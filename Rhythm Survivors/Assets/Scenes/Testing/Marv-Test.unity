@@ -954,6 +954,7 @@ MonoBehaviour:
   subfolder: Beat_Times
   jsonFileName: beat_times
   timingWindow: 0.2
+  delayBeforeStart: 1
   feedbackText: {fileID: 1070805336}
 --- !u!82 &1176413341
 AudioSource:
@@ -1060,7 +1061,7 @@ Transform:
   m_GameObject: {fileID: 1176413339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.520503, y: 0.0861405, z: -0.102583505}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
