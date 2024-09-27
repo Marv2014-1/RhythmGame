@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System.Linq;
@@ -16,6 +17,7 @@ public class BeatDetector : MonoBehaviour
 
     [Header("Timing Settings")]
     public float timingWindow = 0.15f; // +/- 0.15 seconds
+    public float delayBeforeStart = 1f; // Delay before music and detection start
 
     [Header("UI Feedback")]
     public TextMeshProUGUI feedbackText;
@@ -41,6 +43,13 @@ public class BeatDetector : MonoBehaviour
         {
             float currentAudioTime = audioSource.time;
 
+            // Detect if audio has looped
+            if (currentAudioTime < previousAudioTime)
+            {
+                // Audio has looped
+                OnAudioLooped();
+            }
+
             // Check for missed beats
             CheckMissedBeats(currentAudioTime);
 
@@ -48,6 +57,22 @@ public class BeatDetector : MonoBehaviour
 
             previousAudioTime = currentAudioTime;
         }
+    }
+
+    void OnAudioLooped()
+    {
+        // Reset variables
+        nextBeatIndex = 0;
+
+        // Reset beatStatus
+        for (int i = 0; i < beatTimes.Count; i++)
+        {
+            beatStatus[i] = 0; // Reset to unhandled
+        }
+
+        previousAudioTime = 0f;
+
+        Debug.Log("Audio has looped. Variables have been reset.");
     }
 
     void LoadBeatTimes()
@@ -159,6 +184,13 @@ public class BeatDetector : MonoBehaviour
         }
 
         audioSource.clip = audioClip;
+        audioSource.loop = true; // Enable looping
+        StartCoroutine(StartAudioAfterDelay());
+    }
+
+    IEnumerator StartAudioAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeStart);
         audioSource.Play();
         isPlaying = true;
     }
@@ -201,11 +233,13 @@ public class BeatDetector : MonoBehaviour
         if (hit)
         {
             feedbackText.text = "Perfect!";
+            feedbackText.color = Color.green;
             Debug.Log("Beat hit at time: " + inputTime);
         }
         else
         {
             feedbackText.text = "Miss!";
+            feedbackText.color = Color.red;
             Debug.Log("Missed beat at time: " + inputTime);
         }
     }
@@ -217,6 +251,7 @@ public class BeatDetector : MonoBehaviour
             if (beatStatus[nextBeatIndex] == 0) // If unhandled
             {
                 feedbackText.text = "Beat missed!";
+                feedbackText.color = Color.red;
                 Debug.Log("Beat missed at time: " + beatTimes[nextBeatIndex]);
                 MarkBeatAsHandled(nextBeatIndex, false);
             }
