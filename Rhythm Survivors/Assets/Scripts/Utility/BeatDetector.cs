@@ -3,78 +3,125 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class BeatDetector : MonoBehaviour
 {
     [Header("Audio Settings")]
-    public AudioSource audioSource;
-    public AudioClip audioClip;
+    public AudioSource audioSource;       // Reference to the AudioSource component
+    public AudioClip audioClip;           // The audio clip to be played (This could be an array with multiple songs in the future)
 
     [Header("JSON Settings")]
-    // The JSON file should be placed in the Beat_Times subfolder within the Resources folder 
-    public string subfolder = "Beat_Times"; // Subfolder within Resources folder
-    public string jsonFileName = "beat_times"; // Without .json extension
+    // The JSON file containing beat times should be placed in the Beat_Times subfolder within the Resources folder 
+    public string subfolder = "Beat_Times"; // Subfolder within the Resources folder
+    public string jsonFileName = "beat_times"; // JSON file name without the .json extension (This could be an array with multiple songs in the future)
 
     [Header("Timing Settings")]
-    public float timingWindow = 0.15f; // +/- 0.15 seconds
-    public float delayBeforeStart = 1f; // Delay before music and detection start
+    public float timingWindow = 0.15f;    // Allowed time window (in seconds) for a hit to be considered accurate
+    public float delayBeforeStart = 2f;   // Delay before the music and detection start (in seconds)
 
     [Header("UI Feedback")]
-    public TextMeshProUGUI feedbackText;
+    public TextMeshProUGUI feedbackText;  // UI text element to display feedback to the player
 
-    private List<float> beatTimes = new List<float>();
-    private bool isPlaying = false;
+    [Header("Visual Settings")]
+    public RectTransform beatVisualContainer; // Container for beat visual elements (UI)
+    public GameObject beatVisualPrefab;       // Prefab for the beat visual (should have a RectTransform component)
+    public float visualDuration = 5f;         // Duration (in seconds) that beat visuals are displayed before reaching the center
 
-    private int nextBeatIndex = 0; // Index of the next upcoming beat
-    private float previousAudioTime = 0f; // Time in the previous frame
+    private List<float> beatTimes = new List<float>(); // List to store the times of each beat
+    private bool isPlaying = false;                     // Flag to indicate if the music is currently playing
 
-    // Keep track of handled beats: 0 = unhandled, 1 = hit, -1 = missed
+    private float previousAudioTime = 0f;               // Song time in the previous frame
+
+    // Dictionary to track the status of each beat:
+    // 0 = unhandled, 1 = hit, -1 = missed
     private Dictionary<int, int> beatStatus = new Dictionary<int, int>();
 
+    // List to manage active beat visuals currently on the screen
+    private List<BeatVisual> activeBeatVisuals = new List<BeatVisual>();
+
+    private double songStartTime; // DSP time when the song is scheduled to start
+
+    /// <summary>
+    /// Unity's Start method. Called before the first frame update.
+    /// Initializes beat times and sets up the audio.
+    /// </summary>
     void Start()
     {
-        LoadBeatTimes();
-        SetupAudio();
+        LoadBeatTimes(); // Load beat times from the JSON file
+        SetupAudio();    // Set up the audio source and schedule playback
     }
 
+    /// <summary>
+    /// Unity's Update method. Called once per frame.
+    /// Handles song playback, beat detection, and visual updates.
+    /// </summary>
     void Update()
     {
         if (isPlaying)
         {
-            float currentAudioTime = audioSource.time;
+            double dspTime = AudioSettings.dspTime; // Current DSP time
+            float songTime = (float)(dspTime - songStartTime); // Calculate song time based on DSP time
 
-            // Detect if audio has looped
-            if (currentAudioTime < previousAudioTime)
+            float songLength = audioClip.length; // Total length of the song in seconds
+
+            // If songTime exceeds song length, loop it
+            if (songTime >= 0f)
             {
-                // Audio has looped
-                OnAudioLooped();
+                songTime = songTime % songLength;
             }
 
-            // Check for missed beats between previousAudioTime and currentAudioTime
-            CheckMissedBeats(previousAudioTime, currentAudioTime);
+            // Detect if the song has looped by checking if songTime has reset
+            if (songTime < previousAudioTime)
+            {
+                OnSongLooped(); // Handle looping
+            }
 
+            // Check for any missed beats between the previous and current song times
+            CheckMissedBeats(previousAudioTime, songTime);
+
+            // Detect player input (space bar presses)
             DetectPlayerInput();
 
-            previousAudioTime = currentAudioTime;
+            // Update the positions of beat visuals on the screen
+            UpdateBeatVisuals(songTime);
+
+            // Update previousAudioTime for the next frame
+            previousAudioTime = songTime;
         }
     }
 
-    void OnAudioLooped()
+    /// <summary>
+    /// Method to handle actions when the song loops.
+    /// Resets beat statuses and reinitializes beat visuals.
+    /// </summary>
+    void OnSongLooped()
     {
-        // Reset variables
-        nextBeatIndex = 0;
-
-        // Reset beatStatus
+        // Reset all beat statuses to unhandled
         for (int i = 0; i < beatTimes.Count; i++)
         {
-            beatStatus[i] = 0; // Reset to unhandled
+            beatStatus[i] = 0; // 0 indicates unhandled
         }
 
-        previousAudioTime = 0f;
+        // Destroy all active beat visuals on the screen
+        foreach (BeatVisual beatVisual in activeBeatVisuals)
+        {
+            Destroy(beatVisual.rectTransform.gameObject);
+        }
+        activeBeatVisuals.Clear(); // Clear the list of active beat visuals
 
-        Debug.Log("Audio has looped. Variables have been reset.");
+        // Re-initialize beat visuals for the new loop
+        InitializeBeatVisuals();
+
+        previousAudioTime = 0f; // Reset previousAudioTime
+
+        Debug.Log("Song has looped. Variables have been reset.");
     }
 
+    /// <summary>
+    /// Loads beat times from a JSON file located in the specified Resources subfolder.
+    /// Parses the JSON and initializes beat statuses and visuals.
+    /// </summary>
     void LoadBeatTimes()
     {
         // Load the JSON file from Resources/Beat_Times
@@ -84,24 +131,27 @@ public class BeatDetector : MonoBehaviour
         {
             Debug.Log("JSON file loaded successfully. Content: " + jsonFile.text);
 
-            // Manually parse the JSON file content
+            // Manually parse the JSON file content to extract beat times
             List<float> parsedBeatTimes = ManuallyParseBeatTimes(jsonFile.text);
 
             if (parsedBeatTimes != null && parsedBeatTimes.Count > 0)
             {
-                // Ensure the beat times are sorted
+                // Ensure the beat times are sorted in ascending order
                 beatTimes = parsedBeatTimes.OrderBy(bt => bt).ToList();
 
-                // Initialize beat statuses
+                // Initialize beat statuses as unhandled
                 for (int i = 0; i < beatTimes.Count; i++)
                 {
                     beatStatus[i] = 0; // 0 indicates unhandled
                 }
 
+                // Log each beat time for debugging purposes
                 foreach (float beatTime in beatTimes)
                 {
                     Debug.Log("Beat Time: " + beatTime);
                 }
+
+                InitializeBeatVisuals(); // Initialize visuals based on loaded beat times
             }
             else
             {
@@ -115,7 +165,8 @@ public class BeatDetector : MonoBehaviour
     }
 
     /// <summary>
-    /// Manually parses the JSON string to extract beat times.
+    /// Manually parses a JSON string to extract a list of beat times.
+    /// Assumes the JSON has a key "BeatTimes" with an array of float values.
     /// </summary>
     /// <param name="jsonText">The JSON content as a string.</param>
     /// <returns>A list of beat times as floats.</returns>
@@ -123,7 +174,7 @@ public class BeatDetector : MonoBehaviour
     {
         List<float> beatTimeList = new List<float>();
 
-        // Step 1: Find the index of "BeatTimes"
+        // Step 1: Find the index of the "BeatTimes" key in the JSON
         string key = "\"BeatTimes\"";
         int keyIndex = jsonText.IndexOf(key);
         if (keyIndex == -1)
@@ -152,7 +203,7 @@ public class BeatDetector : MonoBehaviour
         string arrayContent = jsonText.Substring(arrayStart + 1, arrayEnd - arrayStart - 1);
         // Debug.Log("Array Content: " + arrayContent);
 
-        // Step 5: Split the string by commas
+        // Step 5: Split the string by commas to get individual beat time strings
         string[] numberStrings = arrayContent.Split(',');
 
         // Step 6: Convert each string to float and add to the list
@@ -161,7 +212,7 @@ public class BeatDetector : MonoBehaviour
             // Trim any whitespace and newline characters
             string trimmedStr = numStr.Trim();
 
-            // Attempt to parse the string to float
+            // Attempt to parse the string to float using invariant culture
             if (float.TryParse(trimmedStr, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float beatTime))
             {
                 beatTimeList.Add(beatTime);
@@ -175,6 +226,9 @@ public class BeatDetector : MonoBehaviour
         return beatTimeList;
     }
 
+    /// <summary>
+    /// Sets up the AudioSource component by assigning the AudioClip and scheduling playback.
+    /// </summary>
     void SetupAudio()
     {
         if (audioClip == null)
@@ -183,55 +237,81 @@ public class BeatDetector : MonoBehaviour
             return;
         }
 
-        audioSource.clip = audioClip;
-        audioSource.loop = true; // Enable looping
-        StartCoroutine(StartAudioAfterDelay());
+        audioSource.clip = audioClip;   // Assign the audio clip to the AudioSource
+        audioSource.loop = true;        // Enable looping of the audio clip
+        StartCoroutine(StartAudioAfterDelay()); // Start the coroutine to play audio after a delay
     }
 
+    /// <summary>
+    /// Coroutine to start audio playback after a specified delay.
+    /// Schedules the audio to start at a precise DSP time for synchronization.
+    /// </summary>
+    /// <returns>IEnumerator for the coroutine.</returns>
     IEnumerator StartAudioAfterDelay()
     {
-        yield return new WaitForSeconds(delayBeforeStart);
-        audioSource.Play();
-        isPlaying = true;
+        // Calculate the DSP time when the song should start
+        songStartTime = AudioSettings.dspTime + delayBeforeStart;
+
+        // Schedule the AudioSource to play at the calculated DSP time
+        audioSource.PlayScheduled(songStartTime);
+
+        isPlaying = true; // Set the playing flag to true
+
+        yield return null; // Wait for the next frame
     }
 
+    /// <summary>
+    /// Detects player input (space bar press) and checks if it aligns with a beat.
+    /// </summary>
     void DetectPlayerInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Capture the precise audio time when the key was pressed
-            float inputTime = audioSource.time;
-            CheckBeatAccuracy(inputTime);
+            // Capture the precise song time when the key was pressed
+            float inputTime = (float)(AudioSettings.dspTime - songStartTime);
+
+            if (inputTime >= 0f)
+            {
+                // Handle looping by taking modulo with song length
+                inputTime = inputTime % audioClip.length;
+                CheckBeatAccuracy(inputTime); // Check if the input time aligns with a beat
+            }
         }
     }
 
+    /// <summary>
+    /// Checks if the player's input time is within the timing window of any beat.
+    /// Updates feedback and beat status accordingly.
+    /// </summary>
+    /// <param name="inputTime">The time (in seconds) when the player pressed the space bar.</param>
     void CheckBeatAccuracy(float inputTime)
     {
-        // Use binary search to find the closest beat time
+        // Use binary search to find the closest beat time to the input time
         int index = FindClosestIndex(inputTime);
 
-        bool hit = false;
+        bool hit = false; // Flag to determine if a beat was hit
 
         // Check the beat time at index - 1
         if (index > 0 && Mathf.Abs(beatTimes[index - 1] - inputTime) <= timingWindow)
         {
-            if (beatStatus[index - 1] == 0) // If unhandled
+            if (beatStatus[index - 1] == 0) // If the beat is unhandled
             {
-                hit = true;
-                MarkBeatAsHandled(index - 1, true);
+                hit = true; // A beat has been hit
+                MarkBeatAsHandled(index - 1, true); // Mark the beat as hit
             }
         }
 
-        // Check the beat time at index
+        // If no hit yet, check the beat time at index
         if (!hit && index < beatTimes.Count && Mathf.Abs(beatTimes[index] - inputTime) <= timingWindow)
         {
-            if (beatStatus[index] == 0) // If unhandled
+            if (beatStatus[index] == 0) // If the beat is unhandled
             {
-                hit = true;
-                MarkBeatAsHandled(index, true);
+                hit = true; // A beat has been hit
+                MarkBeatAsHandled(index, true); // Mark the beat as hit
             }
         }
 
+        // Update feedback based on whether a beat was hit or missed
         if (hit)
         {
             feedbackText.text = "Perfect!";
@@ -246,28 +326,55 @@ public class BeatDetector : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for any beats that were missed between the previous and current song times.
+    /// Updates feedback and beat status for missed beats.
+    /// </summary>
+    /// <param name="previousTime">The song time in the previous frame.</param>
+    /// <param name="currentTime">The current song time.</param>
     void CheckMissedBeats(float previousTime, float currentTime)
     {
-        // Loop through all beats that could have been missed between previousTime and currentTime
-        while (nextBeatIndex < beatTimes.Count && beatTimes[nextBeatIndex] + timingWindow < currentTime)
+        // Iterate through all beats to check if any were missed
+        for (int i = 0; i < beatTimes.Count; i++)
         {
-            float beatTime = beatTimes[nextBeatIndex];
+            float beatTime = beatTimes[i];
 
-            // If the beat was within the previous and current time frame
-            if (beatTime + timingWindow >= previousTime)
+            // Handle looping by adjusting beatTime if necessary
+            float adjustedBeatTime = beatTime;
+            if (currentTime < previousTime)
             {
-                if (beatStatus[nextBeatIndex] == 0) // If unhandled
+                // Loop occurred
+                if (beatTime < previousTime)
+                {
+                    adjustedBeatTime += audioClip.length;
+                }
+            }
+
+            // Skip beats that are still in the future relative to previousTime
+            if (adjustedBeatTime + timingWindow < previousTime)
+            {
+                continue;
+            }
+
+            // Check if the beat time falls within the missed window
+            if (adjustedBeatTime + timingWindow < currentTime)
+            {
+                if (beatStatus[i] == 0) // If the beat is unhandled
                 {
                     feedbackText.text = "Beat missed!";
                     feedbackText.color = Color.red;
                     Debug.Log("Beat missed at time: " + beatTime);
-                    MarkBeatAsHandled(nextBeatIndex, false);
+                    MarkBeatAsHandled(i, false); // Mark the beat as missed
                 }
             }
-            nextBeatIndex++;
         }
     }
 
+    /// <summary>
+    /// Performs a binary search to find the index of the closest beat time to the input time.
+    /// </summary>
+    /// <param name="inputTime">The time to search for.</param>
+    /// <returns>The index of the closest beat time.</returns>
     int FindClosestIndex(float inputTime)
     {
         int left = 0;
@@ -288,17 +395,173 @@ public class BeatDetector : MonoBehaviour
             }
             else
             {
-                // Exact match
+                // Exact match found
                 return mid;
             }
         }
 
-        // left is the insertion point
+        // If no exact match, return the insertion point
         return left;
     }
 
+    /// <summary>
+    /// Marks a beat as handled (hit or missed) in the beatStatus dictionary.
+    /// </summary>
+    /// <param name="index">The index of the beat in the beatTimes list.</param>
+    /// <param name="isHit">True if the beat was hit, false if missed.</param>
     void MarkBeatAsHandled(int index, bool isHit)
     {
         beatStatus[index] = isHit ? 1 : -1; // 1 for hit, -1 for missed
+    }
+
+    /// <summary>
+    /// Initializes beat visuals for beats that are within the visual duration from the current song time.
+    /// </summary>
+    void InitializeBeatVisuals()
+    {
+        // Calculate the current song time based on DSP time
+        float songTime = (float)(AudioSettings.dspTime - songStartTime);
+
+        // Iterate through all beat times to create visuals for upcoming beats
+        foreach (float beatTime in beatTimes)
+        {
+            // Only create visuals for beats that are within the next visualDuration seconds
+            if (beatTime - songTime >= 0f && beatTime - songTime <= visualDuration)
+            {
+                CreateBeatVisual(beatTime); // Instantiate beat visuals for the beat time
+            }
+        }
+    }
+
+    /// <summary>
+    /// Creates visual representations of a beat on both the left and right sides of the screen.
+    /// Positions them at a fixed Y position (-300) to align with the player indicator.
+    /// </summary>
+    /// <param name="beatTime">The time (in seconds) when the beat occurs.</param>
+    void CreateBeatVisual(float beatTime)
+    {
+        float yPosition = -300f; // Fixed Y position for all beat visuals
+
+        // Create left beat visual
+        GameObject leftBeatVisualObject = Instantiate(beatVisualPrefab, beatVisualContainer);
+        RectTransform leftRectTransform = leftBeatVisualObject.GetComponent<RectTransform>();
+        leftRectTransform.anchoredPosition = new Vector2(-beatVisualContainer.rect.width / 2, yPosition); // Position on the left side
+        BeatVisual leftBeatVisual = new BeatVisual(leftRectTransform, beatTime, true); // true indicates it comes from the left
+        activeBeatVisuals.Add(leftBeatVisual); // Add to the list of active visuals
+
+        // Create right beat visual
+        GameObject rightBeatVisualObject = Instantiate(beatVisualPrefab, beatVisualContainer);
+        RectTransform rightRectTransform = rightBeatVisualObject.GetComponent<RectTransform>();
+        rightRectTransform.anchoredPosition = new Vector2(beatVisualContainer.rect.width / 2, yPosition); // Position on the right side
+        BeatVisual rightBeatVisual = new BeatVisual(rightRectTransform, beatTime, false); // false indicates it comes from the right
+        activeBeatVisuals.Add(rightBeatVisual); // Add to the list of active visuals
+    }
+
+    /// <summary>
+    /// Updates the positions of all active beat visuals based on the current song time.
+    /// Removes visuals that have reached the center and adds new visuals for upcoming beats.
+    /// </summary>
+    /// <param name="songTime">The current time of the song (in seconds).</param>
+    void UpdateBeatVisuals(float songTime)
+    {
+        // List to keep track of visuals that need to be removed
+        var visualsToRemove = new List<BeatVisual>();
+
+        // Iterate through all active beat visuals
+        foreach (BeatVisual beatVisual in activeBeatVisuals)
+        {
+            // Calculate the time remaining until the beat occurs
+            float timeUntilBeat = beatVisual.beatTime - songTime;
+
+            // Adjust timeUntilBeat for looping scenarios
+            if (timeUntilBeat < -audioClip.length / 2)
+            {
+                timeUntilBeat += audioClip.length;
+            }
+            else if (timeUntilBeat > audioClip.length / 2)
+            {
+                timeUntilBeat -= audioClip.length;
+            }
+
+            // Calculate normalized time (0 to 1) for moving the visual from start to center
+            float normalizedTime = 1 - (timeUntilBeat / visualDuration);
+
+            if (normalizedTime >= 1)
+            {
+                // The beat has reached the center; remove the visual
+                Destroy(beatVisual.rectTransform.gameObject);
+                visualsToRemove.Add(beatVisual);
+            }
+            else
+            {
+                // Update the X position of the visual based on normalizedTime
+                float halfWidth = beatVisualContainer.rect.width / 2;
+                float xPosition = Mathf.Lerp(
+                    beatVisual.fromLeft ? -halfWidth : halfWidth, // Start position (left or right)
+                    0,                                       // End position (center)
+                    normalizedTime                           // Progress based on normalizedTime
+                );
+
+                // Update the anchored position of the visual
+                beatVisual.rectTransform.anchoredPosition = new Vector2(xPosition, beatVisual.rectTransform.anchoredPosition.y);
+            }
+        }
+
+        // Remove visuals that have reached the center from the active list
+        foreach (BeatVisual beatVisual in visualsToRemove)
+        {
+            activeBeatVisuals.Remove(beatVisual);
+        }
+
+        // Iterate through all beat times to add new visuals for upcoming beats
+        foreach (float beatTime in beatTimes)
+        {
+            float timeUntilBeat = beatTime - songTime;
+
+            // Adjust timeUntilBeat for looping scenarios
+            if (timeUntilBeat < -audioClip.length / 2)
+            {
+                timeUntilBeat += audioClip.length;
+            }
+            else if (timeUntilBeat > audioClip.length / 2)
+            {
+                timeUntilBeat -= audioClip.length;
+            }
+
+            // Check if the beat is within the visual duration window
+            if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
+            {
+                // Check if this beatTime already has a visual from the left side
+                bool visualExists = activeBeatVisuals.Exists(bv => bv.beatTime == beatTime && bv.fromLeft == true);
+                if (!visualExists)
+                {
+                    CreateBeatVisual(beatTime); // Instantiate new beat visuals for the beat time
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Inner class to represent a visual element for a beat.
+    /// Stores the RectTransform, beat time, and origin side (left or right).
+    /// </summary>
+    class BeatVisual
+    {
+        public RectTransform rectTransform; // Reference to the RectTransform component of the visual
+        public float beatTime;              // The time (in seconds) when this beat occurs
+        public bool fromLeft;               // Indicates if the visual comes from the left (true) or right (false)
+
+        /// <summary>
+        /// Constructor to initialize a BeatVisual instance.
+        /// </summary>
+        /// <param name="rectTransform">The RectTransform of the visual.</param>
+        /// <param name="beatTime">The beat time associated with this visual.</param>
+        /// <param name="fromLeft">True if the visual comes from the left, false if from the right.</param>
+        public BeatVisual(RectTransform rectTransform, float beatTime, bool fromLeft)
+        {
+            this.rectTransform = rectTransform;
+            this.beatTime = beatTime;
+            this.fromLeft = fromLeft;
+        }
     }
 }
