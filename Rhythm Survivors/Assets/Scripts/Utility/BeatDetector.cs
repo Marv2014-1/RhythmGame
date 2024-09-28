@@ -50,10 +50,10 @@ public class BeatDetector : MonoBehaviour
                 OnAudioLooped();
             }
 
-            // Check for missed beats
-            CheckMissedBeats(currentAudioTime);
+            // Check for missed beats between previousAudioTime and currentAudioTime
+            CheckMissedBeats(previousAudioTime, currentAudioTime);
 
-            DetectPlayerInput(currentAudioTime);
+            DetectPlayerInput();
 
             previousAudioTime = currentAudioTime;
         }
@@ -195,11 +195,13 @@ public class BeatDetector : MonoBehaviour
         isPlaying = true;
     }
 
-    void DetectPlayerInput(float currentTime)
+    void DetectPlayerInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CheckBeatAccuracy(currentTime);
+            // Capture the precise audio time when the key was pressed
+            float inputTime = audioSource.time;
+            CheckBeatAccuracy(inputTime);
         }
     }
 
@@ -244,16 +246,23 @@ public class BeatDetector : MonoBehaviour
         }
     }
 
-    void CheckMissedBeats(float currentTime)
+    void CheckMissedBeats(float previousTime, float currentTime)
     {
-        while (nextBeatIndex < beatTimes.Count && beatTimes[nextBeatIndex] + timingWindow <= currentTime)
+        // Loop through all beats that could have been missed between previousTime and currentTime
+        while (nextBeatIndex < beatTimes.Count && beatTimes[nextBeatIndex] + timingWindow < currentTime)
         {
-            if (beatStatus[nextBeatIndex] == 0) // If unhandled
+            float beatTime = beatTimes[nextBeatIndex];
+
+            // If the beat was within the previous and current time frame
+            if (beatTime + timingWindow >= previousTime)
             {
-                feedbackText.text = "Beat missed!";
-                feedbackText.color = Color.red;
-                Debug.Log("Beat missed at time: " + beatTimes[nextBeatIndex]);
-                MarkBeatAsHandled(nextBeatIndex, false);
+                if (beatStatus[nextBeatIndex] == 0) // If unhandled
+                {
+                    feedbackText.text = "Beat missed!";
+                    feedbackText.color = Color.red;
+                    Debug.Log("Beat missed at time: " + beatTime);
+                    MarkBeatAsHandled(nextBeatIndex, false);
+                }
             }
             nextBeatIndex++;
         }
