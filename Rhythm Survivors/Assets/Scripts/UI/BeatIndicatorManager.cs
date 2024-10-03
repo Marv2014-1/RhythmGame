@@ -1,35 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BeatIndicatorManager : MonoBehaviour
 {
-    
     public GameObject circlePrefab; // Prefab for the circle UI element
-    public int requiredBeats = 3; // Number of circles to display
-    public float spacing = 30f; // Spacing between circles
-    private List<Image> circles = new List<Image>(); // List to hold circle images
+    public int requiredBeats = 3;   // Number of circles to display
+    public float spacing = 30f;     // Spacing between circles
 
     [Header("Arc Settings")]
-    public float arcRadius = 100f;      // Distance from the pivot to each circle
-    public float totalArcAngle = 180f;  // Total angle of the arc in degrees
-    public float startAngle = 90f;       // Starting angle of the arc in degrees
+    public float arcRadius = 100f;     // Distance from the pivot to each circle
+    public float totalArcAngle = 180f; // Total angle of the arc in degrees
+    public float startAngle = 90f;     // Starting angle of the arc in degrees
 
-     [Header("Camera Settings")]
-    public Camera mainCamera; // Assign your main camera in the Inspector
-    
-    [Header("Desired Screen Size")]
-    [Tooltip("Desired radius of the circle in pixels.")]
-    public float desiredScreenRadius = 50f;
+    private List<Image> circles = new List<Image>(); // List to hold circle images
+    private int currentBeatCount = 0;                // Current count of successful beats
 
-    private SpriteRenderer spriteRenderer;
-
+    // Reference to the BeatDetector to subscribe to its events
+    public BeatDetector beatDetector;
 
     void Start()
     {
         GenerateCircles();
+
+        // Subscribe to BeatDetector events
+        if (beatDetector != null)
+        {
+            beatDetector.OnBeatHit.AddListener(OnBeatHit);
+            beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
+        }
+        else
+        {
+            Debug.LogError("BeatDetector reference is not set in BeatIndicatorManager.");
+        }
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe from events to prevent memory leaks
+        if (beatDetector != null)
+        {
+            beatDetector.OnBeatHit.RemoveListener(OnBeatHit);
+            beatDetector.OnBeatMissed.RemoveListener(OnBeatMissed);
+        }
     }
 
     // Generates the UI circles based on requiredBeats
@@ -71,7 +85,35 @@ public class BeatIndicatorManager : MonoBehaviour
             circleImage.color = Color.grey; // Initial inactive color
             circles.Add(circleImage);
         }
+
+        // Reset the current beat count
+        currentBeatCount = 0;
+        UpdateBeatCount(currentBeatCount);
     }
+
+    // Event handler for OnBeatHit
+    void OnBeatHit()
+    {
+        // Increment the current beat count
+        currentBeatCount++;
+        if (currentBeatCount > requiredBeats)
+        {
+            currentBeatCount = requiredBeats;
+        }
+
+        UpdateBeatCount(currentBeatCount);
+    }
+
+    // Event handler for OnBeatMissed
+    void OnBeatMissed()
+    {
+        // Reset the current beat count or handle as needed
+        if(currentBeatCount > 0){
+            currentBeatCount -= 1;
+        }
+        UpdateBeatCount(currentBeatCount);
+    }
+
     // Updates the circles based on the current beat count
     public void UpdateBeatCount(int beatCount)
     {
@@ -83,7 +125,7 @@ public class BeatIndicatorManager : MonoBehaviour
             }
             else
             {
-                circles[i].color = Color.grey; // Inactive beat
+                circles[i].color = Color.black;  // Inactive beat
             }
         }
     }
@@ -95,4 +137,3 @@ public class BeatIndicatorManager : MonoBehaviour
         GenerateCircles();
     }
 }
-
