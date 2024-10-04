@@ -3,40 +3,72 @@ using UnityEngine;
 
 public class Bow : Weapon
 {
-    private void Start()
+    [Header("Arrow Settings")]
+    public GameObject arrowPrefab; // Assign the Arrow prefab in the Inspector
+    public Transform arrowSpawnPoint; // Assign the spawn point in the Inspector
+
+    public float arrowSpeed = 10f;
+    public float arrowRange = 20f;
+    public float rotationSpeed = 5f; // Speed at which the bow rotates
+
+    private Enemy closestEnemy;
+
+    protected override void Start()
     {
-        // Initialize weapon properties
-        weaponName = "Bow";
-        damage = 10;
-        attackSpeed = 1.0f;
-        range = 5.0f;
-        requiredBeats = 3;
+        base.Start();
 
         // Assign the player object
         player = GameObject.FindGameObjectWithTag("Player");
-
-        // Subscribe to the OnBeatHit event
-        if (beatDetector != null)
-        {
-            beatDetector.OnBeatHit.AddListener(OnBeatDetected);
-        }
-        else
-        {
-            Debug.LogError("BeatDetector reference not assigned in Bow class.");
-        }
     }
 
-    private void OnDestroy()
+    protected void Update()
     {
-        // Unsubscribe from the event to prevent memory leaks
-        if (beatDetector != null)
-        {
-            beatDetector.OnBeatHit.RemoveListener(OnBeatDetected);
-        }
+        UpdateClosestEnemy();
+        RotateTowardsClosestEnemy();
     }
 
-    // This method is called when a beat is detected
-    private void OnBeatDetected()
+    private void UpdateClosestEnemy()
+    {
+        // Find all enemies within range
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(player.transform.position, range, enemyLayerMask);
+
+        if (hitEnemies.Length == 0)
+        {
+            closestEnemy = null;
+            return;
+        }
+
+        // Identify the closest enemy
+        float closestDistance = Mathf.Infinity;
+        Enemy nearest = null;
+
+        foreach (Collider2D enemyCollider in hitEnemies)
+        {
+            float distance = Vector2.Distance(player.transform.position, enemyCollider.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                nearest = enemyCollider.GetComponent<Enemy>();
+            }
+        }
+
+        closestEnemy = nearest;
+    }
+
+    private void RotateTowardsClosestEnemy()
+    {
+        if (closestEnemy == null)
+            return;
+
+        Vector2 direction = closestEnemy.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Adjust the angle based on your bow's sprite orientation if needed
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    protected override void OnBeatDetected()
     {
         beatCount++;
         UpdateWeaponUI(beatCount);
@@ -51,49 +83,32 @@ public class Bow : Weapon
 
     public override void Attack()
     {
-        // [Existing attack logic remains unchanged]
-        // Find all enemies within range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(player.transform.position, range, enemyLayerMask);
+        // Instantiate an arrow at the spawn point with the same rotation as the bow
+        GameObject arrowInstance = Instantiate(arrowPrefab, arrowSpawnPoint.position, transform.rotation);
 
-        if (hitEnemies.Length == 0)
+        Arrow arrow = arrowInstance.GetComponent<Arrow>();
+
+        if (arrow != null)
         {
-            Debug.Log("No enemies in range.");
-            return;
-        }
+            arrow.SetDamage(damage);
+            arrow.SetSpeed(arrowSpeed);
+            arrow.SetRange(arrowRange);
 
-        // Identify the closest enemy
-        float closestDistance = Mathf.Infinity;
-        Enemy closestEnemy = null;
-
-        foreach (Collider2D enemyCollider in hitEnemies)
-        {
-            float distance = Vector2.Distance(player.transform.position, enemyCollider.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestEnemy = enemyCollider.GetComponent<Enemy>();
-            }
-        }
-
-        if (closestEnemy != null)
-        {
-            // Deal damage to the closest enemy
-            closestEnemy.TakeDamage(damage);
-            Debug.Log($"Bow attacked {closestEnemy.name} for {damage} damage.");
-        }
-    }
-
-    public override void UpdateWeaponUI(int beatCount)
-    {
-        // Update the UI indicator for the bow
-        if (beatIndicatorManager != null)
-        {
-            beatIndicatorManager.UpdateBeatCount(beatCount);
+            Debug.Log("Bow shot an arrow.");
         }
         else
         {
-            Debug.LogWarning("BeatIndicatorManager not assigned in Bow class.");
+            Debug.LogError("Arrow prefab does not have an Arrow component.");
         }
-        base.UpdateWeaponUI(beatCount);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize the range in the editor
+        if (player != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(player.transform.position, range);
+        }
     }
 }

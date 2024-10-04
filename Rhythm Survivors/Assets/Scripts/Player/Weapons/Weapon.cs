@@ -12,7 +12,7 @@ public abstract class Weapon : MonoBehaviour
     public GameObject player; // Reference to the player object
     public LayerMask enemyLayerMask; // Layer mask to identify enemies
     protected int beatCount = 0; // Individual beat counter for the weapon
-    public BeatIndicatorManager beatIndicatorManager; // Reference to the UI indicator manager
+    public WeaponBeatIndicatorManager weaponBeatIndicatorManager; // Reference to the UI indicator manager
     public BeatDetector beatDetector; // Reference to the BeatDetector
 
     protected virtual void Start()
@@ -57,9 +57,9 @@ public abstract class Weapon : MonoBehaviour
     // Update Weapon UI with the current beat count
     public virtual void UpdateWeaponUI(int beatCount)
     {
-        if (beatIndicatorManager != null)
+        if (weaponBeatIndicatorManager != null)
         {
-            beatIndicatorManager.UpdateBeatCount(beatCount);
+            weaponBeatIndicatorManager.UpdateBeatCount(beatCount);
         }
         Debug.Log($"Weapon UI updated with beat count: {beatCount}");
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7620935555945615074}
   m_Layer: 0
-  m_Name: Bow
+  m_Name: BowContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9009463393932979525}
   - component: {fileID: 5029514627803307305}
+  - component: {fileID: 7328768738665530331}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +63,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7157967541465684635}
   m_Father: {fileID: 7620935555945615074}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5029514627803307305
@@ -117,6 +119,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7328768738665530331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907888511220909582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccf74b096bcf174a9ef04b5d7f22e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Bow
+  damage: 10
+  attackSpeed: 1
+  range: 20
+  requiredBeats: 3
+  player: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  weaponBeatIndicatorManager: {fileID: 0}
+  beatDetector: {fileID: 0}
+  arrowPrefab: {fileID: 4210355246839257373, guid: 8bf8a60a2c807f74693d2c62380a7827, type: 3}
+  arrowSpawnPoint: {fileID: 7157967541465684635}
+  arrowSpeed: 10
+  rotationSpeed: 5
+--- !u!1 &6499517783649689153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7157967541465684635}
+  m_Layer: 0
+  m_Name: ArrowSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7157967541465684635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499517783649689153}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0648, y: -0.0007, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.25, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9009463393932979525}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2121653565480794092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,11 +293,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3161032756711687485, guid: ee57a39f2c3c2a4468335e126d2c245b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4458446578559725035, guid: ee57a39f2c3c2a4468335e126d2c245b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1155057581116825641}
   m_SourcePrefab: {fileID: 100100000, guid: ee57a39f2c3c2a4468335e126d2c245b, type: 3}
+--- !u!1 &2354878100404689415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4458446578559725035, guid: ee57a39f2c3c2a4468335e126d2c245b, type: 3}
+  m_PrefabInstance: {fileID: 2121653565480794092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1155057581116825641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2354878100404689415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad541faeda2d4704097a8baf345f2cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circlePrefab: {fileID: 2530564311124749066, guid: 026a0ff9406b8b54a8ae1e1fd8d34057, type: 3}
+  requiredBeats: 3
+  spacing: 30
+  arcRadius: 1
+  totalArcAngle: 180
+  startAngle: 90
+  beatDetector: {fileID: 0}
 --- !u!224 &7252333778087516348 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8778878556149477200, guid: ee57a39f2c3c2a4468335e126d2c245b, type: 3}

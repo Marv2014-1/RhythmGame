@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BeatIndicatorManager : MonoBehaviour
+public class WeaponBeatIndicatorManager : MonoBehaviour
 {
     public GameObject circlePrefab; // Prefab for the circle UI element
     public int requiredBeats = 3;   // Number of circles to display
@@ -20,6 +20,9 @@ public class BeatIndicatorManager : MonoBehaviour
     // Reference to the BeatDetector to subscribe to its events
     public BeatDetector beatDetector;
 
+    // Reference to the active coroutine to prevent multiple instances
+    private Coroutine beatCoroutine;
+
     void Start()
     {
         GenerateCircles();
@@ -28,7 +31,7 @@ public class BeatIndicatorManager : MonoBehaviour
         if (beatDetector != null)
         {
             beatDetector.OnBeatHit.AddListener(OnBeatHit);
-            beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
+            // beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
         }
         else
         {
@@ -42,7 +45,7 @@ public class BeatIndicatorManager : MonoBehaviour
         if (beatDetector != null)
         {
             beatDetector.OnBeatHit.RemoveListener(OnBeatHit);
-            beatDetector.OnBeatMissed.RemoveListener(OnBeatMissed);
+            // beatDetector.OnBeatMissed.RemoveListener(OnBeatMissed);
         }
     }
 
@@ -96,23 +99,48 @@ public class BeatIndicatorManager : MonoBehaviour
     {
         // Increment the current beat count
         currentBeatCount++;
-        if (currentBeatCount > requiredBeats)
+        if (currentBeatCount >= requiredBeats)
         {
-            currentBeatCount = requiredBeats;
+            currentBeatCount = 0;
+            // Start the coroutine to activate all circles temporarily
+            beatCoroutine = StartCoroutine(ActivateAllCirclesTemporarily(.1f));
+        }
+        else
+        {
+            // Update the beat count
+            UpdateBeatCount(currentBeatCount);
+        }
+    }
+
+    // Coroutine to activate all circles, wait, and then reset
+    IEnumerator ActivateAllCirclesTemporarily(float delay)
+    {
+        // Activate all circles
+        foreach (var circle in circles)
+        {
+            circle.color = Color.green; // Active beat color
         }
 
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+        // Reset the circles based on the current beat count
         UpdateBeatCount(currentBeatCount);
+
+        // Clear the coroutine reference
+        beatCoroutine = null;
     }
 
     // Event handler for OnBeatMissed
-    void OnBeatMissed()
-    {
-        // Reset the current beat count or handle as needed
-        if(currentBeatCount > 0){
-            currentBeatCount -= 1;
-        }
-        UpdateBeatCount(currentBeatCount);
-    }
+    // void OnBeatMissed()
+    // {
+    //     // Reset the current beat count or handle as needed
+    //     if (currentBeatCount > 0)
+    //     {
+    //         currentBeatCount -= 1;
+    //     }
+    //     UpdateBeatCount(currentBeatCount);
+    // }
 
     // Updates the circles based on the current beat count
     public void UpdateBeatCount(int beatCount)

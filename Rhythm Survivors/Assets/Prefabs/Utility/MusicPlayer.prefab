@@ -138,16 +138,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 775835677488393569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09b07ca941a220042b7afc836d147052, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e708ef22828b6d4585ea0617919d065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 5376638330969664004}
-  audioClip: {fileID: 8300000, guid: 25f41192d817a7b4fa96f80f3d92dd8b, type: 3}
+  audioClip: {fileID: 8300000, guid: f3bb5a86a9f25304fadb13efe155c4dd, type: 3}
   subfolder: Beat_Times
   jsonFileName: beat_times
   timingWindow: 0.15
-  delayBeforeStart: 2
   feedbackText: {fileID: 0}
   beatVisualContainer: {fileID: 0}
-  beatVisualPrefab: {fileID: 1119454655185215005, guid: 24f315fce17ac04458e30c58cf83432d, type: 3}
+  beatVisualPrefab: {fileID: 0}
   visualDuration: 5
+  OnBeatHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBeatMissed:
+    m_PersistentCalls:
+      m_Calls: []
