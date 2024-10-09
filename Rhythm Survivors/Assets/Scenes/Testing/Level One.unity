@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7411263274541787537, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411263274541787537, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -43635033
+      objectReference: {fileID: 0}
     - target: {fileID: 7620182234114448790, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
