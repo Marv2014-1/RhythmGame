@@ -6,7 +6,6 @@ public abstract class Weapon : MonoBehaviour
 {
     public string weaponName;
     public int damage;
-    public float attackSpeed;
     public float range;
     public int requiredBeats; // Number of beats required to activate attack
     public GameObject player; // Reference to the player object
