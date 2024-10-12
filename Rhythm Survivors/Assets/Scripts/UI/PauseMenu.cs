@@ -8,8 +8,10 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     private bool isPaused = false;
+    public static bool isAlive = true;
     public GameObject pauseUI;
     public GameObject optionUI;
+    public GameObject endUI;
     public Slider musicSlider;
     public TMP_Text musicText;
     public float countdownTime;
@@ -22,33 +24,40 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (isAlive)
         {
-            if (isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
-            else
+
+            if (timerOn)
             {
-                Pause();
+                if (timeLeft > 0)
+                {
+                    timeLeft -= (Time.realtimeSinceStartup - countdownStart);
+                    countdownStart = Time.realtimeSinceStartup;
+                    timerTxt.text = timeLeft.ToString("0.00");
+                }
+                else
+                {
+                    timerOn = false;
+                    countdownTimer.SetActive(false);
+                    Time.timeScale = 1.0f;
+                    AudioListener.pause = false;
+                }
             }
         }
-
-        if (timerOn)
+        else
         {
-            if (timeLeft > 0)
-            {
-                timeLeft -= (Time.realtimeSinceStartup - countdownStart);
-                countdownStart = Time.realtimeSinceStartup;
-                timerTxt.text = timeLeft.ToString("0.00");
-            }
-            else
-            {
-                timerOn = false;
-                countdownTimer.SetActive(false);
-                Time.timeScale = 1.0f;
-                AudioListener.pause = false;
-            }
+            EndRun();
         }
     }
 
@@ -80,6 +89,14 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void EndRun()
+    {
+        Time.timeScale = 0.0f;
+        AudioListener.pause = true;
+        pauseUI.SetActive(false);
+        endUI.SetActive(true);
+    }
+
+    public void MainMenu()
     {
         SceneManager.LoadScene(sceneName: "MainMenu");
     }

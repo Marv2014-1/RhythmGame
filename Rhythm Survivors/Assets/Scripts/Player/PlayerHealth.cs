@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     public int maxHealth = 100;
-    public int currentHealth;
+    public static int currentHealth;
 
     [Header("UI Elements")]
     public Image healthBarFill; // Assign HealthBarFill Image in the Inspector
@@ -49,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            UpdateHealthUIImmediate();
             Die();
         }
     }
@@ -92,5 +93,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player has died!");
+        PauseMenu.isAlive = false;
     }
 }
