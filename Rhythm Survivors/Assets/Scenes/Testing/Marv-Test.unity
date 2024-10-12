@@ -1449,6 +1449,10 @@ PrefabInstance:
       propertyPath: circlePrefab
       value: 
       objectReference: {fileID: 2530564311124749066, guid: 026a0ff9406b8b54a8ae1e1fd8d34057, type: 3}
+    - target: {fileID: 310181297984511573, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 2106872072}
     - target: {fileID: 1598544641375550557, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1513,6 +1517,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3260210135074969545, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 2106872072}
     - target: {fileID: 4151940677018315587, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: range
       value: 15
@@ -1537,6 +1545,14 @@ PrefabInstance:
       propertyPath: beatDetector
       value: 
       objectReference: {fileID: 2106872072}
+    - target: {fileID: 5603481211184066330, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 915151850}
+    - target: {fileID: 5603481211184066330, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 2106872072}
     - target: {fileID: 6421356638923000961, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_Name
       value: BowContainer
@@ -1553,6 +1569,10 @@ PrefabInstance:
       propertyPath: beatDetector
       value: 
       objectReference: {fileID: 2106872072}
+    - target: {fileID: 6875333015490790505, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6875333015490790505, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: player
       value: 
@@ -1637,6 +1657,14 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9064570238711848077, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 2106872072}
+    - target: {fileID: 9064570238711848077, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: circlePrefab
+      value: 
+      objectReference: {fileID: 2530564311124749066, guid: 026a0ff9406b8b54a8ae1e1fd8d34057, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
