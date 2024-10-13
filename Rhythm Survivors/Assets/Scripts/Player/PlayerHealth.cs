@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
 
     private float targetFillAmount;
 
+    public Animator anim; // Play death animation upon death
+
     void Start()
     {
         // Initialize current health
@@ -92,7 +94,11 @@ public class PlayerHealth : MonoBehaviour
     /// Handles player death.
     void Die()
     {
+        // Halt player movement
+        PlayerMovement.canMove = false;
+        // Begin death animation
+        anim.SetBool("IsDead", true);
+
         Debug.Log("Player has died!");
-        PauseMenu.isAlive = false;
     }
 }
