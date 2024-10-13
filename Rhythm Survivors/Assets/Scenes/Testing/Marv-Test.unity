@@ -387,6 +387,32 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4610885315921822385, guid: 841f4d78162e6fa43b11c901790fa903, type: 3}
   m_PrefabInstance: {fileID: 8066604919505471187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &273839468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 200780706664052860, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+  m_PrefabInstance: {fileID: 3483450099411893292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &273839471
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273839468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e2b06a83db9d0f348be2a48c3dc47df5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &383611146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1543,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1654044369728406552, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3260210135074969545, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: beatDetector
       value: 
@@ -1536,6 +1566,10 @@ PrefabInstance:
     - target: {fileID: 4151940677018315587, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: weaponBeatIndicatorManager
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434743723594136622, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5331642771113070419, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_Camera
@@ -1569,6 +1603,22 @@ PrefabInstance:
       propertyPath: beatDetector
       value: 
       objectReference: {fileID: 2106872072}
+    - target: {fileID: 6840341909790055140, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.57441586
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840341909790055140, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840341909790055140, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0015872568
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840341909790055140, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.20103416
+      objectReference: {fileID: 0}
     - target: {fileID: 6875333015490790505, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: damage
       value: 20
@@ -1653,6 +1703,10 @@ PrefabInstance:
       propertyPath: requiredBeats
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7984849659843082845, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8095021606197262188, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -1665,10 +1719,14 @@ PrefabInstance:
       propertyPath: circlePrefab
       value: 
       objectReference: {fileID: 2530564311124749066, guid: 026a0ff9406b8b54a8ae1e1fd8d34057, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 383418001508350314, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 200780706664052860, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 273839471}
   m_SourcePrefab: {fileID: 100100000, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
 --- !u!1001 &4558671557211616928
 PrefabInstance:
