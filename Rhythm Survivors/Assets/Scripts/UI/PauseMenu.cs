@@ -8,8 +8,10 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     private bool isPaused = false;
+    public static bool isAlive = true;
     public GameObject pauseUI;
     public GameObject optionUI;
+    public GameObject endUI;
     public Slider musicSlider;
     public TMP_Text musicText;
     public float countdownTime;
@@ -22,36 +24,51 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Check if the player is currently alive
+        if (isAlive)
         {
-            if (isPaused)
+            // Check if pause key is pressed
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
+                // Pause or unpause game
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
-            else
+
+            // Check if the cooldown to begin the game after unpausing is running
+            if (timerOn)
             {
-                Pause();
+                if (timeLeft > 0)
+                {
+                    // Runs down the cooldown timer
+                    timeLeft -= (Time.realtimeSinceStartup - countdownStart);
+                    countdownStart = Time.realtimeSinceStartup;
+                    timerTxt.text = timeLeft.ToString("0.00");
+                }
+                else
+                {
+                    // Continues gameplay
+                    timerOn = false;
+                    countdownTimer.SetActive(false);
+                    Time.timeScale = 1.0f;
+                    AudioListener.pause = false;
+                }
             }
         }
-
-        if (timerOn)
+        else
         {
-            if (timeLeft > 0)
-            {
-                timeLeft -= (Time.realtimeSinceStartup - countdownStart);
-                countdownStart = Time.realtimeSinceStartup;
-                timerTxt.text = timeLeft.ToString("0.00");
-            }
-            else
-            {
-                timerOn = false;
-                countdownTimer.SetActive(false);
-                Time.timeScale = 1.0f;
-                AudioListener.pause = false;
-            }
+            // The player is dead and the game is over
+            EndRun();
         }
     }
 
+    // Pauses the game and brings up the pause UI
     void Pause()
     {
         pauseUI.SetActive(true);
@@ -62,6 +79,7 @@ public class PauseMenu : MonoBehaviour
         countdownTimer.SetActive(false);
     }
 
+    // Hides all the pause UI and begins countdown to resume gameplay
     public void Resume()
     {
         pauseUI.SetActive(false);
@@ -73,29 +91,43 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
+    // Opens the options menu from the pause menu
     public void Options()
     {
         pauseUI.SetActive(false);
         optionUI.SetActive(true);
     }
 
+    // Ends the game and brings up the end UI
     public void EndRun()
+    {
+        Time.timeScale = 0.0f;
+        AudioListener.pause = true;
+        pauseUI.SetActive(false);
+        endUI.SetActive(true);
+    }
+
+    // Loads the Main Menu scene
+    public void MainMenu()
     {
         SceneManager.LoadScene(sceneName: "MainMenu");
     }
 
+    // Exits the application
     public void QuitGame()
     {
         Debug.Log("Quitting Game...");
         Application.Quit();
     }
 
+    // Returns from the options menu to the pause menu
     public void Back()
     {
         optionUI.SetActive(false);
         pauseUI.SetActive(true);
     }
 
+    // Allows the player to change the music volume via an onscreen slider
     public void MusicVolume()
     {
         AudioListener.volume = musicSlider.value;

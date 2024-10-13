@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;  // Rigidbody component for physics-based movement
     private Animator animator;  // Reference to the Animator component in the child object
+    public static bool canMove = true;
 
     private Vector2 movement;  // Store player movement vector
 
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // Get the Rigidbody2D component from the game object
+        // Get the Rigidbody2D and animator components from the game object
         rb = GetComponent<Rigidbody2D>();
 
         // Get the Animator component from the child object named "Animation"
@@ -54,13 +55,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame which is good for user input
     void Update()
     {
-        ProcessInput();
-
-        // Calculate player speed based on movement
-        float playerSpeed = movement.magnitude;
-
-        // Update the Animator's speed parameter
-        animator.SetFloat("Speed", playerSpeed);
+        // Check if the player is able to move
+        if (canMove)
+        {
+            ProcessInput();
+            // Switch between idle and running animations as needed
+            if (movement != Vector2.zero)
+            {
+                animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
+        }
     }
 
     // FixedUpdate is called at a fixed interval which is good for physics
@@ -102,8 +110,11 @@ public class PlayerMovement : MonoBehaviour
             movement.Normalize();
         }
 
-        // Move the player
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        // Move the player if able
+        if (canMove)
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     // Coroutine to handle flip animation
