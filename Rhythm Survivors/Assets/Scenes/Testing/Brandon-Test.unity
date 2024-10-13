@@ -58113,6 +58113,10 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1960920542}
+    - target: {fileID: 5239286639336431215, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1960920542}
     - target: {fileID: 5331642771113070419, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_Camera
       value: 
