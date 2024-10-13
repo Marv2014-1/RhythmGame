@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     private float targetFillAmount;
 
-    public Animator anim; // Play death animation upon death
+    public Animator animator; // Play death animation upon death
 
     void Start()
     {
@@ -97,7 +97,7 @@ public class PlayerHealth : MonoBehaviour
         // Halt player movement
         PlayerMovement.canMove = false;
         // Begin death animation
-        anim.SetBool("IsDead", true);
+        animator.SetBool("IsDead", true);
 
         Debug.Log("Player has died!");
     }

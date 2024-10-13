@@ -122,7 +122,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7620182234114448790}
@@ -189,7 +189,7 @@ Animator:
   m_GameObject: {fileID: 200780706664052860}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e2b06a83db9d0f348be2a48c3dc47df5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6524edaa510f26b4982e38481ef2d944, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -639,10 +639,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
   healthBarFill: {fileID: 3661399447869947358}
   healthText: {fileID: 6204444399627559936}
   smoothSpeed: 5
+  animator: {fileID: 4792032883061283714}
 --- !u!1001 &1633012711378344186
 PrefabInstance:
   m_ObjectHideFlags: 0
