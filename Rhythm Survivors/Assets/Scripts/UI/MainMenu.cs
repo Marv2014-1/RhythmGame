@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     // Loads the game scene
     public void Play()
     {
-        SceneManager.LoadScene(sceneName: "Brandon-Test");
+        SceneManager.LoadScene(sceneName: "Story");
     }
     
     // Brings up the options menu
