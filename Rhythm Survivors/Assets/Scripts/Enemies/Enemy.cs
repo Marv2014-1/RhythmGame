@@ -11,6 +11,8 @@ public abstract class Enemy : MonoBehaviour
 {
     [Header("Enemy Stats")]
     [SerializeField]
+
+    public int cost = 1; // strength of the enemy as seen in the spawner
     public int maxHealth = 100;
     [SerializeField]
     public float baseMoveSpeed = 2f; // Normal move speed
