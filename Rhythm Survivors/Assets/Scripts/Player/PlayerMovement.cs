@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;  // Rigidbody component for physics-based movement
     private Animator animator;  // Reference to the Animator component in the child object
-    public static bool canMove = true;
+    public static bool canMove;
 
     private Vector2 movement;  // Store player movement vector
 
@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // Allow player movement on game start
+        canMove = true;
+
         // Get the Rigidbody2D and animator components from the game object
         rb = GetComponent<Rigidbody2D>();
 

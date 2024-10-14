@@ -21,6 +21,13 @@ public class PauseMenu : MonoBehaviour
     public TMP_Text timerTxt;
     private float countdownStart;
 
+    void Start()
+    {
+        // Ensure player is alive and game is unpaused at game start
+        isPaused = false;
+        isAlive = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -96,6 +103,11 @@ public class PauseMenu : MonoBehaviour
     {
         pauseUI.SetActive(false);
         optionUI.SetActive(true);
+
+        musicSlider.value = AudioListener.volume;
+        float vol = musicSlider.value;
+        vol = Mathf.Round(vol * 100);
+        musicText.text = vol.ToString();
     }
 
     // Ends the game and brings up the end UI

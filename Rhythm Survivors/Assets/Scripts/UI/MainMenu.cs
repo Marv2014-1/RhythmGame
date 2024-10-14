@@ -24,6 +24,11 @@ public class MainMenu : MonoBehaviour
     {
         mainUI.SetActive(false);
         optionUI.SetActive(true);
+
+        musicSlider.value = AudioListener.volume;
+        float vol = musicSlider.value;
+        vol = Mathf.Round(vol * 100);
+        musicText.text = vol.ToString();
     }
 
     // Brings up the credits screen
