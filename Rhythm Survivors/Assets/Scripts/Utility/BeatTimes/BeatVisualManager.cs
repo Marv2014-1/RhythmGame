@@ -181,4 +181,19 @@ public class BeatVisualManager : MonoBehaviour
 			this.fromLeft = fromLeft;
 		}
 	}
+
+	public void SetAudioManager(AudioManager audioManager)
+	{
+		this.audioManager = audioManager;
+	}
+
+	public void ClearAllBeatVisuals()
+	{
+		foreach (BeatVisual beatVisual in activeBeatVisuals)
+		{
+			Destroy(beatVisual.rectTransform.gameObject);
+		}
+		activeBeatVisuals.Clear();
+	}
+
 }
