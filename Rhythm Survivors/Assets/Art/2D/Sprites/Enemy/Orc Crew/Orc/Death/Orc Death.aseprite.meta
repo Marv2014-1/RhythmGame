@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0548beddf9636284381a0fac6b5ba5b9
+guid: 94e9748bfdf3e8341b17d6c927d3c5ca
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Death_Frame_0
+  - name: Orc Death_Frame_0
     originalName: 
-    pivot: {x: 0.6190476, y: 0}
+    pivot: {x: 0.5263158, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 52
-      width: 21
-      height: 28
-    spriteID: 2c5c6ed86dc884840b90d51ccdf4f21d
+      y: 48
+      width: 19
+      height: 22
+    spriteID: 8dcb656684a4e2c498faf7c84dc5fb46
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,8 +140,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 52}
-  - name: Death_Frame_1
+    uvTransform: {x: 4, y: 48}
+  - name: Orc Death_Frame_1
     originalName: 
     pivot: {x: 0.6086957, y: 0}
     alignment: 9
@@ -151,8 +151,8 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 23
-      height: 40
-    spriteID: b884d2b90ead4624595ac74fe4c3e666
+      height: 36
+    spriteID: 4cf905e83140b4540a1d342e9f4aac9f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,38 +161,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Death_Frame_2
+  - name: Orc Death_Frame_2
     originalName: 
-    pivot: {x: 0.42105266, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 88
-      width: 19
-      height: 22
-    spriteID: 67af40a7098172f4dad815ef307c8cb3
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 88}
-  - name: Death_Frame_3
-    originalName: 
-    pivot: {x: 0.33333334, y: 0}
+    pivot: {x: 0.125, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 35
       y: 4
-      width: 27
-      height: 27
-    spriteID: 4cea2821b46024e4a93bed56ff891fc9
+      width: 24
+      height: 25
+    spriteID: 303a93d244e444544ac0e9765877a3c9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -201,18 +181,38 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 35, y: 4}
-  - name: Death_Frame_4
+  - name: Orc Death_Frame_3
     originalName: 
-    pivot: {x: 0.18181819, y: 0}
+    pivot: {x: 0.29032257, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 70
-      y: 27
+      x: 67
+      y: 28
+      width: 31
+      height: 15
+    spriteID: b6b71ceabbc8a9a42bf08ba6eca856a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 67, y: 28}
+  - name: Orc Death_Frame_4
+    originalName: 
+    pivot: {x: 0.3030303, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 67
+      y: 51
       width: 33
       height: 12
-    spriteID: 4a4a3ba67cae28d4894dafc6ba8aafc1
+    spriteID: 5692f95136589d343bbfc75c74b0c7ae
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -220,19 +220,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 70, y: 27}
-  - name: Death_Frame_5
+    uvTransform: {x: 67, y: 51}
+  - name: Orc Death_Frame_5
     originalName: 
-    pivot: {x: 0.18181819, y: 0}
+    pivot: {x: 0.29411766, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 70
+      x: 67
       y: 4
-      width: 33
-      height: 15
-    spriteID: b3cdc4ff3a2f671458f856b46b84216d
+      width: 34
+      height: 16
+    spriteID: 722da4429505b8a41af76e6f3bd01f94
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -240,74 +240,74 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 70, y: 4}
+    uvTransform: {x: 67, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -814945124
-    name: Death
+    guid: -497937574
+    name: Orc Death
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Death_Frame_0
+    - name: Orc Death_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 35
-        y: 0
-        width: 21
-        height: 28
-      spriteId: 2c5c6ed86dc884840b90d51ccdf4f21d
-    - name: Death_Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 34
-        y: 0
-        width: 23
-        height: 40
-      spriteId: b884d2b90ead4624595ac74fe4c3e666
-    - name: Death_Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 40
+        x: 22
         y: 0
         width: 19
         height: 22
-      spriteId: 67af40a7098172f4dad815ef307c8cb3
-    - name: Death_Frame_3
+      spriteId: 8dcb656684a4e2c498faf7c84dc5fb46
+    - name: Orc Death_Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 18
+        y: 0
+        width: 23
+        height: 36
+      spriteId: 4cf905e83140b4540a1d342e9f4aac9f
+    - name: Orc Death_Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: 29
+        y: 0
+        width: 24
+        height: 25
+      spriteId: 303a93d244e444544ac0e9765877a3c9
+    - name: Orc Death_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 39
+        x: 23
         y: 0
-        width: 27
-        height: 27
-      spriteId: 4cea2821b46024e4a93bed56ff891fc9
-    - name: Death_Frame_4
+        width: 31
+        height: 15
+      spriteId: b6b71ceabbc8a9a42bf08ba6eca856a8
+    - name: Orc Death_Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 42
+        x: 22
         y: 0
         width: 33
         height: 12
-      spriteId: 4a4a3ba67cae28d4894dafc6ba8aafc1
-    - name: Death_Frame_5
+      spriteId: 5692f95136589d343bbfc75c74b0c7ae
+    - name: Orc Death_Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
-        x: 42
+        x: 22
         y: 0
-        width: 33
-        height: 15
-      spriteId: b3cdc4ff3a2f671458f856b46b84216d
+        width: 34
+        height: 16
+      spriteId: 722da4429505b8a41af76e6f3bd01f94
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 96, y: 80}
+  canvasSize: {x: 64, y: 64}

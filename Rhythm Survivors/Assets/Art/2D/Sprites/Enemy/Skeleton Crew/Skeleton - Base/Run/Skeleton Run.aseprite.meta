@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d3ba0bb06d743104ab7c73b7649f472e
+guid: 69b5caacfda9b464cb15f5f77d6f73f1
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Idle_Frame_0
+  - name: Skeleton Run_Frame_0
     originalName: 
-    pivot: {x: 0.625, y: 0}
+    pivot: {x: 0.47619048, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 30
-    spriteID: 21d1b2ae4aa0f6b4db7ef2ff32a36562
+      width: 42
+      height: 32
+    spriteID: c19458d5204a87947a71c163d9e54d88
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Idle_Frame_1
+  - name: Skeleton Run_Frame_1
     originalName: 
-    pivot: {x: 0.625, y: 0}
+    pivot: {x: 0.475, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 79
-      width: 16
-      height: 28
-    spriteID: 46cb236ad3760ab45b1bf1b07c84453a
+      y: 44
+      width: 40
+      height: 33
+    spriteID: 0f43be04ef55f66498eea8d5187f13ca
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,19 +160,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 79}
-  - name: Idle_Frame_2
+    uvTransform: {x: 4, y: 44}
+  - name: Skeleton Run_Frame_2
     originalName: 
-    pivot: {x: 0.625, y: 0}
+    pivot: {x: 0.47368422, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
+      x: 54
       y: 4
-      width: 16
-      height: 27
-    spriteID: 4dc65d5c8b4a22a4e88db1278ccbcb0d
+      width: 38
+      height: 32
+    spriteID: c11c307fef1225346b83de77a54a23df
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -180,19 +180,39 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 4}
-  - name: Idle_Frame_3
+    uvTransform: {x: 54, y: 4}
+  - name: Skeleton Run_Frame_3
     originalName: 
-    pivot: {x: 0.625, y: 0}
+    pivot: {x: 0.47058824, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 85
+      width: 34
+      height: 32
+    spriteID: d86da356027c36143a7f381e635df38a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 48, y: 85}
+  - name: Skeleton Run_Frame_4
+    originalName: 
+    pivot: {x: 0.47222224, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 42
-      width: 16
-      height: 29
-    spriteID: bc22462345cac4d4891282dfece524fa
+      y: 85
+      width: 36
+      height: 33
+    spriteID: 7c8d2f7078ffd9d4a84ac7cc98c83499
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,56 +220,94 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 42}
+    uvTransform: {x: 4, y: 85}
+  - name: Skeleton Run_Frame_5
+    originalName: 
+    pivot: {x: 0.47368422, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 44
+      width: 38
+      height: 32
+    spriteID: d2d517d1805df104697181960a2ba1fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 44}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 161112836
-    name: Idle
+    guid: 872858688
+    name: Skeleton Run
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Idle_Frame_0
+    - name: Skeleton Run_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 6
+        x: 12
         y: 0
-        width: 16
-        height: 30
-      spriteId: 21d1b2ae4aa0f6b4db7ef2ff32a36562
-    - name: Idle_Frame_1
+        width: 42
+        height: 32
+      spriteId: c19458d5204a87947a71c163d9e54d88
+    - name: Skeleton Run_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 6
+        x: 13
         y: 0
-        width: 16
-        height: 28
-      spriteId: 46cb236ad3760ab45b1bf1b07c84453a
-    - name: Idle_Frame_2
+        width: 40
+        height: 33
+      spriteId: 0f43be04ef55f66498eea8d5187f13ca
+    - name: Skeleton Run_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 6
+        x: 14
         y: 0
-        width: 16
-        height: 27
-      spriteId: 4dc65d5c8b4a22a4e88db1278ccbcb0d
-    - name: Idle_Frame_3
+        width: 38
+        height: 32
+      spriteId: c11c307fef1225346b83de77a54a23df
+    - name: Skeleton Run_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 6
+        x: 16
         y: 0
-        width: 16
-        height: 29
-      spriteId: bc22462345cac4d4891282dfece524fa
+        width: 34
+        height: 32
+      spriteId: d86da356027c36143a7f381e635df38a
+    - name: Skeleton Run_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 15
+        y: 0
+        width: 36
+        height: 33
+      spriteId: 7c8d2f7078ffd9d4a84ac7cc98c83499
+    - name: Skeleton Run_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 14
+        y: 0
+        width: 38
+        height: 32
+      spriteId: d2d517d1805df104697181960a2ba1fd
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 64, y: 64}

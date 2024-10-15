@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c31987538794b014cbe429aae3a654de
+guid: e6bd2c392128bc64f9d97b909de10fb7
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,38 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Death_Frame_0
+  - name: Skeleton_Warrior Run_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 92
-      y: 4
-      width: 18
-      height: 28
-    spriteID: 8dd2a6960fbf7cc45be1c708f58e40f5
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 92, y: 4}
-  - name: Death_Frame_1
-    originalName: 
-    pivot: {x: 0.5, y: -0.037037037}
+    pivot: {x: 0.4375, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 18
-      height: 54
-    spriteID: 1b09f6668200e084a984aa330be0410e
+      width: 48
+      height: 44
+    spriteID: 80766a16286397140af4ce196e854d23
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,58 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Death_Frame_2
-    originalName: 
-    pivot: {x: 0.5714286, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 30
-      y: 4
-      width: 21
-      height: 42
-    spriteID: f199827a1278dc4449a8b92c1aa61179
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 30, y: 4}
-  - name: Death_Frame_3
-    originalName: 
-    pivot: {x: 0.52, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 59
-      y: 4
-      width: 25
-      height: 21
-    spriteID: 4a3bd09f98c47b444bff6cdd10c6dec5
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 59, y: 4}
-  - name: Death_Frame_4
+  - name: Skeleton_Warrior Run_Frame_1
     originalName: 
     pivot: {x: 0.43478262, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 59
-      y: 33
-      width: 23
-      height: 8
-    spriteID: ebd35bf641b1dce459edc535a8d5f086
+      x: 4
+      y: 56
+      width: 46
+      height: 44
+    spriteID: 028e0e55521e1344baa4f8b17d19019a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -220,19 +160,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 59, y: 33}
-  - name: Death_Frame_5
+    uvTransform: {x: 4, y: 56}
+  - name: Skeleton_Warrior Run_Frame_2
     originalName: 
-    pivot: {x: 0.47619048, y: 0}
+    pivot: {x: 0.4318182, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 92
-      y: 40
-      width: 21
-      height: 11
-    spriteID: cda7f6cfaa536a940a7d4dd73d9b65ae
+      x: 4
+      y: 108
+      width: 44
+      height: 44
+    spriteID: 35d257ce0a76f6142a1b80bec9d0d95c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -240,70 +180,130 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 92, y: 40}
+    uvTransform: {x: 4, y: 108}
+  - name: Skeleton_Warrior Run_Frame_3
+    originalName: 
+    pivot: {x: 0.425, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 56
+      width: 40
+      height: 44
+    spriteID: 28155b14764ecf74b9abc482a98219ac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 56}
+  - name: Skeleton_Warrior Run_Frame_4
+    originalName: 
+    pivot: {x: 0.42857143, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 4
+      width: 42
+      height: 44
+    spriteID: c326dc5d94b9fbc47b2f11555755df42
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 60, y: 4}
+  - name: Skeleton_Warrior Run_Frame_5
+    originalName: 
+    pivot: {x: 0.4318182, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 160
+      width: 44
+      height: 44
+    spriteID: 4f90fb1f360a21d4580f4e8596a77546
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 160}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -814945124
-    name: Death
+    guid: 1604080349
+    name: Skeleton_Warrior Run
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Death_Frame_0
+    - name: Skeleton_Warrior Run_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 23
+        x: 11
         y: 0
-        width: 18
-        height: 28
-      spriteId: 8dd2a6960fbf7cc45be1c708f58e40f5
-    - name: Death_Frame_1
+        width: 48
+        height: 44
+      spriteId: 80766a16286397140af4ce196e854d23
+    - name: Skeleton_Warrior Run_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 23
-        y: 2
-        width: 18
-        height: 54
-      spriteId: 1b09f6668200e084a984aa330be0410e
-    - name: Death_Frame_2
+        x: 12
+        y: 0
+        width: 46
+        height: 44
+      spriteId: 028e0e55521e1344baa4f8b17d19019a
+    - name: Skeleton_Warrior Run_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 20
+        x: 13
         y: 0
-        width: 21
-        height: 42
-      spriteId: f199827a1278dc4449a8b92c1aa61179
-    - name: Death_Frame_3
+        width: 44
+        height: 44
+      spriteId: 35d257ce0a76f6142a1b80bec9d0d95c
+    - name: Skeleton_Warrior Run_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 19
+        x: 15
         y: 0
-        width: 25
-        height: 21
-      spriteId: 4a3bd09f98c47b444bff6cdd10c6dec5
-    - name: Death_Frame_4
+        width: 40
+        height: 44
+      spriteId: 28155b14764ecf74b9abc482a98219ac
+    - name: Skeleton_Warrior Run_Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 22
+        x: 14
         y: 0
-        width: 23
-        height: 8
-      spriteId: ebd35bf641b1dce459edc535a8d5f086
-    - name: Death_Frame_5
+        width: 42
+        height: 44
+      spriteId: c326dc5d94b9fbc47b2f11555755df42
+    - name: Skeleton_Warrior Run_Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
-        x: 22
+        x: 13
         y: 0
-        width: 21
-        height: 11
-      spriteId: cda7f6cfaa536a940a7d4dd73d9b65ae
+        width: 44
+        height: 44
+      spriteId: 4f90fb1f360a21d4580f4e8596a77546
     linkedCells: []
     parentIndex: -1
   platformSettings: []

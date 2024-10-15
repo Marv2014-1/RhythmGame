@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b586267693fba9d4f8dcfffb501007f3
+guid: e68214365286cf745beeb61a50383d9b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,38 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Death_Frame_0
+  - name: Skeleton_Mage Idle_Frame_0
     originalName: 
-    pivot: {x: 0.39130434, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 41
-      width: 23
-      height: 21
-    spriteID: 68555757d5937fd4a8f94869b3fd2fe8
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 41}
-  - name: Death_Frame_1
-    originalName: 
-    pivot: {x: 0.47826087, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 23
-      height: 29
-    spriteID: a8a453d93934f4744a982447430542a4
+      width: 18
+      height: 32
+    spriteID: 257e6f6068a8ccd43a4bc3852240807d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,18 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Death_Frame_2
+  - name: Skeleton_Mage Idle_Frame_1
     originalName: 
-    pivot: {x: 0.26086956, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 97
-      width: 23
-      height: 16
-    spriteID: 0e3b34d2c0720da408b2eb72e753af08
+      y: 83
+      width: 18
+      height: 30
+    spriteID: d223a05996d890b498a49f14c3907c85
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -180,59 +160,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 97}
-  - name: Death_Frame_3
+    uvTransform: {x: 4, y: 83}
+  - name: Skeleton_Mage Idle_Frame_2
     originalName: 
-    pivot: {x: 0.26086956, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 70
-      width: 23
-      height: 19
-    spriteID: 1c1f552d6d325404aa7093eaafc48013
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 70}
-  - name: Death_Frame_4
-    originalName: 
-    pivot: {x: 0.29411766, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 35
-      y: 44
-      width: 34
-      height: 9
-    spriteID: 41de27c880c2222439503008720aae02
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 35, y: 44}
-  - name: Death_Frame_5
-    originalName: 
-    pivot: {x: 0.29411766, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 35
+      x: 30
       y: 4
-      width: 34
-      height: 12
-    spriteID: ee326be6a81d087408952aeb4533ed44
+      width: 18
+      height: 29
+    spriteID: 3db05c35cd721fb4fbca1847fd9de0d5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -240,19 +180,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 35, y: 4}
-  - name: Death_Frame_6
+    uvTransform: {x: 30, y: 4}
+  - name: Skeleton_Mage Idle_Frame_3
     originalName: 
-    pivot: {x: 0.29411766, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 35
-      y: 24
-      width: 34
-      height: 12
-    spriteID: 308954952383dd84d9375ec862f73a32
+      x: 4
+      y: 44
+      width: 18
+      height: 31
+    spriteID: a0e3e6ae448106b45a24fdd259df2c43
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -260,83 +200,56 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 35, y: 24}
+    uvTransform: {x: 4, y: 44}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -814945124
-    name: Death
+    guid: 931841518
+    name: Skeleton_Mage Idle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Death_Frame_0
+    - name: Skeleton_Mage Idle_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 23
+        x: 7
         y: 0
-        width: 23
-        height: 21
-      spriteId: 68555757d5937fd4a8f94869b3fd2fe8
-    - name: Death_Frame_1
+        width: 18
+        height: 32
+      spriteId: 257e6f6068a8ccd43a4bc3852240807d
+    - name: Skeleton_Mage Idle_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 21
+        x: 7
         y: 0
-        width: 23
-        height: 29
-      spriteId: a8a453d93934f4744a982447430542a4
-    - name: Death_Frame_2
+        width: 18
+        height: 30
+      spriteId: d223a05996d890b498a49f14c3907c85
+    - name: Skeleton_Mage Idle_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 26
+        x: 7
         y: 0
-        width: 23
-        height: 16
-      spriteId: 0e3b34d2c0720da408b2eb72e753af08
-    - name: Death_Frame_3
+        width: 18
+        height: 29
+      spriteId: 3db05c35cd721fb4fbca1847fd9de0d5
+    - name: Skeleton_Mage Idle_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 26
+        x: 7
         y: 0
-        width: 23
-        height: 19
-      spriteId: 1c1f552d6d325404aa7093eaafc48013
-    - name: Death_Frame_4
-      frameIndex: 4
-      additiveSortOrder: 0
-      cellRect:
-        x: 22
-        y: 0
-        width: 34
-        height: 9
-      spriteId: 41de27c880c2222439503008720aae02
-    - name: Death_Frame_5
-      frameIndex: 5
-      additiveSortOrder: 0
-      cellRect:
-        x: 22
-        y: 0
-        width: 34
-        height: 12
-      spriteId: ee326be6a81d087408952aeb4533ed44
-    - name: Death_Frame_6
-      frameIndex: 6
-      additiveSortOrder: 0
-      cellRect:
-        x: 22
-        y: 0
-        width: 34
-        height: 12
-      spriteId: 308954952383dd84d9375ec862f73a32
+        width: 18
+        height: 31
+      spriteId: a0e3e6ae448106b45a24fdd259df2c43
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 64}
+  canvasSize: {x: 32, y: 32}

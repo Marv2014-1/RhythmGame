@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e28bd4ef9ad559344ad7c4dec37fe646
+guid: 44be88f1ff89a274aaa7784479e1dee3
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Run_Frame_0
+  - name: Orc_Rogue Idle_Frame_0
     originalName: 
-    pivot: {x: 0.45945948, y: 0}
+    pivot: {x: 0.55, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 37
-      height: 37
-    spriteID: 3d2d96dd12deabf498470bf390da5866
+      width: 20
+      height: 30
+    spriteID: be8ce584b8bf56c4a822fdcc4fb911cb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Run_Frame_1
+  - name: Orc_Rogue Idle_Frame_1
     originalName: 
-    pivot: {x: 0.45714286, y: 0}
+    pivot: {x: 0.55, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 49
-      width: 35
-      height: 38
-    spriteID: 71daf29852690a047acce178bd991411
+      y: 79
+      width: 20
+      height: 28
+    spriteID: 5a6933fa9d69d3c4cbac1f665bd3d91b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,19 +160,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 49}
-  - name: Run_Frame_2
+    uvTransform: {x: 4, y: 79}
+  - name: Orc_Rogue Idle_Frame_2
     originalName: 
-    pivot: {x: 0.45454547, y: 0}
+    pivot: {x: 0.55, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 49
+      x: 32
       y: 4
-      width: 33
-      height: 37
-    spriteID: bba2d83e8b8fc5746b57d092ece1b17d
+      width: 20
+      height: 28
+    spriteID: 6449e612106c11746911b32a5a99b44e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -180,19 +180,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 49, y: 4}
-  - name: Run_Frame_3
+    uvTransform: {x: 32, y: 4}
+  - name: Orc_Rogue Idle_Frame_3
     originalName: 
-    pivot: {x: 0.44827586, y: 0}
+    pivot: {x: 0.55, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 86
-      y: 49
-      width: 29
-      height: 37
-    spriteID: c24824230ac3e874aa2c156105fa61c1
+      x: 4
+      y: 42
+      width: 20
+      height: 29
+    spriteID: e0084a7378f93df4195cee7b70f11393
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,114 +200,56 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 86, y: 49}
-  - name: Run_Frame_4
-    originalName: 
-    pivot: {x: 0.4516129, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 47
-      y: 49
-      width: 31
-      height: 38
-    spriteID: 42e32e33690f3b24682d47444af48fd0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 47, y: 49}
-  - name: Run_Frame_5
-    originalName: 
-    pivot: {x: 0.45454547, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 90
-      y: 4
-      width: 33
-      height: 37
-    spriteID: eb0e826fb25dba6448c6dd4690c36696
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 90, y: 4}
+    uvTransform: {x: 4, y: 42}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1912097461
-    name: Run
+    guid: -494853569
+    name: Orc_Rogue Idle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Run_Frame_0
+    - name: Orc_Rogue Idle_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 15
+        x: 5
         y: 0
-        width: 37
-        height: 37
-      spriteId: 3d2d96dd12deabf498470bf390da5866
-    - name: Run_Frame_1
+        width: 20
+        height: 30
+      spriteId: be8ce584b8bf56c4a822fdcc4fb911cb
+    - name: Orc_Rogue Idle_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 16
+        x: 5
         y: 0
-        width: 35
-        height: 38
-      spriteId: 71daf29852690a047acce178bd991411
-    - name: Run_Frame_2
+        width: 20
+        height: 28
+      spriteId: 5a6933fa9d69d3c4cbac1f665bd3d91b
+    - name: Orc_Rogue Idle_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 17
+        x: 5
         y: 0
-        width: 33
-        height: 37
-      spriteId: bba2d83e8b8fc5746b57d092ece1b17d
-    - name: Run_Frame_3
+        width: 20
+        height: 28
+      spriteId: 6449e612106c11746911b32a5a99b44e
+    - name: Orc_Rogue Idle_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 19
+        x: 5
         y: 0
-        width: 29
-        height: 37
-      spriteId: c24824230ac3e874aa2c156105fa61c1
-    - name: Run_Frame_4
-      frameIndex: 4
-      additiveSortOrder: 0
-      cellRect:
-        x: 18
-        y: 0
-        width: 31
-        height: 38
-      spriteId: 42e32e33690f3b24682d47444af48fd0
-    - name: Run_Frame_5
-      frameIndex: 5
-      additiveSortOrder: 0
-      cellRect:
-        x: 17
-        y: 0
-        width: 33
-        height: 37
-      spriteId: eb0e826fb25dba6448c6dd4690c36696
+        width: 20
+        height: 29
+      spriteId: e0084a7378f93df4195cee7b70f11393
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 64}
+  canvasSize: {x: 32, y: 32}

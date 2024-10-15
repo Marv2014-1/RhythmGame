@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8be655db152b57c44805eb093474ef08
+guid: 4b5fba336717e0047946ac0863d7260d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Idle_Frame_0
+  - name: Skeleton_Warrior Idle_Frame_0
     originalName: 
-    pivot: {x: 0.39130434, y: 0}
+    pivot: {x: 0.6, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 23
-      height: 25
-    spriteID: d3a1702117145a54f98aa24cdfaeb556
+      width: 20
+      height: 30
+    spriteID: 925915d72479ef84b8016611a4ccee0f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Idle_Frame_1
+  - name: Skeleton_Warrior Idle_Frame_1
     originalName: 
-    pivot: {x: 0.39130434, y: 0}
+    pivot: {x: 0.6, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 37
-      width: 23
-      height: 23
-    spriteID: 15ad4689ec0aa8f4aa6dbd4bb21c78af
+      y: 79
+      width: 20
+      height: 28
+    spriteID: d9927b578cab692449864d59836f5e5c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,39 +160,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 37}
-  - name: Idle_Frame_2
+    uvTransform: {x: 4, y: 79}
+  - name: Skeleton_Warrior Idle_Frame_2
     originalName: 
-    pivot: {x: 0.39130434, y: 0}
+    pivot: {x: 0.6, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 35
-      y: 36
-      width: 23
-      height: 22
-    spriteID: d0b1fa3c7d19cb0408dae9168c08edb0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 35, y: 36}
-  - name: Idle_Frame_3
-    originalName: 
-    pivot: {x: 0.39130434, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 35
+      x: 32
       y: 4
-      width: 23
-      height: 24
-    spriteID: b9789d9ccb0f74d47b69ebccd79ff410
+      width: 20
+      height: 28
+    spriteID: 08f1646cc71ef69489b07c4ef519f584
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,52 +180,72 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 35, y: 4}
+    uvTransform: {x: 32, y: 4}
+  - name: Skeleton_Warrior Idle_Frame_3
+    originalName: 
+    pivot: {x: 0.6, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 42
+      width: 20
+      height: 29
+    spriteID: 0dd16a59e2d17e042a0051e1558833f3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 42}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 161112836
-    name: Idle
+    guid: 1400040194
+    name: Skeleton_Warrior Idle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Idle_Frame_0
+    - name: Skeleton_Warrior Idle_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 7
+        x: 4
         y: 0
-        width: 23
-        height: 25
-      spriteId: d3a1702117145a54f98aa24cdfaeb556
-    - name: Idle_Frame_1
+        width: 20
+        height: 30
+      spriteId: 925915d72479ef84b8016611a4ccee0f
+    - name: Skeleton_Warrior Idle_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 7
+        x: 4
         y: 0
-        width: 23
-        height: 23
-      spriteId: 15ad4689ec0aa8f4aa6dbd4bb21c78af
-    - name: Idle_Frame_2
+        width: 20
+        height: 28
+      spriteId: d9927b578cab692449864d59836f5e5c
+    - name: Skeleton_Warrior Idle_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 7
+        x: 4
         y: 0
-        width: 23
-        height: 22
-      spriteId: d0b1fa3c7d19cb0408dae9168c08edb0
-    - name: Idle_Frame_3
+        width: 20
+        height: 28
+      spriteId: 08f1646cc71ef69489b07c4ef519f584
+    - name: Skeleton_Warrior Idle_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 7
+        x: 4
         y: 0
-        width: 23
-        height: 24
-      spriteId: b9789d9ccb0f74d47b69ebccd79ff410
+        width: 20
+        height: 29
+      spriteId: 0dd16a59e2d17e042a0051e1558833f3
     linkedCells: []
     parentIndex: -1
   platformSettings: []

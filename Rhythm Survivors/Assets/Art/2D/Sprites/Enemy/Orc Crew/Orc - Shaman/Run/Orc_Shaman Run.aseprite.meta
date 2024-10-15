@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4b5fba336717e0047946ac0863d7260d
+guid: 840b8ba839994cc4b8ee9ec35a1b688b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Idle_Frame_0
+  - name: Orc_Shaman Run_Frame_0
     originalName: 
-    pivot: {x: 0.6, y: 0}
+    pivot: {x: 0.40909094, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 20
-      height: 30
-    spriteID: cdde99f5b09a99d46a9095035ed7af6b
+      width: 44
+      height: 39
+    spriteID: fdc4fd118af897d40a3d54ad1913e3ed
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +141,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Idle_Frame_1
+  - name: Orc_Shaman Run_Frame_1
     originalName: 
-    pivot: {x: 0.6, y: 0}
+    pivot: {x: 0.4047619, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 79
-      width: 20
-      height: 28
-    spriteID: 129a6f2ec01b6eb4da74d7032cf0a1f5
+      y: 51
+      width: 42
+      height: 40
+    spriteID: 0bae1f5101f14f641a5d06a232109bd4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,19 +160,39 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 79}
-  - name: Idle_Frame_2
+    uvTransform: {x: 4, y: 51}
+  - name: Orc_Shaman Run_Frame_2
     originalName: 
-    pivot: {x: 0.6, y: 0}
+    pivot: {x: 0.4, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 32
+      x: 4
+      y: 99
+      width: 40
+      height: 39
+    spriteID: cfd6ac1edac5b1142b73c1557c89934d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 99}
+  - name: Orc_Shaman Run_Frame_3
+    originalName: 
+    pivot: {x: 0.3888889, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
       y: 4
-      width: 20
-      height: 28
-    spriteID: 288e14e40bfb2d14898c6168c6386f7a
+      width: 36
+      height: 39
+    spriteID: 3efe38e775ff84447b6729e4a1acafb4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -180,19 +200,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 32, y: 4}
-  - name: Idle_Frame_3
+    uvTransform: {x: 56, y: 4}
+  - name: Orc_Shaman Run_Frame_4
     originalName: 
-    pivot: {x: 0.6, y: 0}
+    pivot: {x: 0.39473686, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 42
-      width: 20
-      height: 29
-    spriteID: 5b55149cc7ed3794c85039cf90c25d89
+      y: 193
+      width: 38
+      height: 40
+    spriteID: 5cb52930db8f9ec4c83c708659d093b0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,56 +220,94 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 42}
+    uvTransform: {x: 4, y: 193}
+  - name: Orc_Shaman Run_Frame_5
+    originalName: 
+    pivot: {x: 0.4, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 146
+      width: 40
+      height: 39
+    spriteID: 5cc646bfc7a729b44b5376c0d1ec79fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 146}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 161112836
-    name: Idle
+    guid: -855800894
+    name: Orc_Shaman Run
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Idle_Frame_0
+    - name: Orc_Shaman Run_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 4
+        x: 14
         y: 0
-        width: 20
-        height: 30
-      spriteId: cdde99f5b09a99d46a9095035ed7af6b
-    - name: Idle_Frame_1
+        width: 44
+        height: 39
+      spriteId: fdc4fd118af897d40a3d54ad1913e3ed
+    - name: Orc_Shaman Run_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 4
+        x: 15
         y: 0
-        width: 20
-        height: 28
-      spriteId: 129a6f2ec01b6eb4da74d7032cf0a1f5
-    - name: Idle_Frame_2
+        width: 42
+        height: 40
+      spriteId: 0bae1f5101f14f641a5d06a232109bd4
+    - name: Orc_Shaman Run_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 4
+        x: 16
         y: 0
-        width: 20
-        height: 28
-      spriteId: 288e14e40bfb2d14898c6168c6386f7a
-    - name: Idle_Frame_3
+        width: 40
+        height: 39
+      spriteId: cfd6ac1edac5b1142b73c1557c89934d
+    - name: Orc_Shaman Run_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 4
+        x: 18
         y: 0
-        width: 20
-        height: 29
-      spriteId: 5b55149cc7ed3794c85039cf90c25d89
+        width: 36
+        height: 39
+      spriteId: 3efe38e775ff84447b6729e4a1acafb4
+    - name: Orc_Shaman Run_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 17
+        y: 0
+        width: 38
+        height: 40
+      spriteId: 5cb52930db8f9ec4c83c708659d093b0
+    - name: Orc_Shaman Run_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 16
+        y: 0
+        width: 40
+        height: 39
+      spriteId: 5cc646bfc7a729b44b5376c0d1ec79fd
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 64, y: 64}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8731633982873444dac9de1b17081318
+guid: 0548beddf9636284381a0fac6b5ba5b9
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,38 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Idle_Frame_0
+  - name: Orc_Warrior Death_Frame_0
     originalName: 
-    pivot: {x: 0.55, y: 0}
+    pivot: {x: 0.6190476, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 52
+      width: 21
+      height: 28
+    spriteID: 5425df29d154e8447a8a3af160fcb057
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 52}
+  - name: Orc_Warrior Death_Frame_1
+    originalName: 
+    pivot: {x: 0.6086957, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 20
-      height: 30
-    spriteID: ca779b15064d95545af8f6627953ca1f
+      width: 23
+      height: 40
+    spriteID: 3d629760b28dcc744b621929899d0230
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +161,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Idle_Frame_1
+  - name: Orc_Warrior Death_Frame_2
     originalName: 
-    pivot: {x: 0.55, y: 0}
+    pivot: {x: 0.42105266, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 79
-      width: 20
-      height: 28
-    spriteID: b631e02e9a2498b428c44ea32fc5198b
+      y: 88
+      width: 19
+      height: 22
+    spriteID: bcf7931bd395d4c4f857f656d1390a30
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,19 +180,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 79}
-  - name: Idle_Frame_2
+    uvTransform: {x: 4, y: 88}
+  - name: Orc_Warrior Death_Frame_3
     originalName: 
-    pivot: {x: 0.55, y: 0}
+    pivot: {x: 0.33333334, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 32
+      x: 35
       y: 4
-      width: 20
-      height: 28
-    spriteID: df85dcdce6b40fb4691a2189cc142e8b
+      width: 27
+      height: 27
+    spriteID: 621bec2d2c1bb7c468868147918cd024
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -180,19 +200,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 32, y: 4}
-  - name: Idle_Frame_3
+    uvTransform: {x: 35, y: 4}
+  - name: Orc_Warrior Death_Frame_4
     originalName: 
-    pivot: {x: 0.55, y: 0}
+    pivot: {x: 0.18181819, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 42
-      width: 20
-      height: 29
-    spriteID: 63b5e6f35b7f8a646b55330c3a13a96f
+      x: 70
+      y: 27
+      width: 33
+      height: 12
+    spriteID: 8a67e04dd6bb15f4ebafbb9d5d4195bd
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,56 +220,94 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 42}
+    uvTransform: {x: 70, y: 27}
+  - name: Orc_Warrior Death_Frame_5
+    originalName: 
+    pivot: {x: 0.18181819, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 4
+      width: 33
+      height: 15
+    spriteID: 2135ccb2690c1984f84b2ab12cc13d3a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 161112836
-    name: Idle
+    guid: 1853780567
+    name: Orc_Warrior Death
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Idle_Frame_0
+    - name: Orc_Warrior Death_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 5
+        x: 35
         y: 0
-        width: 20
-        height: 30
-      spriteId: ca779b15064d95545af8f6627953ca1f
-    - name: Idle_Frame_1
+        width: 21
+        height: 28
+      spriteId: 5425df29d154e8447a8a3af160fcb057
+    - name: Orc_Warrior Death_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 5
+        x: 34
         y: 0
-        width: 20
-        height: 28
-      spriteId: b631e02e9a2498b428c44ea32fc5198b
-    - name: Idle_Frame_2
+        width: 23
+        height: 40
+      spriteId: 3d629760b28dcc744b621929899d0230
+    - name: Orc_Warrior Death_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 5
+        x: 40
         y: 0
-        width: 20
-        height: 28
-      spriteId: df85dcdce6b40fb4691a2189cc142e8b
-    - name: Idle_Frame_3
+        width: 19
+        height: 22
+      spriteId: bcf7931bd395d4c4f857f656d1390a30
+    - name: Orc_Warrior Death_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 5
+        x: 39
         y: 0
-        width: 20
-        height: 29
-      spriteId: 63b5e6f35b7f8a646b55330c3a13a96f
+        width: 27
+        height: 27
+      spriteId: 621bec2d2c1bb7c468868147918cd024
+    - name: Orc_Warrior Death_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 42
+        y: 0
+        width: 33
+        height: 12
+      spriteId: 8a67e04dd6bb15f4ebafbb9d5d4195bd
+    - name: Orc_Warrior Death_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 42
+        y: 0
+        width: 33
+        height: 15
+      spriteId: 2135ccb2690c1984f84b2ab12cc13d3a
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 96, y: 80}
