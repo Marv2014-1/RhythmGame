@@ -113,7 +113,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             // Calculate the total available cost based on beat count
-            int totalAvailableCost = beatCount / 2; // Devide by 2 to reduce the dificulty
+            int totalAvailableCost = beatCount / 2; // Divide by 2 to reduce the difficulty
 
             // Reset beat count
             beatCount = 0;

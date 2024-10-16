@@ -3,8 +3,6 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using System;
-using Unity.VisualScripting;
 
 public class BeatDetector : MonoBehaviour
 {
