@@ -37,11 +37,6 @@ public class Story : MonoBehaviour
         {
             Progress();
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SceneManager.LoadScene(sceneName: "MainMenu");
-        }
     }
 
     void Progress()
