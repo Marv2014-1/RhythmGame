@@ -5,7 +5,6 @@ public class Sword : Weapon
 {
     private Vector3 originalLocalPosition; // Store the original local position of the sword
     private Animator animator; // Reference to the Animator component
-    private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
     private bool isAttacking = false; // Prevents overlapping attacks
 
     // Reference to the SwordContainer's Transform
@@ -26,13 +25,6 @@ public class Sword : Weapon
         if (animator == null)
         {
             Debug.LogError("No Animator component found on the Sword object.");
-        }
-
-        // Get the SpriteRenderer component
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("No SpriteRenderer component found on the Sword object.");
         }
 
         // Get the SwordContainer's Transform
