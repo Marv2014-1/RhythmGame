@@ -26,6 +26,11 @@ public class PauseMenu : MonoBehaviour
         // Ensure player is alive and game is unpaused at game start
         isPaused = false;
         isAlive = true;
+        Time.timeScale = 1.0f;
+        AudioListener.pause = false;
+        pauseUI.SetActive(false);
+        optionUI.SetActive(false);
+        endUI.SetActive(false);
     }
 
     // Update is called once per frame
