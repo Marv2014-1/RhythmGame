@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Staff
-  damage: 5
+  damage: 15
   range: 10
   requiredBeats: 5
   player: {fileID: 0}

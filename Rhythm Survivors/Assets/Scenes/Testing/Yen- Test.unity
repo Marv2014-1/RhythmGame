@@ -1160,6 +1160,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8840884471665460991, guid: b87570bc6cc87e645851c84da0adb0bd, type: 3}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2141168504861516278, guid: fae1ecfcd14df4549bef30f9aec9308b, type: 3}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8840884471665460991, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2141168504861516278, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
     - target: {fileID: 7349946975714620294, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_Name
       value: World

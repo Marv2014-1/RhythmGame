@@ -112,11 +112,11 @@ public abstract class Enemy : MonoBehaviour
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
-        // Move only in the x-direction (left and right)
-        Vector2 movement = new Vector2(direction.x, 0) * currentMoveSpeed * Time.fixedDeltaTime;
+        // Move in both x and y directions
+        Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
 
-        // Flip sprite based on movement direction
+        // Optional: Flip sprite based on horizontal movement
         if (spriteRenderer != null)
         {
             spriteRenderer.flipX = direction.x < 0;

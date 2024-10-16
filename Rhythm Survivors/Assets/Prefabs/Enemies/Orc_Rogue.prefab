@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2288259282888971082}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,9 +46,9 @@ GameObject:
   - component: {fileID: 5700384084139661224}
   - component: {fileID: 5310864389946468507}
   - component: {fileID: 6063391053882302770}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Orc_Rogue
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 6798963994648437604}
   - component: {fileID: 3628681406832059640}
   - component: {fileID: 1816459691204814838}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
