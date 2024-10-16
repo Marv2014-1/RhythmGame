@@ -3,7 +3,7 @@ import json
 import os
 
 # Correct the path to your actual file
-audio_path = 'Assets/Audio/Music/testing2.mp3'
+audio_path = 'Assets/Audio/Music/170BPM.wav'
 
 def extract_beats(audio_path, output_file):
     # Load the audio file
@@ -28,4 +28,4 @@ def extract_beats(audio_path, output_file):
     print(f"Output saved to {output_path}")
 
 # Run the beat extraction, specifying the output file name
-extract_beats(audio_path, 'beat_times2.json')
+extract_beats(audio_path, '170BPM.json')

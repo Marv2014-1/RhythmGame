@@ -5,36 +5,26 @@ public class AudioManager : MonoBehaviour
 {
 	public AudioSource audioSource;
 	public AudioClip audioClip;
-	public float delayBeforeStart = 2f;
 	public bool IsPlaying { get; private set; } = false;
 	public double SongStartTime { get; private set; }
 
 	/// <summary>
 	/// Sets up the audio source and schedules playback.
 	/// </summary>
-	public void SetupAudio()
+	public void SetupAudio(Song song)
 	{
-		if (audioClip == null)
+		if (song.audioClip == null)
 		{
 			Debug.LogError("AudioClip not assigned!");
 			return;
 		}
 
+		audioClip = song.audioClip;
 		audioSource.clip = audioClip;
-		audioSource.loop = true;
-		StartCoroutine(StartAudioAfterDelay());
-	}
-
-	/// <summary>
-	/// Coroutine to start audio playback after a delay.
-	/// </summary>
-	/// <returns>IEnumerator for coroutine.</returns>
-	private IEnumerator StartAudioAfterDelay()
-	{
-		SongStartTime = AudioSettings.dspTime + delayBeforeStart;
+		audioSource.loop = false; // We'll handle looping manually
+		SongStartTime = AudioSettings.dspTime;
 		audioSource.PlayScheduled(SongStartTime);
 		IsPlaying = true;
-		yield return null;
 	}
 
 	/// <summary>
@@ -46,5 +36,24 @@ public class AudioManager : MonoBehaviour
 		if (!IsPlaying) return 0f;
 		float songTime = (float)(AudioSettings.dspTime - SongStartTime);
 		return songTime % audioClip.length;
+	}
+
+	/// <summary>
+	/// Stops the audio playback.
+	/// </summary>
+	public void StopAudio()
+	{
+		audioSource.Stop();
+		IsPlaying = false;
+	}
+
+	/// <summary>
+	/// Plays the audio immediately.
+	/// </summary>
+	public void PlayAudio()
+	{
+		audioSource.Play();
+		SongStartTime = AudioSettings.dspTime;
+		IsPlaying = true;
 	}
 }

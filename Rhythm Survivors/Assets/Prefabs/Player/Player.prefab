@@ -678,6 +678,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6587130257597593568, guid: bacd4864ad7227740943be51bca0a19f, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7737873500741305463, guid: bacd4864ad7227740943be51bca0a19f, type: 3}
       propertyPath: requiredBeats
       value: 2
@@ -707,6 +711,10 @@ PrefabInstance:
     - target: {fileID: 2354878100404689415, guid: 3868b238bfb9dd2438b52d066f334699, type: 3}
       propertyPath: m_Name
       value: WeaponBeatIndicatorManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328768738665530331, guid: 3868b238bfb9dd2438b52d066f334699, type: 3}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7328768738665530331, guid: 3868b238bfb9dd2438b52d066f334699, type: 3}
       propertyPath: arrowSpeed
@@ -770,6 +778,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7620182234114448790}
     m_Modifications:
+    - target: {fileID: 3479140325936877350, guid: a6700d057f51e174885597228683a54a, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5886216039713830291, guid: a6700d057f51e174885597228683a54a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

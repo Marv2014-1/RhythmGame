@@ -66,7 +66,7 @@ public class Story : MonoBehaviour
                 storyText.text = "Now Giocoso must travel his newly twisted home and defeat Coda’s minions in order to regain his lost power and restore Oratorio to its former glory.";
                 break;
             case 4:
-                SceneManager.LoadScene(sceneName: "Brandon-Test");
+                SceneManager.LoadScene(sceneName: "GameStart");
                 break;
             default:
                 break;
