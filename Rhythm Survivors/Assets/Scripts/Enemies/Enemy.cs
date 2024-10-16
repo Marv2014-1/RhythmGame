@@ -141,6 +141,15 @@ public abstract class Enemy : MonoBehaviour
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
+
+        if (FindObjectOfType<ScoreManager>() != null)
+        {
+            // Find Score Manager and update player's score
+            ScoreManager score = FindObjectOfType<ScoreManager>();
+            score.UpdateScore(10);
+        }
+
+        // Destroy the enemy game object
         Destroy(gameObject);
     }
 }
