@@ -284,8 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1cc084afa4a77140b84dc5a3f5912b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuSong: {fileID: 8300000, guid: abffb64c96d53294a82a1c0b2b8a0434, type: 3}
-  storySong: {fileID: 8300000, guid: 25f41192d817a7b4fa96f80f3d92dd8b, type: 3}
+  menuSong: {fileID: 8300000, guid: 0ef7ad39a445c1a47ba73355066badd7, type: 3}
+  storySong: {fileID: 8300000, guid: 174b9acafe43907479261d23bf8a83c2, type: 3}
   musicSource: {fileID: 2095462976}
   sfxSource: {fileID: 1561230796}
 --- !u!4 &50907008
