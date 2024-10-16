@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Make sure TextMeshPro is imported
+using TMPro;
+using System; // Make sure TextMeshPro is imported
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -100,5 +101,10 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("IsDead", true);
 
         Debug.Log("Player has died!");
+    }
+
+    internal static void TakeDamage(float arrowDamage)
+    {
+        throw new NotImplementedException();
     }
 }

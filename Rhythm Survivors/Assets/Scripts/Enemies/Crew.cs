@@ -3,11 +3,11 @@ using UnityEngine;
 /// <summary>
 /// Orc enemy that follows the player and attacks when in range.
 /// </summary>
-public class Skeleton : Enemy
+public class Crew : Enemy
 {
-	[Header("Orc Settings")]
+	[Header("Crew Settings")]
 	public float attackRange = 1.5f;      // Distance within which Orc can attack
-	public float attackCooldown = 2f;     // Time between attacks
+	public float crewAttackCooldown = 2f; // Time between attacks
 	public int damageAmount = 10;         // Damage dealt to the player
 
 	private PlayerHealth playerHealth;
@@ -28,7 +28,7 @@ public class Skeleton : Enemy
 		}
 
 		// Initialize attack timer to allow immediate attack if in range
-		lastAttackTime = -attackCooldown;
+		lastAttackTime = -crewAttackCooldown;
 	}
 
 	/// <summary>
@@ -42,7 +42,7 @@ public class Skeleton : Enemy
 	/// <summary>
 	/// Called every frame to check attack conditions.
 	/// </summary>
-	void Update()
+	protected override void Update()
 	{
 		AttemptAttack();
 	}
@@ -57,7 +57,7 @@ public class Skeleton : Enemy
 
 		float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-		if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+		if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + crewAttackCooldown)
 		{
 			AttackPlayer();
 			lastAttackTime = Time.time;

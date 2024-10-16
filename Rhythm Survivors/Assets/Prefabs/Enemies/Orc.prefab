@@ -184,14 +184,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 1
-  maxHealth: 100
+  maxHealth: 10
   baseMoveSpeed: 2
   currentMoveSpeed: 2
-  deathEffect: {fileID: 0}
-  speedBoostMultiplier: 2
-  speedBoostDuration: 0.2
-  speedSlowdownMultiplier: 1
-  speedSlowdownDuration: 0.2
-  attackRange: 1.5
+  attackDamage: 10
   attackCooldown: 2
+  deathEffect: {fileID: 0}
+  attackRange: 1.5
+  crewAttackCooldown: 2
   damageAmount: 10
