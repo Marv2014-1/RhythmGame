@@ -14,6 +14,13 @@ public class MainMenu : MonoBehaviour
     public Slider sfxSlider;
     public TMP_Text musicText;
     public TMP_Text sfxText;
+    public ScoreManager score;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        score = FindObjectOfType<ScoreManager>();
+    }
 
     // Loads the game scene
     void Play()
@@ -26,6 +33,7 @@ public class MainMenu : MonoBehaviour
     {
         mainUI.SetActive(false);
         optionUI.SetActive(true);
+        score.Hide();
 
         musicSlider.value = MusicPlayer.music.volume;
         float vol = musicSlider.value;
@@ -43,6 +51,7 @@ public class MainMenu : MonoBehaviour
     {
         mainUI.SetActive(false);
         creditUI.SetActive(true);
+        score.Hide();
     }
 
     // Exits the application
@@ -57,6 +66,7 @@ public class MainMenu : MonoBehaviour
     {
         optionUI.SetActive(false);
         mainUI.SetActive(true);
+        score.MenuShow();
     }
     
     // Hides the credits screen
@@ -64,6 +74,7 @@ public class MainMenu : MonoBehaviour
     {
         creditUI.SetActive(false);
         mainUI.SetActive(true);
+        score.MenuShow();
     }
        
     // Allows the player to adjust the music volume via an onscreen slider

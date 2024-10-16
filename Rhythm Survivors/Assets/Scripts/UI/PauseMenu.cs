@@ -20,6 +20,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject countdownTimer;
     public TMP_Text timerTxt;
     private float countdownStart;
+    public ScoreManager score;
 
     void Start()
     {
@@ -31,6 +32,9 @@ public class PauseMenu : MonoBehaviour
         pauseUI.SetActive(false);
         optionUI.SetActive(false);
         endUI.SetActive(false);
+
+        // Find score manager
+        score = FindObjectOfType<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -118,6 +122,8 @@ public class PauseMenu : MonoBehaviour
         vol = sfxSlider.value;
         vol = Mathf.Round(vol * 100);
         sfxText.text = vol.ToString();
+
+        score.Hide();
     }
 
     // Ends the game and brings up the end UI
@@ -147,6 +153,7 @@ public class PauseMenu : MonoBehaviour
     {
         optionUI.SetActive(false);
         pauseUI.SetActive(true);
+        score.GameShow();
     }
 
     // Allows the player to adjust the music volume via an onscreen slider
