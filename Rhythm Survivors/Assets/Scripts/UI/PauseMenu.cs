@@ -127,7 +127,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Ends the game and brings up the end UI
-    void EndRun()
+    public void EndRun()
     {
         Time.timeScale = 0.0f;
         AudioListener.pause = true;

@@ -32,9 +32,11 @@ public class BeatVisualManager : MonoBehaviour
 		foreach (float beatTime in beatTimes)
 		{
 			float timeUntilBeat = beatTime - songTime;
-			if (timeUntilBeat < 0f)
+
+			// Adjust for negative songTime (countdown before song starts)
+			if (songTime < 0f)
 			{
-				timeUntilBeat += audioManager.audioClip.length;
+				timeUntilBeat = beatTime;
 			}
 
 			if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
@@ -60,14 +62,22 @@ public class BeatVisualManager : MonoBehaviour
 		{
 			float timeUntilBeat = beatVisual.beatTime - songTime;
 
-			// Handle looping
-			if (timeUntilBeat < -audioClipLength / 2)
+			// Adjust for negative songTime
+			if (songTime < 0f)
 			{
-				timeUntilBeat += audioClipLength;
+				timeUntilBeat = beatVisual.beatTime;
 			}
-			else if (timeUntilBeat > audioClipLength / 2)
+			else
 			{
-				timeUntilBeat -= audioClipLength;
+				// Handle looping
+				if (timeUntilBeat < -audioClipLength / 2)
+				{
+					timeUntilBeat += audioClipLength;
+				}
+				else if (timeUntilBeat > audioClipLength / 2)
+				{
+					timeUntilBeat -= audioClipLength;
+				}
 			}
 
 			if (timeUntilBeat <= 0f)
@@ -78,11 +88,13 @@ public class BeatVisualManager : MonoBehaviour
 			}
 			else if (timeUntilBeat <= visualDuration)
 			{
-				// Visual is active, update its position
-				float progress = 1f - (timeUntilBeat / visualDuration);
+				// Corrected progress calculation
+				float progress = timeUntilBeat / visualDuration;
+
 				float halfWidth = beatVisualContainer.rect.width / 2;
-				float targetX = beatVisual.fromLeft ? halfWidth : -halfWidth;
-				float xPosition = progress * targetX;
+				float startX = beatVisual.fromLeft ? -halfWidth : halfWidth;
+				float xPosition = progress * startX;
+
 				beatVisual.rectTransform.anchoredPosition = new Vector2(xPosition, beatVisual.rectTransform.anchoredPosition.y);
 			}
 			else
@@ -104,14 +116,22 @@ public class BeatVisualManager : MonoBehaviour
 		{
 			float timeUntilBeat = beatTime - songTime;
 
-			// Handle looping
-			if (timeUntilBeat < -audioClipLength / 2)
+			// Adjust for negative songTime
+			if (songTime < 0f)
 			{
-				timeUntilBeat += audioClipLength;
+				timeUntilBeat = beatTime;
 			}
-			else if (timeUntilBeat > audioClipLength / 2)
+			else
 			{
-				timeUntilBeat -= audioClipLength;
+				// Handle looping
+				if (timeUntilBeat < -audioClipLength / 2)
+				{
+					timeUntilBeat += audioClipLength;
+				}
+				else if (timeUntilBeat > audioClipLength / 2)
+				{
+					timeUntilBeat -= audioClipLength;
+				}
 			}
 
 			if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
@@ -146,9 +166,16 @@ public class BeatVisualManager : MonoBehaviour
 		GameObject beatVisualObject = Instantiate(beatVisualPrefab, beatVisualContainer);
 		RectTransform rectTransform = beatVisualObject.GetComponent<RectTransform>();
 		SetupBeatVisualRectTransform(rectTransform, desiredSize, fromLeft);
+
+		// Set initial position at the edge
+		float halfWidth = beatVisualContainer.rect.width / 2;
+		float startX = fromLeft ? -halfWidth : halfWidth;
+		rectTransform.anchoredPosition = new Vector2(startX, rectTransform.anchoredPosition.y);
+
 		BeatVisual beatVisual = new BeatVisual(rectTransform, beatTime, fromLeft);
 		activeBeatVisuals.Add(beatVisual);
 	}
+
 
 	/// <summary>
 	/// Configures the RectTransform for the beat visual.
@@ -159,11 +186,12 @@ public class BeatVisualManager : MonoBehaviour
 	private void SetupBeatVisualRectTransform(RectTransform rectTransform, Vector2 size, bool fromLeft)
 	{
 		rectTransform.sizeDelta = size;
-		rectTransform.pivot = new Vector2(fromLeft ? 0f : 1f, 0f);
-		rectTransform.anchorMin = new Vector2(fromLeft ? 0f : 1f, 0f);
-		rectTransform.anchorMax = new Vector2(fromLeft ? 0f : 1f, 0f);
+		rectTransform.pivot = new Vector2(0.5f, 0f);
+		rectTransform.anchorMin = new Vector2(0.5f, 0f);
+		rectTransform.anchorMax = new Vector2(0.5f, 0f);
 		rectTransform.anchoredPosition = new Vector2(0f, 25f);
 	}
+
 
 	/// <summary>
 	/// Represents a beat visual with its associated properties.
@@ -195,5 +223,4 @@ public class BeatVisualManager : MonoBehaviour
 		}
 		activeBeatVisuals.Clear();
 	}
-
 }

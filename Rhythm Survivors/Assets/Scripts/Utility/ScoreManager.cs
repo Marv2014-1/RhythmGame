@@ -49,6 +49,8 @@ public class ScoreManager : MonoBehaviour
             {
                 maxScore = currentScore;
             }
+
+            menuText.text = "Best Score: " + maxScore.ToString();
         }
         else if (sceneName == "GameStart")
         {

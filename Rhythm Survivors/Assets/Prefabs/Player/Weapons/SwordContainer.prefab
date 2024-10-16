@@ -5062,7 +5062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Sword
-  damage: 10
+  damage: 15
   range: 0
   requiredBeats: 2
   player: {fileID: 0}

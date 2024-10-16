@@ -46,7 +46,8 @@ public class BeatDetector : MonoBehaviour
     private int currentSongIndex = -1;
     private int currentLoopCount = 0;
 
-    private bool first = true;
+    private List<List<float>> allBeatTimes = new List<List<float>>();
+
     void Awake()
     {
         beatTimeLoader = new BeatTimeLoader();
@@ -64,7 +65,6 @@ public class BeatDetector : MonoBehaviour
 
     void Start()
     {
-
         if (OnBeatHit == null)
             OnBeatHit = new UnityEvent();
 
@@ -78,13 +78,19 @@ public class BeatDetector : MonoBehaviour
         {
             currentSongIndex = -1;
             currentLoopCount = 0;
-            // Set songStartTime
             songStartTime = Time.time + songStartDelay;
             songStarted = false;
 
+            // Preload all beat times
+            for (int i = 0; i < playlist.Count; i++)
+            {
+                string jsonFileName = playlist[i].jsonFileName;
+                List<float> songBeats = beatTimeLoader.LoadBeatTimes(subfolder, jsonFileName);
+                allBeatTimes.Add(songBeats);
+            }
+
             // Start the coroutine to start the song after delay
             StartCoroutine(TransitionToNextSong());
-
         }
         else
         {
@@ -128,17 +134,35 @@ public class BeatDetector : MonoBehaviour
     {
         audioManager.StopAudio();
 
+        currentSongIndex++;
         if (currentSongIndex >= playlist.Count)
         {
             Debug.Log("Playlist ended.");
             songStarted = false;
             beatVisualManager.ClearAllBeatVisuals();
+
+            PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+            pauseMenu.EndRun();
+
             yield break;
         }
 
         currentLoopCount = 0;
-        currentSongIndex++;
-        LoadBeatTimes(); // Load the next song's beat times
+
+        // Set beatTimes to the preloaded list
+        beatTimes = allBeatTimes[currentSongIndex];
+
+        // Initialize beat statuses
+        beatStatus.Clear();
+        for (int i = 0; i < beatTimes.Count; i++)
+        {
+            beatStatus[i] = 0; // 0 = unhandled
+            Debug.Log($"Beat Time: {beatTimes[i]}");
+        }
+
+        // Initialize beat visuals with songTime = 0f
+        beatVisualManager.InitializeBeatVisuals(beatTimes, 0f);
+
         audioManager.SetupAudio(playlist[currentSongIndex]);
         audioManager.StopAudio();
         Debug.Log($"Transitioning to next song: {playlist[currentSongIndex].audioClip.name}");
@@ -149,28 +173,6 @@ public class BeatDetector : MonoBehaviour
         songStarted = true;
     }
 
-    /// <summary>
-    /// Loads beat times using BeatTimeLoader and initializes beat statuses and visuals.
-    /// </summary>
-    private void LoadBeatTimes()
-    {
-        string jsonFileName = playlist[currentSongIndex].jsonFileName;
-        beatTimes = beatTimeLoader.LoadBeatTimes(subfolder, jsonFileName);
-
-        for (int i = 0; i < beatTimes.Count; i++)
-        {
-            beatStatus[i] = 0; // 0 = unhandled
-            Debug.Log($"Beat Time: {beatTimes[i]}");
-        }
-
-        // Initialize beat visuals with songTime = 0f
-        beatVisualManager.InitializeBeatVisuals(beatTimes, 0f);
-    }
-
-
-    /// <summary>
-    /// Handles actions when the song loops.
-    /// </summary>
     private void OnSongLooped()
     {
         for (int i = 0; i < beatTimes.Count; i++)
@@ -184,10 +186,6 @@ public class BeatDetector : MonoBehaviour
         Debug.Log("Song has looped. Variables have been reset.");
     }
 
-    /// <summary>
-    /// Detects player input (space bar press) and checks beat accuracy.
-    /// </summary>
-    /// <param name="songTime">Current song time.</param>
     private void DetectPlayerInput(float songTime)
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -197,10 +195,6 @@ public class BeatDetector : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks if the player's input is within the timing window of any beat.
-    /// </summary>
-    /// <param name="inputTime">The time when the player pressed the space bar.</param>
     private void CheckBeatAccuracy(float inputTime)
     {
         int index = FindClosestIndex(inputTime);
@@ -242,11 +236,6 @@ public class BeatDetector : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks for any beats that were missed between the previous and current song times.
-    /// </summary>
-    /// <param name="previousTime">Previous song time.</param>
-    /// <param name="currentTime">Current song time.</param>
     private void CheckMissedBeats(float previousTime, float currentTime)
     {
         float audioClipLength = audioManager.audioClip.length;
@@ -285,11 +274,6 @@ public class BeatDetector : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Finds the closest index of a beat time relative to the input time using binary search.
-    /// </summary>
-    /// <param name="inputTime">The time to search for.</param>
-    /// <returns>The index of the closest beat time.</returns>
     private int FindClosestIndex(float inputTime)
     {
         int left = 0;
@@ -319,11 +303,6 @@ public class BeatDetector : MonoBehaviour
         return left;
     }
 
-    /// <summary>
-    /// Marks a beat as handled (hit or missed).
-    /// </summary>
-    /// <param name="index">Index of the beat in the beatTimes list.</param>
-    /// <param name="isHit">True if the beat was hit, false if missed.</param>
     private void MarkBeatAsHandled(int index, bool isHit)
     {
         beatStatus[index] = isHit ? 1 : -1;
