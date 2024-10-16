@@ -11,49 +11,76 @@ public class MainMenu : MonoBehaviour
     public GameObject optionUI;
     public GameObject creditUI;
     public Slider musicSlider;
+    public Slider sfxSlider;
     public TMP_Text musicText;
+    public TMP_Text sfxText;
 
-    public void Play()
+    // Loads the game scene
+    void Play()
     {
-        SceneManager.LoadScene(sceneName: "Brandon-Test");
+        SceneManager.LoadScene(sceneName: "Story");
     }
     
-    public void Options()
+    // Brings up the options menu
+    void Options()
     {
         mainUI.SetActive(false);
         optionUI.SetActive(true);
+
+        musicSlider.value = MusicPlayer.music.volume;
+        float vol = musicSlider.value;
+        vol = Mathf.Round(vol * 100);
+        musicText.text = vol.ToString();
+
+        sfxSlider.value = MusicPlayer.sfx.volume;
+        vol = sfxSlider.value;
+        vol = Mathf.Round(vol * 100);
+        sfxText.text = vol.ToString();
     }
 
-    public void Credits()
+    // Brings up the credits screen
+    void Credits()
     {
         mainUI.SetActive(false);
         creditUI.SetActive(true);
     }
 
-    public void QuitGame()
+    // Exits the application
+    void QuitGame()
     {
         Debug.Log("Quitting Game...");
         Application.Quit();
     }
 
-    public void OptionBack()
+    // Hides the options menu
+    void OptionBack()
     {
         optionUI.SetActive(false);
         mainUI.SetActive(true);
     }
-
-    public void CreditBack()
+    
+    // Hides the credits screen
+    void CreditBack()
     {
         creditUI.SetActive(false);
         mainUI.SetActive(true);
     }
        
-
-    public void MusicVolume()
+    // Allows the player to adjust the music volume via an onscreen slider
+    public void MusicSlider()
     {
-        AudioListener.volume = musicSlider.value;
+        MusicPlayer.MusicVolume(musicSlider.value);
         float vol = musicSlider.value;
         vol = Mathf.Round(vol * 100);
         musicText.text = vol.ToString();
+    }
+
+    // Allows the player to adjust the sound effect volume via an onscreen slider
+    public void SFXSlider()
+    {
+        MusicPlayer.SFXVolume(sfxSlider.value);
+        float vol = sfxSlider.value;
+        vol = Mathf.Round(vol * 100);
+        sfxText.text = vol.ToString();
     }
 }

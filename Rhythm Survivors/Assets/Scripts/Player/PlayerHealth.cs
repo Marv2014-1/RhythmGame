@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     public int maxHealth = 100;
-    public int currentHealth;
+    public static int currentHealth;
 
     [Header("UI Elements")]
     public Image healthBarFill; // Assign HealthBarFill Image in the Inspector
@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     public float smoothSpeed = 5f; // Speed of the fill transition
 
     private float targetFillAmount;
+
+    public Animator animator; // Play death animation upon death
 
     void Start()
     {
@@ -49,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            UpdateHealthUIImmediate();
             Die();
         }
     }
@@ -91,6 +94,11 @@ public class PlayerHealth : MonoBehaviour
     /// Handles player death.
     void Die()
     {
+        // Halt player movement
+        PlayerMovement.canMove = false;
+        // Begin death animation
+        animator.SetBool("IsDead", true);
+
         Debug.Log("Player has died!");
     }
 }

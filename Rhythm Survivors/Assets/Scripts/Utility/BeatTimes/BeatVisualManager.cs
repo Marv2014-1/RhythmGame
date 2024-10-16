@@ -6,24 +6,35 @@ public class BeatVisualManager : MonoBehaviour
 	public RectTransform beatVisualContainer;
 	public GameObject beatVisualPrefab;
 	public float visualDuration = 5f;
-	public AudioClip audioClip;
 
+	private AudioManager audioManager;
 	private List<BeatVisual> activeBeatVisuals = new List<BeatVisual>();
+
+	void Awake()
+	{
+		audioManager = FindObjectOfType<BeatDetector>().GetComponent<AudioManager>();
+	}
 
 	/// <summary>
 	/// Initializes beat visuals for beats that are within the visual duration from the current song time.
-	/// Creates visuals from both left and right directions.
 	/// </summary>
 	/// <param name="beatTimes">List of all beat times.</param>
 	/// <param name="songTime">Current song time.</param>
 	public void InitializeBeatVisuals(List<float> beatTimes, float songTime)
 	{
+		// Clear existing visuals
+		foreach (BeatVisual beatVisual in activeBeatVisuals)
+		{
+			Destroy(beatVisual.rectTransform.gameObject);
+		}
+		activeBeatVisuals.Clear();
+
 		foreach (float beatTime in beatTimes)
 		{
 			float timeUntilBeat = beatTime - songTime;
 			if (timeUntilBeat < 0f)
 			{
-				timeUntilBeat += audioClip.length;
+				timeUntilBeat += audioManager.audioClip.length;
 			}
 
 			if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
@@ -42,6 +53,7 @@ public class BeatVisualManager : MonoBehaviour
 	/// <param name="songTime">Current song time.</param>
 	public void UpdateBeatVisuals(List<float> beatTimes, float songTime)
 	{
+		float audioClipLength = audioManager.audioClip.length;
 		var visualsToRemove = new List<BeatVisual>();
 
 		foreach (BeatVisual beatVisual in activeBeatVisuals)
@@ -49,13 +61,13 @@ public class BeatVisualManager : MonoBehaviour
 			float timeUntilBeat = beatVisual.beatTime - songTime;
 
 			// Handle looping
-			if (timeUntilBeat < -audioClip.length / 2)
+			if (timeUntilBeat < -audioClipLength / 2)
 			{
-				timeUntilBeat += audioClip.length;
+				timeUntilBeat += audioClipLength;
 			}
-			else if (timeUntilBeat > audioClip.length / 2)
+			else if (timeUntilBeat > audioClipLength / 2)
 			{
-				timeUntilBeat -= audioClip.length;
+				timeUntilBeat -= audioClipLength;
 			}
 
 			if (timeUntilBeat <= 0f)
@@ -93,13 +105,13 @@ public class BeatVisualManager : MonoBehaviour
 			float timeUntilBeat = beatTime - songTime;
 
 			// Handle looping
-			if (timeUntilBeat < -audioClip.length / 2)
+			if (timeUntilBeat < -audioClipLength / 2)
 			{
-				timeUntilBeat += audioClip.length;
+				timeUntilBeat += audioClipLength;
 			}
-			else if (timeUntilBeat > audioClip.length / 2)
+			else if (timeUntilBeat > audioClipLength / 2)
 			{
-				timeUntilBeat -= audioClip.length;
+				timeUntilBeat -= audioClipLength;
 			}
 
 			if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
@@ -119,6 +131,7 @@ public class BeatVisualManager : MonoBehaviour
 			}
 		}
 	}
+
 
 	/// <summary>
 	/// Creates a beat visual from the specified direction.
@@ -168,4 +181,19 @@ public class BeatVisualManager : MonoBehaviour
 			this.fromLeft = fromLeft;
 		}
 	}
+
+	public void SetAudioManager(AudioManager audioManager)
+	{
+		this.audioManager = audioManager;
+	}
+
+	public void ClearAllBeatVisuals()
+	{
+		foreach (BeatVisual beatVisual in activeBeatVisuals)
+		{
+			Destroy(beatVisual.rectTransform.gameObject);
+		}
+		activeBeatVisuals.Clear();
+	}
+
 }
