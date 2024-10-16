@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/Brandon-Test.unity
     guid: a93766421ab8c9e499511e87831ba235
+  - enabled: 1
+    path: Assets/Scenes/Official/Story.unity
+    guid: c619e7a8862ce0f4ab130fa7da91553c
   m_configObjects: {}

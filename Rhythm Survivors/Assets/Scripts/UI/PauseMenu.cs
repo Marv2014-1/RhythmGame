@@ -12,14 +12,21 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseUI;
     public GameObject optionUI;
     public GameObject endUI;
-    public Slider musicSlider;
-    public TMP_Text musicText;
+    public Slider musicSlider, sfxSlider;
+    public TMP_Text musicText, sfxText;
     public float countdownTime;
     private float timeLeft;
     private bool timerOn = false;
     public GameObject countdownTimer;
     public TMP_Text timerTxt;
     private float countdownStart;
+
+    void Start()
+    {
+        // Ensure player is alive and game is unpaused at game start
+        isPaused = false;
+        isAlive = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -80,7 +87,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Hides all the pause UI and begins countdown to resume gameplay
-    public void Resume()
+    void Resume()
     {
         pauseUI.SetActive(false);
         optionUI.SetActive(false);
@@ -92,14 +99,24 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Opens the options menu from the pause menu
-    public void Options()
+    void Options()
     {
         pauseUI.SetActive(false);
         optionUI.SetActive(true);
+
+        musicSlider.value = MusicPlayer.music.volume;
+        float vol = musicSlider.value;
+        vol = Mathf.Round(vol * 100);
+        musicText.text = vol.ToString();
+
+        sfxSlider.value = MusicPlayer.sfx.volume;
+        vol = sfxSlider.value;
+        vol = Mathf.Round(vol * 100);
+        sfxText.text = vol.ToString();
     }
 
     // Ends the game and brings up the end UI
-    public void EndRun()
+    void EndRun()
     {
         Time.timeScale = 0.0f;
         AudioListener.pause = true;
@@ -108,31 +125,40 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Loads the Main Menu scene
-    public void MainMenu()
+    void MainMenu()
     {
         SceneManager.LoadScene(sceneName: "MainMenu");
     }
 
     // Exits the application
-    public void QuitGame()
+    void QuitGame()
     {
         Debug.Log("Quitting Game...");
         Application.Quit();
     }
 
     // Returns from the options menu to the pause menu
-    public void Back()
+    void Back()
     {
         optionUI.SetActive(false);
         pauseUI.SetActive(true);
     }
 
-    // Allows the player to change the music volume via an onscreen slider
-    public void MusicVolume()
+    // Allows the player to adjust the music volume via an onscreen slider
+    public void MusicSlider()
     {
-        AudioListener.volume = musicSlider.value;
+        MusicPlayer.MusicVolume(musicSlider.value);
         float vol = musicSlider.value;
         vol = Mathf.Round(vol * 100);
         musicText.text = vol.ToString();
+    }
+
+    // Allows the player to adjust the sound effect volume via an onscreen slider
+    public void SFXSlider()
+    {
+        MusicPlayer.SFXVolume(sfxSlider.value);
+        float vol = sfxSlider.value;
+        vol = Mathf.Round(vol * 100);
+        sfxText.text = vol.ToString();
     }
 }
