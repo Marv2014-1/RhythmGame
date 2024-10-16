@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
     protected float speedSlowdownMultiplier = 1f;  // Speed decrease on beat hit
     [SerializeField]
     protected float speedSlowdownDuration = 0.2f;     // Duration of slowdown in seconds
+    protected SpriteRenderer spriteRenderer;
 
     // Reference to the BeatDetector
     protected BeatDetector beatDetector;
@@ -76,6 +77,13 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             Debug.LogError("BeatDetector not found in the scene.");
+        }
+
+        // Get the SpriteRenderer component
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
     }
 
@@ -146,10 +154,25 @@ public abstract class Enemy : MonoBehaviour
         if (playerTransform == null)
             return;
 
+        // Calculate direction and movement
         Vector2 direction = (playerTransform.position - transform.position).normalized;
         Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
+
+        // Flip the sprite based on horizontal movement
+        if (spriteRenderer != null)
+        {
+            if (direction.x > 0)
+            {
+                spriteRenderer.flipX = false; // Facing right
+            }
+            else if (direction.x < 0)
+            {
+                spriteRenderer.flipX = true;  // Facing left
+            }
+        }
     }
+
 
     /// <summary>
     /// Method to apply damage to the enemy.
