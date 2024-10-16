@@ -51,6 +51,7 @@ public class MusicPlayer : MonoBehaviour
             music.clip = null;
         }
 
+        AudioListener.pause = false;
         music.Play();
     }
 
