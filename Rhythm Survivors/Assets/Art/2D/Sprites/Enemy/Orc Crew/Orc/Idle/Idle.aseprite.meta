@@ -121,7 +121,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Orc Idle_Frame_0
+  - name: Idle_Frame_0
     originalName: 
     pivot: {x: 0.55, y: 0}
     alignment: 9
@@ -132,7 +132,7 @@ ScriptedImporter:
       y: 4
       width: 20
       height: 30
-    spriteID: 92b0c4f2c4a2d78409f9fc50832dcfcc
+    spriteID: ca779b15064d95545af8f6627953ca1f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,7 +141,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Orc Idle_Frame_1
+  - name: Idle_Frame_1
     originalName: 
     pivot: {x: 0.55, y: 0}
     alignment: 9
@@ -152,7 +152,7 @@ ScriptedImporter:
       y: 79
       width: 20
       height: 28
-    spriteID: 9d4626ac6566b1e4e8bf2326f632d173
+    spriteID: b631e02e9a2498b428c44ea32fc5198b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,7 +161,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 79}
-  - name: Orc Idle_Frame_2
+  - name: Idle_Frame_2
     originalName: 
     pivot: {x: 0.55, y: 0}
     alignment: 9
@@ -172,7 +172,7 @@ ScriptedImporter:
       y: 4
       width: 20
       height: 28
-    spriteID: d7e21de6c4677fd48a84e328a4e65a56
+    spriteID: df85dcdce6b40fb4691a2189cc142e8b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -181,7 +181,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 32, y: 4}
-  - name: Orc Idle_Frame_3
+  - name: Idle_Frame_3
     originalName: 
     pivot: {x: 0.55, y: 0}
     alignment: 9
@@ -192,7 +192,7 @@ ScriptedImporter:
       y: 42
       width: 20
       height: 29
-    spriteID: d73c55b7ce16b3a4d882cd22d2b30763
+    spriteID: 63b5e6f35b7f8a646b55330c3a13a96f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -204,13 +204,13 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -981591374
-    name: Orc Idle
+    guid: 161112836
+    name: Idle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Orc Idle_Frame_0
+    - name: Idle_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -218,8 +218,8 @@ ScriptedImporter:
         y: 0
         width: 20
         height: 30
-      spriteId: 92b0c4f2c4a2d78409f9fc50832dcfcc
-    - name: Orc Idle_Frame_1
+      spriteId: ca779b15064d95545af8f6627953ca1f
+    - name: Idle_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -227,8 +227,8 @@ ScriptedImporter:
         y: 0
         width: 20
         height: 28
-      spriteId: 9d4626ac6566b1e4e8bf2326f632d173
-    - name: Orc Idle_Frame_2
+      spriteId: b631e02e9a2498b428c44ea32fc5198b
+    - name: Idle_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -236,8 +236,8 @@ ScriptedImporter:
         y: 0
         width: 20
         height: 28
-      spriteId: d7e21de6c4677fd48a84e328a4e65a56
-    - name: Orc Idle_Frame_3
+      spriteId: df85dcdce6b40fb4691a2189cc142e8b
+    - name: Idle_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -245,7 +245,7 @@ ScriptedImporter:
         y: 0
         width: 20
         height: 29
-      spriteId: d73c55b7ce16b3a4d882cd22d2b30763
+      spriteId: 63b5e6f35b7f8a646b55330c3a13a96f
     linkedCells: []
     parentIndex: -1
   platformSettings: []

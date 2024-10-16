@@ -1,0 +1,4 @@
+repository "Rhythm Survivors@yenduong2k@cloud"
+  path "/"
+    br "/main"
+    co "/main"

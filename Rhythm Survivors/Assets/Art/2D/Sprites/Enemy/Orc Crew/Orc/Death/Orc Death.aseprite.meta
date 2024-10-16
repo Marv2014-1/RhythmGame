@@ -132,7 +132,7 @@ ScriptedImporter:
       y: 48
       width: 19
       height: 22
-    spriteID: 8dcb656684a4e2c498faf7c84dc5fb46
+    spriteID: 7205be02a190e344386dce7cb29bb6de
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -152,7 +152,7 @@ ScriptedImporter:
       y: 4
       width: 23
       height: 36
-    spriteID: 4cf905e83140b4540a1d342e9f4aac9f
+    spriteID: 39db8b70e330792408c0efe9f29710d2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -172,7 +172,7 @@ ScriptedImporter:
       y: 4
       width: 24
       height: 25
-    spriteID: 303a93d244e444544ac0e9765877a3c9
+    spriteID: 941aeaf37ba5a2e4cabc70477ffe0241
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -192,7 +192,7 @@ ScriptedImporter:
       y: 28
       width: 31
       height: 15
-    spriteID: b6b71ceabbc8a9a42bf08ba6eca856a8
+    spriteID: 17bf8136c097def4e87120cc86c69004
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -212,7 +212,7 @@ ScriptedImporter:
       y: 51
       width: 33
       height: 12
-    spriteID: 5692f95136589d343bbfc75c74b0c7ae
+    spriteID: 7f74d48cc0e855f48b43ec46a103c3ca
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -232,7 +232,7 @@ ScriptedImporter:
       y: 4
       width: 34
       height: 16
-    spriteID: 722da4429505b8a41af76e6f3bd01f94
+    spriteID: d2d557ad99195494fb7ff12bdb636521
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -258,7 +258,7 @@ ScriptedImporter:
         y: 0
         width: 19
         height: 22
-      spriteId: 8dcb656684a4e2c498faf7c84dc5fb46
+      spriteId: 7205be02a190e344386dce7cb29bb6de
     - name: Orc Death_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -267,7 +267,7 @@ ScriptedImporter:
         y: 0
         width: 23
         height: 36
-      spriteId: 4cf905e83140b4540a1d342e9f4aac9f
+      spriteId: 39db8b70e330792408c0efe9f29710d2
     - name: Orc Death_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -276,7 +276,7 @@ ScriptedImporter:
         y: 0
         width: 24
         height: 25
-      spriteId: 303a93d244e444544ac0e9765877a3c9
+      spriteId: 941aeaf37ba5a2e4cabc70477ffe0241
     - name: Orc Death_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -285,7 +285,7 @@ ScriptedImporter:
         y: 0
         width: 31
         height: 15
-      spriteId: b6b71ceabbc8a9a42bf08ba6eca856a8
+      spriteId: 17bf8136c097def4e87120cc86c69004
     - name: Orc Death_Frame_4
       frameIndex: 4
       additiveSortOrder: 0
@@ -294,7 +294,7 @@ ScriptedImporter:
         y: 0
         width: 33
         height: 12
-      spriteId: 5692f95136589d343bbfc75c74b0c7ae
+      spriteId: 7f74d48cc0e855f48b43ec46a103c3ca
     - name: Orc Death_Frame_5
       frameIndex: 5
       additiveSortOrder: 0
@@ -303,7 +303,7 @@ ScriptedImporter:
         y: 0
         width: 34
         height: 16
-      spriteId: 722da4429505b8a41af76e6f3bd01f94
+      spriteId: d2d557ad99195494fb7ff12bdb636521
     linkedCells: []
     parentIndex: -1
   platformSettings: []
