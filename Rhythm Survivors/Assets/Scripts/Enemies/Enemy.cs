@@ -146,7 +146,7 @@ public abstract class Enemy : MonoBehaviour
         {
             // Find Score Manager and update player's score
             ScoreManager score = FindObjectOfType<ScoreManager>();
-            score.UpdateScore(10);
+            score.UpdateScore(cost*10);
         }
 
         // Destroy the enemy game object
