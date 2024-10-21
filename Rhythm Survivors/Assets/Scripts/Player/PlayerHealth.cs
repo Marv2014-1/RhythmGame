@@ -48,6 +48,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         targetFillAmount = (float)currentHealth / maxHealth;
+        animator.SetBool("IsHurt", true);
         StartCoroutine(SmoothFill());
 
         if (currentHealth <= 0)
