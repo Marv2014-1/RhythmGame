@@ -37,9 +37,13 @@ public class EnemyArrow : MonoBehaviour
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(ArrowDamage);
             Destroy(gameObject); // Destroy the arrow upon hitting the player
         }
-        else
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Optionally destroy the arrow upon colliding with any object
+            // Ignore other enemies
+            return;
+        } else
+        {
+            // Destroy the arrow upon colliding with any object
             Destroy(gameObject);
         }
     }
