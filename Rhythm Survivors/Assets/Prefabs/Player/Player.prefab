@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4792032883061283714}
   m_Layer: 0
   m_Name: Animation
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

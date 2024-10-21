@@ -37,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
     protected float speedSlowdownDuration = 0.2f;     // Duration of slowdown in seconds
 
     protected SpriteRenderer spriteRenderer;
+    protected Animator animator;
 
     // Reference to the BeatDetector
     protected BeatDetector beatDetector;
@@ -57,7 +58,9 @@ public abstract class Enemy : MonoBehaviour
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
     }
+
     protected virtual void Update()
 
     {
@@ -112,6 +115,8 @@ public abstract class Enemy : MonoBehaviour
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
+        animator.SetBool("IsMoving", true);
+
         // Move in both x and y directions
         Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
@@ -128,6 +133,8 @@ public abstract class Enemy : MonoBehaviour
         currentHealth -= damageAmount;
         Debug.Log($"{gameObject.name} took {damageAmount} damage. Current Health: {currentHealth}");
 
+        animator.SetBool("IsHurt", true);
+
         if (currentHealth <= 0)
         {
             Die();
@@ -137,11 +144,6 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         Debug.Log($"{gameObject.name} has died.");
-        if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
-
         if (FindObjectOfType<ScoreManager>() != null)
         {
             // Find Score Manager and update player's score
@@ -149,7 +151,11 @@ public abstract class Enemy : MonoBehaviour
             score.UpdateScore(cost*10);
         }
 
-        // Destroy the enemy game object
-        Destroy(gameObject);
+        animator.SetBool("IsDead", true);
+
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
     }
 }
