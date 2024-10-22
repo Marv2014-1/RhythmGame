@@ -450,6 +450,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 6.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3202301495404100059, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3260210135074969545, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: beatDetector
       value: 
@@ -471,6 +475,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4677756711581853388, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677756711581853388, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677756711581853388, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 571404f9b570a1b4e94477b81264e5ee, type: 3}
@@ -481,6 +493,10 @@ PrefabInstance:
     - target: {fileID: 4677756711581853388, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_SortingLayerID
       value: -43635033
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677756711581853388, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5239286639336431215, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: anim
@@ -650,6 +666,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8972746596718064287, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9064570238711848077, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: beatDetector
       value: 
@@ -809,6 +829,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 341391070586048235, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 1711154241}
     - target: {fileID: 641170485569161591, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -817,6 +841,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2302572729562806244, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 72353563}
     - target: {fileID: 2936581102506449008, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -957,9 +985,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6152218089563538523, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 1711154241}
     - target: {fileID: 6952213294034674455, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318418572982382362, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8177927438479511356, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -969,6 +1005,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8878629721129840510, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
+      propertyPath: beatDetector
+      value: 
+      objectReference: {fileID: 1711154241}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
