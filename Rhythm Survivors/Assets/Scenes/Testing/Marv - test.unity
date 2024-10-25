@@ -296,17 +296,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8984432788296162109, guid: 0b6990b1bbc13924cbafc20983969c0a, type: 3}
   m_PrefabInstance: {fileID: 72353562}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &72636836 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5493969484977125887, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-  m_PrefabInstance: {fileID: 3293349787080338669}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef7a023966b16a4697c54ed165fbb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &888317835 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 126866817485661763, guid: a4b88e5f9c087124bb4a567d68dcc439, type: 3}
@@ -729,28 +718,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7984849659843082845, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
   m_PrefabInstance: {fileID: 1678559028}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1837063362 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9080340555435245423, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-  m_PrefabInstance: {fileID: 3293349787080338669}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef7a023966b16a4697c54ed165fbb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1900211499 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8399902821769964748, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-  m_PrefabInstance: {fileID: 3293349787080338669}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef7a023966b16a4697c54ed165fbb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1960920539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 200780706664052860, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
@@ -777,17 +744,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1975445797 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 555812215783021897, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-  m_PrefabInstance: {fileID: 3293349787080338669}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef7a023966b16a4697c54ed165fbb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3293349787080338669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -840,10 +796,6 @@ PrefabInstance:
       propertyPath: m_text
       value: Game Start!
       objectReference: {fileID: 0}
-    - target: {fileID: 6271619508840397839, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: loopCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: enemyPrefabs.Array.size
       value: 3
@@ -868,66 +820,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: World
       objectReference: {fileID: 0}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: delay
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: visualDuration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[0]
-      value: 
-      objectReference: {fileID: 72636836}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[1]
-      value: 
-      objectReference: {fileID: 1975445797}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[2]
-      value: 
-      objectReference: {fileID: 1837063362}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[3]
-      value: 
-      objectReference: {fileID: 72636836}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[4]
-      value: 
-      objectReference: {fileID: 1975445797}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[5]
-      value: 
-      objectReference: {fileID: 1900211499}
-    - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: playlist.Array.data[6]
-      value: 
-      objectReference: {fileID: 1975445797}
-    - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: MinDistance
-      value: 495.0495
-      objectReference: {fileID: 0}
-    - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -5377846282472180362, guid: 8b5d0ad9768020548b9da0930e714b1d, type: 2}
-    - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].time
-      value: 0.06451607
-      objectReference: {fileID: 0}
-    - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
-      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
-      value: 1.0131912
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
