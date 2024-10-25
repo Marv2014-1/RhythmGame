@@ -17,6 +17,7 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
     private int currentBeatCount = 0;                // Current count of successful beats
 
     // Reference to the BeatDetector to subscribe to its events
+    public GameObject musicPlayer;
     public BeatDetector beatDetector;
 
     // Reference to the active coroutine to prevent multiple instances
@@ -25,6 +26,9 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
     void Start()
     {
         GenerateCircles();
+
+        musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        beatDetector = musicPlayer.GetComponent<BeatDetector>();
 
         // Subscribe to BeatDetector events
         if (beatDetector != null)

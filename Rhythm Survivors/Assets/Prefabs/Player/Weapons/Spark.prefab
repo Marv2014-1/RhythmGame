@@ -4856,8 +4856,8 @@ Transform:
   m_GameObject: {fileID: 7603850514299004048}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 2, z: 1}
+  m_LocalPosition: {x: -0.015, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5140497042274075218}
@@ -4900,8 +4900,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -43635033
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -427511460, guid: ed65fdb145750c645b464d521f09c443, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4941,8 +4941,8 @@ Transform:
   m_GameObject: {fileID: 8879890909060314736}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2435, y: -0.063, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 669930349975238605}
@@ -4992,7 +4992,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &4800456659606986036
 MonoBehaviour:
@@ -5008,4 +5008,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trailParticles: {fileID: 6588826744228475260}
   rotationSpeed: 720
-  destroyDelay: 5
+  destroyDelay: 2

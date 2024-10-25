@@ -14,7 +14,6 @@ public class Die : StateMachineBehaviour
         }
         else if (animator.transform.tag == "Enemy")
         {
-            Debug.Log("TEST");
             // Destroy the enemy game object
             Destroy(animator.gameObject);
         }

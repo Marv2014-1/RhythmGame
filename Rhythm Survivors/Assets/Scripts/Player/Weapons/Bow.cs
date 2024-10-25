@@ -16,12 +16,9 @@ public class Bow : Weapon
     protected override void Start()
     {
         base.Start();
-
-        // Assign the player object
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    protected void Update()
+    void Update()
     {
         UpdateClosestEnemy();
         RotateTowardsClosestEnemy();

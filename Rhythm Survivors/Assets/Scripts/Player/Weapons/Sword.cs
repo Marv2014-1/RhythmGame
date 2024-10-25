@@ -7,11 +7,7 @@ public class Sword : Weapon
     private Animator animator; // Reference to the Animator component
     private bool isAttacking = false; // Prevents overlapping attacks
 
-    // Reference to the SwordContainer's Transform
-    private Transform swordContainerTransform;
-
     public ParticleSystem attackParticles;
-    public AudioSource attackSound;
 
     protected override void Start()
     {
@@ -27,31 +23,12 @@ public class Sword : Weapon
             Debug.LogError("No Animator component found on the Sword object.");
         }
 
-        // Get the SwordContainer's Transform
-        if (transform.parent != null)
-        {
-            swordContainerTransform = transform.parent;
-        }
-        else
-        {
-            Debug.LogError("Sword does not have a parent SwordContainer.");
-        }
-
         if (attackParticles == null)
         {
             attackParticles = GetComponentInChildren<ParticleSystem>();
             if (attackParticles == null)
             {
                 Debug.LogWarning("No ParticleSystem found for attack effects.");
-            }
-        }
-
-        if (attackSound == null)
-        {
-            attackSound = GetComponent<AudioSource>();
-            if (attackSound == null)
-            {
-                Debug.LogWarning("No AudioSource found for attack sounds.");
             }
         }
 
@@ -72,9 +49,6 @@ public class Sword : Weapon
     private IEnumerator AttackSequence()
     {
         isAttacking = true;
-
-        // Play attack sound
-        // attackSound?.Play();
 
         // Play particle effect
         attackParticles?.Play();
