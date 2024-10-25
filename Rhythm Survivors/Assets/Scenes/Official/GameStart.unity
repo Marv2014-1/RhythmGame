@@ -469,6 +469,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 6.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2445078984113255038, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: weaponDisplay
+      value: 
+      objectReference: {fileID: 1796799749}
     - target: {fileID: 3202301495404100059, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -949,36 +953,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[0]
       value: 
-      objectReference: {fileID: 72636836}
+      objectReference: {fileID: 3293349787080338671}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[1]
       value: 
-      objectReference: {fileID: 1975445797}
+      objectReference: {fileID: 3293349787080338670}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[2]
       value: 
-      objectReference: {fileID: 1837063362}
+      objectReference: {fileID: 1900211499}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[3]
       value: 
-      objectReference: {fileID: 72636836}
+      objectReference: {fileID: 1837063362}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[4]
       value: 
-      objectReference: {fileID: 1975445797}
+      objectReference: {fileID: 72636836}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[5]
       value: 
-      objectReference: {fileID: 1900211499}
+      objectReference: {fileID: 1975445797}
     - target: {fileID: 7501524443964926416, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: playlist.Array.data[6]
       value: 
-      objectReference: {fileID: 1975445797}
+      objectReference: {fileID: 0}
     - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: MinDistance
       value: 495.0495
@@ -1004,6 +1008,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+--- !u!114 &3293349787080338670 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1018801343699118238, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+  m_PrefabInstance: {fileID: 3293349787080338669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef7a023966b16a4697c54ed165fbb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3293349787080338671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6271619508840397839, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+  m_PrefabInstance: {fileID: 3293349787080338669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef7a023966b16a4697c54ed165fbb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4219015177341156789
 PrefabInstance:
   m_ObjectHideFlags: 0
