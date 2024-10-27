@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Stats")]
     public int cost = 1; // strength of the enemy as seen in the spawner
     public int maxHealth = 100;
+    public bool canMove;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
 
@@ -46,6 +47,7 @@ public abstract class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentMoveSpeed = baseMoveSpeed; // Initialize current speed
+        canMove = true;
 
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -106,7 +108,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        MoveTowardsPlayer();
+        if (canMove)
+        {
+            MoveTowardsPlayer();
+        }
     }
 
     protected void MoveTowardsPlayer()
@@ -124,7 +129,14 @@ public abstract class Enemy : MonoBehaviour
         // Optional: Flip sprite based on horizontal movement
         if (spriteRenderer != null)
         {
-            spriteRenderer.flipX = direction.x < 0;
+            if (direction.x >= 0)
+            {
+                transform.localScale = new Vector3(10, 10, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-10, 10, 1);
+            }
         }
     }
 
@@ -144,6 +156,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         Debug.Log($"{gameObject.name} has died.");
+        canMove = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         if (FindObjectOfType<ScoreManager>() != null)
         {
             // Find Score Manager and update player's score

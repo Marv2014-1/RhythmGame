@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
         maxScore = 0;
     }
 
-    // Allows the music player to listen for scene changes
+    // Allows the manager to listen for scene changes
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviour
                 maxScore = currentScore;
             }
 
-            menuText.text = "Best Score: " + maxScore.ToString();
+            UpdateMenu();
         }
         else if (sceneName == "GameStart")
         {
@@ -67,6 +67,11 @@ public class ScoreManager : MonoBehaviour
     {
         currentScore += score;
         gameText.text = "Score: " + currentScore.ToString();
+    }
+
+    public void UpdateMenu()
+    {
+        menuText.text = "Best Score: " + maxScore.ToString();
     }
 
     void ZeroScore()

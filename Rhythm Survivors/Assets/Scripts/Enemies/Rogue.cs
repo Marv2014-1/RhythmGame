@@ -21,7 +21,7 @@ public class Rogue : Enemy
 	{
 		base.Update();
 
-		if (playerTransform == null) return;
+		if (playerTransform == null || !canMove) return;
 
 		// Calculate distance to the player
 		float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);

@@ -97,4 +97,17 @@ public class MainMenu : MonoBehaviour
         vol = Mathf.Round(vol * 100);
         sfxText.text = vol.ToString();
     }
+
+    public void ReloadSliders()
+    {
+        musicSlider.value = musicPlayer.musicVolume;
+        float vol = musicSlider.value;
+        vol = Mathf.Round(vol * 100);
+        musicText.text = vol.ToString();
+
+        sfxSlider.value = musicPlayer.sfxVolume;
+        vol = sfxSlider.value;
+        vol = Mathf.Round(vol * 100);
+        sfxText.text = vol.ToString();
+    }
 }

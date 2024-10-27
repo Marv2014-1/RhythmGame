@@ -44,7 +44,10 @@ public class Crew : Enemy
 	/// </summary>
 	protected override void Update()
 	{
-		AttemptAttack();
+		if (canMove)
+		{
+            AttemptAttack();
+        }
 	}
 
 	/// <summary>
