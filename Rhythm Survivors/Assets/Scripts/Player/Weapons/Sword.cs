@@ -3,112 +3,30 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
-    private Vector3 originalLocalPosition; // Store the original local position of the sword
-    private Animator animator; // Reference to the Animator component
-    private bool isAttacking = false; // Prevents overlapping attacks
-
-    public ParticleSystem attackParticles;
+    [Header("Sword Settings")]
+    public GameObject slashPrefab; // Assign the Slash prefab in the Inspector
+    public Transform slashSpawnPoint; // Assign the spawn point in the Inspector
 
     protected override void Start()
     {
         base.Start();
-
-        // Store the original local position relative to the SwordContainer
-        originalLocalPosition = transform.localPosition;
-
-        // Get the Animator component
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError("No Animator component found on the Sword object.");
-        }
-
-        if (attackParticles == null)
-        {
-            attackParticles = GetComponentInChildren<ParticleSystem>();
-            if (attackParticles == null)
-            {
-                Debug.LogWarning("No ParticleSystem found for attack effects.");
-            }
-        }
-
-        if (attackParticles != null)
-        {
-            attackParticles.Stop();
-        }
     }
 
     public override void Attack()
     {
-        if (!isAttacking)
+        // Instantiate a slash at the spawn point
+        GameObject slashInstance = Instantiate(slashPrefab, slashSpawnPoint.position, transform.rotation, this.transform);
+
+        Slash slash = slashInstance.GetComponent<Slash>();
+
+        if (slash != null)
         {
-            StartCoroutine(AttackSequence());
+            slash.SetDamage(damage);
+            slash.SetTransform(slashSpawnPoint);
         }
-    }
-
-    private IEnumerator AttackSequence()
-    {
-        isAttacking = true;
-
-        // Play particle effect
-        attackParticles?.Play();
-
-        Vector3 forwardOffset = new Vector3(0f, 0, 0);
-
-        // Calculate left positions relative to SwordContainer
-        Vector3 rightPosition = originalLocalPosition + forwardOffset;
-
-        // --- Attack to the Right ---
-
-        // Move to the right side
-        transform.localPosition = rightPosition;
-
-        // Play slash animation to the right
-        if (animator != null)
+        else
         {
-            animator.SetTrigger("AttackRight");
-        }
-
-        // Wait for the animation to reach the impact point
-        yield return new WaitForSeconds(0.25f); // Adjust based on your animation length
-
-        // Wait for the rest of the animation
-        // yield return new WaitForSeconds(0.25f);
-
-        // Return to original position
-
-        // Play slash animation to the left
-        if (animator != null)
-        {
-            animator.SetTrigger("AttackLeft");
-        }
-
-        // Wait for the animation to reach the impact point
-        yield return new WaitForSeconds(0.25f); // Adjust based on your animation length
-
-        // Wait for the rest of the animation
-        yield return new WaitForSeconds(0.25f);
-
-        attackParticles?.Stop();
-
-        // Return to original position
-        transform.localPosition = originalLocalPosition;
-
-        isAttacking = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Check if the Sword hit an enemy
-        if (collision.CompareTag("Enemy"))
-        {
-            Enemy enemy = collision.GetComponent<Enemy>();
-
-            if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-                Debug.Log($"Sword hit {enemy.gameObject.name} and dealt {damage} damage.");
-            }
+            Debug.LogError("Slash prefab does not have an Slash component.");
         }
     }
 }

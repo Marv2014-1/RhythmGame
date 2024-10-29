@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Stats")]
     public int cost = 1; // strength of the enemy as seen in the spawner
     public int maxHealth = 100;
+    public int xpDrop = 10;
     public bool canMove;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
@@ -30,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Death Settings")]
     [SerializeField]
     protected GameObject deathEffect; // Particle effect or animation on death
+    protected PlayerExperience playerXP;
 
     [Header("Speed Adjustment Settings")]
     protected float speedBoostMultiplier = 2f;     // Speed increase on beat miss
@@ -51,6 +53,7 @@ public abstract class Enemy : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        playerXP = FindObjectOfType<PlayerExperience>();
 
         beatDetector = FindObjectOfType<BeatDetector>();
         if (beatDetector != null)
@@ -166,6 +169,8 @@ public abstract class Enemy : MonoBehaviour
         }
 
         animator.SetBool("IsDead", true);
+
+        playerXP.GetExperience(xpDrop);
 
         if (deathEffect != null)
         {
