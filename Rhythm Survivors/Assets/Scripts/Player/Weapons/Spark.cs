@@ -8,6 +8,7 @@ public class Spark : MonoBehaviour
     private float range;
     private Vector3 startPosition;
     private Vector2 direction;
+    private bool canMove;
 
     public ParticleSystem trailParticles; // Assign a particle system for the trail in the Inspector
     public float rotationSpeed = 360f;    // Speed of spinning in degrees per second
@@ -46,6 +47,7 @@ public class Spark : MonoBehaviour
     private void Start()
     {
         startPosition = transform.position;
+        canMove = true;
 
         // Start the particle system
         if (trailParticles != null)
@@ -56,8 +58,11 @@ public class Spark : MonoBehaviour
 
     private void Update()
     {
-        // Move the spark in the specified direction
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        if (canMove)
+        {
+            // Move the spark in the specified direction
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        }
 
         // Spin the spark
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
@@ -96,6 +101,9 @@ public class Spark : MonoBehaviour
         // Prevent this method from being called multiple times
         if (trailParticles == null || !trailParticles.isPlaying && (spriteRenderer == null || !spriteRenderer.enabled))
             return;
+
+        // Stop movement
+        canMove = false;
 
         // Stop emitting new particles
         if (trailParticles != null)

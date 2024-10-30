@@ -54,7 +54,5 @@ public class Staff : Weapon
 
             angle += angleStep;
         }
-
-        Debug.Log("Staff emitted sparks in a radial pattern.");
     }
 }

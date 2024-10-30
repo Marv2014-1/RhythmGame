@@ -16,6 +16,13 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Start()
     {
+        // Assign the player object
+        player = GameObject.Find("Player");
+
+        // Assign the beat detector
+        GameObject musicPlayer = GameObject.Find("MusicPlayer");
+        beatDetector = musicPlayer.GetComponent<BeatDetector>();
+
         // Subscribe to the OnBeatHit event
         if (beatDetector != null)
         {

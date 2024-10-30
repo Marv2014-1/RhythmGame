@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 8840884471665460991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.1566443, y: 0.481947, z: 0.012225845}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3018453376560316382, guid: 69b5caacfda9b464cb15f5f77d6f73f1, type: 3}
+  m_Sprite: {fileID: 300858120, guid: 60f8ef9c2034689478f3ac1f4e96087f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -147,8 +147,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007547462, y: 0.1466497}
-  m_Size: {x: 0.1607741, y: 0.3033353}
+  m_Offset: {x: 0.03, y: 0.005}
+  m_Size: {x: 0.11, y: 0.15}
   m_Direction: 0
 --- !u!95 &7961760111808500163
 Animator:
@@ -160,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 8840884471665460991}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8d8287915c4f13d4ba66ac431bad29b6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 83076c0902c3bf740a876b9bf3779667, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -185,6 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 3
   maxHealth: 40
+  xpDrop: 15
+  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
   attackDamage: 10

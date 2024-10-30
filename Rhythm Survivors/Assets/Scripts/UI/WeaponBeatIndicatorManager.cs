@@ -7,17 +7,17 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
 {
     public GameObject circlePrefab; // Prefab for the circle UI element
     public int requiredBeats = 3;   // Number of circles to display
-    public float spacing = 30f;     // Spacing between circles
-
-    [Header("Arc Settings")]
-    public float arcRadius = 100f;     // Distance from the pivot to each circle
-    public float totalArcAngle = 180f; // Total angle of the arc in degrees
-    public float startAngle = 90f;     // Starting angle of the arc in degrees
+    private float xInit = -15f;     // Initial x position for circles
+    private float yInit = 0f;       // Initial y position for circles
+    private float xSpacing = 13f;   // Spacing between circles horizontally
+    private float ySpacing = 11f;   // Spacing between circles vertically
+    private int perRow = 3;         // How many circles before starting new row
 
     private List<Image> circles = new List<Image>(); // List to hold circle images
     private int currentBeatCount = 0;                // Current count of successful beats
 
     // Reference to the BeatDetector to subscribe to its events
+    public GameObject musicPlayer;
     public BeatDetector beatDetector;
 
     // Reference to the active coroutine to prevent multiple instances
@@ -26,6 +26,9 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
     void Start()
     {
         GenerateCircles();
+
+        musicPlayer = GameObject.FindGameObjectWithTag("MusicPlayer");
+        beatDetector = musicPlayer.GetComponent<BeatDetector>();
 
         // Subscribe to BeatDetector events
         if (beatDetector != null)
@@ -65,23 +68,19 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
             return;
         }
 
-        // Calculate the angle between each circle
-        float angleStep = requiredBeats > 1 ? totalArcAngle / (requiredBeats - 1) : 0f;
-
         for (int i = 0; i < requiredBeats; i++)
         {
             GameObject circleObj = Instantiate(circlePrefab, transform);
             RectTransform rectTransform = circleObj.GetComponent<RectTransform>();
 
-            // Calculate the angle for this circle
-            float currentAngle = startAngle - (totalArcAngle / 2) + (angleStep * i);
-
-            // Convert angle to radians
-            float angleRad = currentAngle * Mathf.Deg2Rad;
-
-            // Calculate the position based on the angle and radius
-            float x = arcRadius * Mathf.Cos(angleRad);
-            float y = arcRadius * Mathf.Sin(angleRad);
+            // Calculate the position based number of beats
+            float x = xInit + ((i % perRow) * xSpacing);
+            float y = yInit;
+            y += Mathf.Floor((requiredBeats - 1) / perRow) * (ySpacing / 2);
+            if (i >= perRow)
+            {
+                y += Mathf.Floor(i / perRow) * -ySpacing;
+            }
             rectTransform.anchoredPosition = new Vector2(x, y);
 
             Image circleImage = circleObj.GetComponent<Image>();

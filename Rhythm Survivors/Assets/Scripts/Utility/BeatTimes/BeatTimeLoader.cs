@@ -4,14 +4,14 @@ using System.Linq;
 
 public class BeatTimeLoader
 {
-	public List<float> LoadBeatTimes(string subfolder, string jsonFileName)
+	public List<float> LoadBeatTimes(string subfolder, string jsonFileName, float delay)
 	{
 		TextAsset jsonFile = Resources.Load<TextAsset>($"{subfolder}/{jsonFileName}");
 
 		if (jsonFile != null)
 		{
 			Debug.Log($"JSON file loaded successfully. Content: {jsonFile.text}");
-			List<float> parsedBeatTimes = ManuallyParseBeatTimes(jsonFile.text);
+			List<float> parsedBeatTimes = ManuallyParseBeatTimes(jsonFile.text, delay);
 
 			if (parsedBeatTimes != null && parsedBeatTimes.Count > 0)
 			{
@@ -30,7 +30,7 @@ public class BeatTimeLoader
 		return new List<float>();
 	}
 
-	private List<float> ManuallyParseBeatTimes(string jsonText)
+	private List<float> ManuallyParseBeatTimes(string jsonText, float delay)
 	{
 		List<float> beatTimeList = new List<float>();
 		string key = "\"BeatTimes\"";
@@ -64,7 +64,7 @@ public class BeatTimeLoader
 			string trimmedStr = numStr.Trim();
 			if (float.TryParse(trimmedStr, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float beatTime))
 			{
-				beatTimeList.Add(beatTime);
+				beatTimeList.Add(beatTime + delay);
 			}
 			else
 			{

@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
     public TMP_Text timerTxt;
     private float countdownStart;
     public ScoreManager score;
+    public MusicPlayer musicPlayer;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class PauseMenu : MonoBehaviour
 
         // Find score manager
         score = FindObjectOfType<ScoreManager>();
+        musicPlayer = FindObjectOfType<MusicPlayer>();
     }
 
     // Update is called once per frame
@@ -113,17 +115,20 @@ public class PauseMenu : MonoBehaviour
         pauseUI.SetActive(false);
         optionUI.SetActive(true);
 
-        musicSlider.value = MusicPlayer.music.volume;
+        musicSlider.value = musicPlayer.musicVolume;
         float vol = musicSlider.value;
         vol = Mathf.Round(vol * 100);
         musicText.text = vol.ToString();
 
-        sfxSlider.value = MusicPlayer.sfx.volume;
+        sfxSlider.value = musicPlayer.sfxVolume;
         vol = sfxSlider.value;
         vol = Mathf.Round(vol * 100);
         sfxText.text = vol.ToString();
 
-        score.Hide();
+        if (score != null)
+        {
+            score.Hide();
+        }
     }
 
     // Ends the game and brings up the end UI
@@ -153,13 +158,17 @@ public class PauseMenu : MonoBehaviour
     {
         optionUI.SetActive(false);
         pauseUI.SetActive(true);
-        score.GameShow();
+
+        if (score != null)
+        {
+            score.GameShow();
+        }
     }
 
     // Allows the player to adjust the music volume via an onscreen slider
     public void MusicSlider()
     {
-        MusicPlayer.MusicVolume(musicSlider.value);
+        musicPlayer.MusicVolume(musicSlider.value);
         float vol = musicSlider.value;
         vol = Mathf.Round(vol * 100);
         musicText.text = vol.ToString();
@@ -168,7 +177,7 @@ public class PauseMenu : MonoBehaviour
     // Allows the player to adjust the sound effect volume via an onscreen slider
     public void SFXSlider()
     {
-        MusicPlayer.SFXVolume(sfxSlider.value);
+        musicPlayer.SFXVolume(sfxSlider.value);
         float vol = sfxSlider.value;
         vol = Mathf.Round(vol * 100);
         sfxText.text = vol.ToString();

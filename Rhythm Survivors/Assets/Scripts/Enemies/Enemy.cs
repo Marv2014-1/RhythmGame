@@ -12,6 +12,8 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Stats")]
     public int cost = 1; // strength of the enemy as seen in the spawner
     public int maxHealth = 100;
+    public int xpDrop = 10;
+    public bool canMove;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
 
@@ -29,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Death Settings")]
     [SerializeField]
     protected GameObject deathEffect; // Particle effect or animation on death
+    protected PlayerExperience playerXP;
 
     [Header("Speed Adjustment Settings")]
     protected float speedBoostMultiplier = 2f;     // Speed increase on beat miss
@@ -37,6 +40,7 @@ public abstract class Enemy : MonoBehaviour
     protected float speedSlowdownDuration = 0.2f;     // Duration of slowdown in seconds
 
     protected SpriteRenderer spriteRenderer;
+    protected Animator animator;
 
     // Reference to the BeatDetector
     protected BeatDetector beatDetector;
@@ -45,9 +49,11 @@ public abstract class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentMoveSpeed = baseMoveSpeed; // Initialize current speed
+        canMove = true;
 
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        playerXP = FindObjectOfType<PlayerExperience>();
 
         beatDetector = FindObjectOfType<BeatDetector>();
         if (beatDetector != null)
@@ -57,7 +63,9 @@ public abstract class Enemy : MonoBehaviour
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
     }
+
     protected virtual void Update()
 
     {
@@ -103,7 +111,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        MoveTowardsPlayer();
+        if (canMove)
+        {
+            MoveTowardsPlayer();
+        }
     }
 
     protected void MoveTowardsPlayer()
@@ -112,6 +123,8 @@ public abstract class Enemy : MonoBehaviour
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
+        animator.SetBool("IsMoving", true);
+
         // Move in both x and y directions
         Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
@@ -119,7 +132,14 @@ public abstract class Enemy : MonoBehaviour
         // Optional: Flip sprite based on horizontal movement
         if (spriteRenderer != null)
         {
-            spriteRenderer.flipX = direction.x < 0;
+            if (direction.x >= 0)
+            {
+                transform.localScale = new Vector3(10, 10, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-10, 10, 1);
+            }
         }
     }
 
@@ -127,6 +147,8 @@ public abstract class Enemy : MonoBehaviour
     {
         currentHealth -= damageAmount;
         Debug.Log($"{gameObject.name} took {damageAmount} damage. Current Health: {currentHealth}");
+
+        animator.SetBool("IsHurt", true);
 
         if (currentHealth <= 0)
         {
@@ -137,11 +159,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         Debug.Log($"{gameObject.name} has died.");
-        if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
-
+        canMove = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         if (FindObjectOfType<ScoreManager>() != null)
         {
             // Find Score Manager and update player's score
@@ -149,7 +168,13 @@ public abstract class Enemy : MonoBehaviour
             score.UpdateScore(cost*10);
         }
 
-        // Destroy the enemy game object
-        Destroy(gameObject);
+        animator.SetBool("IsDead", true);
+
+        playerXP.GetExperience(xpDrop);
+
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
     }
 }
