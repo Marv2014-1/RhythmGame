@@ -8,9 +8,7 @@ public class AudioManager : MonoBehaviour
 	public bool IsPlaying { get; private set; } = false;
 	public double SongStartTime { get; private set; }
 
-	/// <summary>
-	/// Sets up the audio source and schedules playback.
-	/// </summary>
+	/// Sets up the audio source without starting playback.
 	public void SetupAudio(Song song)
 	{
 		if (song.audioClip == null)
@@ -22,15 +20,45 @@ public class AudioManager : MonoBehaviour
 		audioClip = song.audioClip;
 		audioSource.clip = audioClip;
 		audioSource.loop = false; // We'll handle looping manually
+		IsPlaying = false;
+	}
+
+	/// Plays the audio, ensuring the data is loaded.
+	public void PlayAudio()
+	{
+		if (audioClip.loadState != AudioDataLoadState.Loaded)
+		{
+			Debug.Log("Audio data not loaded yet, loading now...");
+			audioClip.LoadAudioData();
+			StartCoroutine(WaitForAudioLoadAndPlay());
+			return;
+		}
+
+		audioSource.Play();
 		SongStartTime = AudioSettings.dspTime;
-		audioSource.PlayScheduled(SongStartTime);
 		IsPlaying = true;
 	}
 
-	/// <summary>
+	private IEnumerator WaitForAudioLoadAndPlay()
+	{
+		while (audioClip.loadState == AudioDataLoadState.Loading)
+		{
+			yield return null;
+		}
+
+		if (audioClip.loadState == AudioDataLoadState.Loaded)
+		{
+			audioSource.Play();
+			SongStartTime = AudioSettings.dspTime;
+			IsPlaying = true;
+		}
+		else
+		{
+			Debug.LogError("Failed to load audio data.");
+		}
+	}
+
 	/// Retrieves the current song time based on DSP time.
-	/// </summary>
-	/// <returns>Current song time in seconds.</returns>
 	public float GetSongTime()
 	{
 		if (!IsPlaying) return 0f;
@@ -38,22 +66,10 @@ public class AudioManager : MonoBehaviour
 		return songTime % audioClip.length;
 	}
 
-	/// <summary>
 	/// Stops the audio playback.
-	/// </summary>
 	public void StopAudio()
 	{
 		audioSource.Stop();
 		IsPlaying = false;
-	}
-
-	/// <summary>
-	/// Plays the audio immediately.
-	/// </summary>
-	public void PlayAudio()
-	{
-		audioSource.Play();
-		SongStartTime = AudioSettings.dspTime;
-		IsPlaying = true;
 	}
 }

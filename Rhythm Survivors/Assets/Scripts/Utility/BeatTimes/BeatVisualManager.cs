@@ -112,7 +112,6 @@ public class BeatVisualManager : MonoBehaviour
 	/// <param name="fromLeft">Direction from which the visual originates.</param>
 	private void CreateBeatVisual(float beatTime, bool fromLeft)
 	{
-		Debug.Log($"Creating beat visual for time {beatTime} from {(fromLeft ? "Left" : "Right")}");
 		Vector2 desiredSize = new Vector2(30f, 100f);
 
 		GameObject beatVisualObject = Instantiate(beatVisualPrefab, beatVisualContainer);

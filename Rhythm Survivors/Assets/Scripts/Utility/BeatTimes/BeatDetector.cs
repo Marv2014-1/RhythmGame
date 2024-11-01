@@ -25,7 +25,7 @@ public class BeatDetector : MonoBehaviour
     public float visualDuration = 5f;
 
     private List<float> beatTimes = new List<float>();
-    //allows the player to hit beats that have been destroyed
+    // Allows the player to hit beats that have been destroyed
     private Dictionary<int, int> beatStatus = new Dictionary<int, int>();
     private float previousAudioTime = 0f;
 
@@ -36,6 +36,7 @@ public class BeatDetector : MonoBehaviour
     public UnityEvent OnBeatHit;
     public UnityEvent OnBeatMissed;
     public UnityEvent OnBeatOccurred;
+    private Coroutine clearFeedbackCoroutine;
 
     private bool songStarted = false;
 
@@ -70,6 +71,7 @@ public class BeatDetector : MonoBehaviour
 
     void Start()
     {
+        // Initialize UnityEvents if they are null
         if (OnBeatHit == null)
             OnBeatHit = new UnityEvent();
 
@@ -85,7 +87,7 @@ public class BeatDetector : MonoBehaviour
             currentLoopCount = 0;
             songStarted = false;
 
-            // Preload all beat times
+            // Preload all beat times and audio clips
             for (int i = 0; i < playlist.Count; i++)
             {
                 string jsonFileName = playlist[i].jsonFileName;
@@ -93,6 +95,19 @@ public class BeatDetector : MonoBehaviour
                 allBeatTimes.Add(songBeats);
                 List<float> songBeatsWDelay = beatTimeLoader.LoadBeatTimes(subfolder, jsonFileName, delay);
                 allBeatTimesWDelay.Add(songBeatsWDelay);
+
+                // Preload audio clips
+                if (playlist[i].audioClip != null)
+                {
+                    if (!playlist[i].audioClip.preloadAudioData)
+                    {
+                        playlist[i].audioClip.LoadAudioData();
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"AudioClip for song {i} is null!");
+                }
             }
 
             // Start the coroutine to transition to the next song without delay
@@ -120,14 +135,13 @@ public class BeatDetector : MonoBehaviour
         float audioSongTime = audioManager.GetSongTime();
 
         // Detect if the audio has looped back to the beginning
-        if (audioSongTime < previousAudioTime)
+        if (audioSongTime < adjustedPreviousTime)
         {
             currentLoopCount++;
             if (currentLoopCount <= playlist[currentSongIndex].loopCount)
             {
                 // Replay the current song
-                audioManager.PlayAudio();
-                OnSongLooped();
+                StartCoroutine(OnSongLooped());
             }
             else
             {
@@ -143,13 +157,11 @@ public class BeatDetector : MonoBehaviour
         previousAudioTime = audioSongTime;
     }
 
-
-
     private IEnumerator TransitionToNextSong()
     {
-        audioManager.StopAudio();
-
         currentSongIndex++;
+        Debug.Log("Current Song Index: " + currentSongIndex);
+        Debug.Log("Current playlist size: " + playlist.Count);
         if (currentSongIndex >= playlist.Count)
         {
             Debug.Log("Playlist ended.");
@@ -157,7 +169,14 @@ public class BeatDetector : MonoBehaviour
             beatVisualManager.ClearAllBeatVisuals();
 
             PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
-            pauseMenu.EndRun();
+            if (pauseMenu != null)
+            {
+                pauseMenu.EndRun();
+            }
+            else
+            {
+                Debug.LogWarning("PauseMenu not found in the scene.");
+            }
 
             yield break;
         }
@@ -174,26 +193,22 @@ public class BeatDetector : MonoBehaviour
         for (int i = 0; i < beatTimes.Count; i++)
         {
             beatStatus[i] = 0; // 0 = unhandled
-            Debug.Log($"Beat Time (With Delay): {beatTimes[i]}");
         }
 
         // Initialize beat visuals with songTime = 0f
         beatVisualManager.InitializeBeatVisuals(beatTimes, 0f);
 
         audioManager.SetupAudio(playlist[currentSongIndex]);
-        audioManager.StopAudio();
         Debug.Log($"Transitioning to next song: {playlist[currentSongIndex].audioClip.name}");
 
         songStartTime = Time.time - delay;
         songStarted = true;
 
         // Wait for the specified delay
-        Debug.Log($"Waiting for {delay} seconds before starting the song.");
         yield return new WaitForSeconds(delay);
 
-        // Start the audio and set songStarted to true
+        // Start the audio
         audioManager.PlayAudio();
-        Debug.Log("Song has started playing.");
     }
 
     private IEnumerator OnSongLooped()
@@ -202,94 +217,139 @@ public class BeatDetector : MonoBehaviour
         isLoopingSong = true;
 
         // Use delayed beat times when the song loops
-        beatTimes = allBeatTimesWDelay[currentSongIndex];
+        beatTimes = allBeatTimes[currentSongIndex];
 
         // Reset beat statuses
         beatStatus.Clear();
         for (int i = 0; i < beatTimes.Count; i++)
         {
             beatStatus[i] = 0; // Reset all beat statuses to unhandled
-            Debug.Log($"Beat Time (With Delay): {beatTimes[i]}");
         }
 
         // Reset songStartTime and previousAudioTime
-        songStartTime = Time.time - delay;
+        songStartTime = Time.time;
         previousAudioTime = 0f;
 
         // Re-initialize beat visuals with songTime = 0f
         beatVisualManager.InitializeBeatVisuals(beatTimes, 0f);
-        Debug.Log("Song has looped. Variables have been reset.");
 
         // Wait for the specified delay
-        Debug.Log($"Waiting for {delay} seconds before restarting the song.");
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(1);
 
         // Ensure audio starts from the beginning
         audioManager.audioSource.time = 0f;
 
         // Start the audio
         audioManager.PlayAudio();
-        Debug.Log("Song has started playing from the beginning.");
 
         songStarted = true;
     }
-
-
-
-
 
     private void DetectPlayerInput(float songTime)
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CheckBeatAccuracy(songTime);
-            Debug.Log("Hit Time: " + songTime);
         }
     }
-
 
     private void CheckBeatAccuracy(float inputTime)
     {
         int index = FindClosestIndex(inputTime);
         bool hit = false;
+        float difference = float.MaxValue;
+        int beatIndex = -1;
 
-        if (index > 0 && Mathf.Abs(beatTimes[index - 1] - inputTime) <= timingWindow)
+        // Check the previous beat
+        if (index > 0)
         {
-            if (beatStatus[index - 1] == 0)
+            float prevDifference = Mathf.Abs(beatTimes[index - 1] - inputTime);
+            if (prevDifference <= timingWindow && beatStatus[index - 1] == 0)
             {
+                difference = prevDifference;
+                beatIndex = index - 1;
                 hit = true;
-                MarkBeatAsHandled(index - 1, true);
             }
         }
 
-        if (!hit && index < beatTimes.Count && Mathf.Abs(beatTimes[index] - inputTime) <= timingWindow)
+        // Check the current beat
+        if (!hit && index < beatTimes.Count)
         {
-            if (beatStatus[index] == 0)
+            float currentDifference = Mathf.Abs(beatTimes[index] - inputTime);
+            if (currentDifference <= timingWindow && beatStatus[index] == 0)
             {
+                difference = currentDifference;
+                beatIndex = index;
                 hit = true;
-                MarkBeatAsHandled(index, true);
             }
         }
 
-        if (hit)
+        if (hit && beatIndex != -1)
         {
-            feedbackText.text = "Perfect!";
-            feedbackText.color = Color.green;
-            Debug.Log($"Beat hit at time: {inputTime}");
-            OnBeatHit.Invoke();
-            OnBeatOccurred.Invoke();
+            MarkBeatAsHandled(beatIndex, true);
+
+            if (difference <= timingWindow / 4f)
+            {
+                // Perfect hit
+                SetFeedback("Perfect!", Color.green);
+
+                // Invoke OnBeatHit twice
+                OnBeatHit.Invoke();
+                OnBeatHit.Invoke();
+
+                OnBeatOccurred.Invoke();
+            }
+            else
+            {
+                // Nice hit
+                SetFeedback("Nice!", Color.yellow);
+
+                OnBeatHit.Invoke();
+
+                OnBeatOccurred.Invoke();
+            }
+
+            // Optional: Log the hit details
+            Debug.Log($"Hit Time: {inputTime} Closest Beat Time: {beatTimes[beatIndex]} Difference: {difference}");
         }
         else
         {
-            feedbackText.text = "Miss!";
-            feedbackText.color = Color.red;
-            Debug.Log($"Missed beat at time: {inputTime}");
+            // Missed the beat
+            SetFeedback("Miss!", Color.red);
+
             OnBeatMissed.Invoke();
             OnBeatOccurred.Invoke();
+
+            // Optional: Log the miss details
+            Debug.Log($"Missed Beat at Time: {inputTime} Closest Beat Time: {(index < beatTimes.Count ? beatTimes[index].ToString() : "N/A")}");
         }
-        //print hit time and closest beat time
-        print("Hit Time: " + inputTime + " Closest Beat Time: " + beatTimes[index]);
     }
+
+    private void SetFeedback(string message, Color color)
+    {
+        // Set the feedback text and color
+        feedbackText.text = message;
+        feedbackText.color = color;
+
+        // If a coroutine is already running, stop it
+        if (clearFeedbackCoroutine != null)
+        {
+            StopCoroutine(clearFeedbackCoroutine);
+        }
+
+        // Start the coroutine to clear the feedback text after 0.15 seconds
+        clearFeedbackCoroutine = StartCoroutine(ClearFeedbackText());
+    }
+
+    private IEnumerator ClearFeedbackText()
+    {
+        // Wait for 0.15 seconds
+        yield return new WaitForSeconds(0.25f);
+
+        // Clear the feedback text
+        feedbackText.text = "";
+    }
+
 
     private void CheckMissedBeats(float previousTime, float currentTime)
     {
@@ -318,9 +378,8 @@ public class BeatDetector : MonoBehaviour
             {
                 if (beatStatus[i] == 0)
                 {
-                    feedbackText.text = "Beat missed!";
-                    feedbackText.color = Color.red;
-                    Debug.Log($"Beat missed at time: {beatTime}");
+                    SetFeedback("Beat Miss!", Color.red);
+                    // Debug.Log($"Beat missed at time: {beatTime}");
                     MarkBeatAsHandled(i, false);
                     OnBeatMissed.Invoke();
                     OnBeatOccurred.Invoke();
