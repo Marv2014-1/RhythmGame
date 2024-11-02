@@ -253,9 +253,14 @@ public class BeatDetector : MonoBehaviour
         }
     }
 
-    private void CheckBeatAccuracy(float inputTime)
+    public void CheckBeatAccuracy(float inputTime)
     {
+        Debug.Log($"--- Checking Beat Accuracy ---");
+        Debug.Log($"Input Time: {inputTime}");
+
         int index = FindClosestIndex(inputTime);
+        Debug.Log($"Initial Closest Index: {index}");
+
         bool hit = false;
         float difference = float.MaxValue;
         int beatIndex = -1;
@@ -264,24 +269,44 @@ public class BeatDetector : MonoBehaviour
         if (index > 0)
         {
             float prevDifference = Mathf.Abs(beatTimes[index - 1] - inputTime);
+            Debug.Log($"[Previous Beat] Index: {index - 1}, Beat Time: {beatTimes[index - 1]}, Difference: {prevDifference}, Status: {beatStatus[index - 1]}");
             if (prevDifference <= timingWindow && beatStatus[index - 1] == 0)
             {
                 difference = prevDifference;
                 beatIndex = index - 1;
                 hit = true;
+                Debug.Log($"--> [Previous Beat Hit] Difference: {difference}");
             }
+            else
+            {
+                Debug.Log($"--> [Previous Beat Missed] Difference: {difference}");
+            }
+        }
+        else
+        {
+            Debug.Log($"[Previous Beat] Skipped (index <= 0)");
         }
 
         // Check the current beat
         if (!hit && index < beatTimes.Count)
         {
             float currentDifference = Mathf.Abs(beatTimes[index] - inputTime);
+            Debug.Log($"[Current Beat] Index: {index}, Beat Time: {beatTimes[index]}, Difference: {currentDifference}, Status: {beatStatus[index]}");
             if (currentDifference <= timingWindow && beatStatus[index] == 0)
             {
                 difference = currentDifference;
                 beatIndex = index;
                 hit = true;
+                Debug.Log($"--> [Current Beat Hit] Difference: {difference}");
             }
+            else
+            {
+                Debug.Log($"--> [Current Beat Missed] Difference: {difference}");
+            }
+        }
+        else
+        {
+            Debug.Log($"[Current Beat] Skipped (Already hit or index out of range)");
         }
 
         if (hit && beatIndex != -1)
@@ -298,6 +323,8 @@ public class BeatDetector : MonoBehaviour
                 OnBeatHit.Invoke();
 
                 OnBeatOccurred.Invoke();
+
+                Debug.Log($"[Result] Perfect Hit! Beat Index: {beatIndex}, Difference: {difference}");
             }
             else
             {
@@ -307,10 +334,12 @@ public class BeatDetector : MonoBehaviour
                 OnBeatHit.Invoke();
 
                 OnBeatOccurred.Invoke();
+
+                Debug.Log($"[Result] Nice Hit! Beat Index: {beatIndex}, Difference: {difference}");
             }
 
             // Optional: Log the hit details
-            Debug.Log($"Hit Time: {inputTime} Closest Beat Time: {beatTimes[beatIndex]} Difference: {difference}");
+            Debug.Log($"[Hit Details] Input Time: {inputTime}, Closest Beat Time: {beatTimes[beatIndex]}, Difference: {difference}");
         }
         else
         {
@@ -321,8 +350,11 @@ public class BeatDetector : MonoBehaviour
             OnBeatOccurred.Invoke();
 
             // Optional: Log the miss details
-            Debug.Log($"Missed Beat at Time: {inputTime} Closest Beat Time: {(index < beatTimes.Count ? beatTimes[index].ToString() : "N/A")}");
+            string closestBeatTime = (index < beatTimes.Count) ? beatTimes[index].ToString() : "N/A";
+            Debug.Log($"[Result] Missed Beat! Input Time: {inputTime}, Closest Beat Time: {closestBeatTime}");
         }
+
+        Debug.Log($"--- End of Check ---\n");
     }
 
     private void SetFeedback(string message, Color color)
@@ -344,7 +376,7 @@ public class BeatDetector : MonoBehaviour
     private IEnumerator ClearFeedbackText()
     {
         // Wait for 0.15 seconds
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
 
         // Clear the feedback text
         feedbackText.text = "";
