@@ -22,8 +22,7 @@ public class BeatVisualManager : MonoBehaviour
 	/// Initializes beat visuals for beats that are within the visual duration from the current time.
 	/// </summary>
 	/// <param name="beatTimes">List of all beat times.</param>
-	/// <param name="songTime">Current song time.</param>
-	public void InitializeBeatVisuals(List<float> beatTimes, float songTime)
+	public void InitializeBeatVisuals()
 	{
 		// Clear existing visuals
 		ClearAllBeatVisuals();
@@ -37,13 +36,11 @@ public class BeatVisualManager : MonoBehaviour
 	/// Updates the positions of active beat visuals and manages their lifecycle.
 	/// </summary>
 	/// <param name="beatTimes">List of all beat times.</param>
-	/// <param name="songTime">Current song time.</param>
-	public void UpdateBeatVisuals(List<float> beatTimes, float songTime)
+	public void UpdateBeatVisuals(List<float> beatTimes)
 	{
 		if (!visualsStarted) return;
 
 		float visualTime = Time.time - visualStartTime; // Time since visuals started
-		float audioClipLength = audioManager.audioClip != null ? audioManager.audioClip.length : 0f;
 
 		var visualsToRemove = new List<BeatVisual>();
 

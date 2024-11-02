@@ -7,5 +7,5 @@ public class Song : MonoBehaviour
 	public AudioClip audioClip;
 	public string jsonFileName;
 	public int loopCount;
-	public int delayOffset;
+	public float delayOffset;
 }
