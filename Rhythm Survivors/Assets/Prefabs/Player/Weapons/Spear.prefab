@@ -78,7 +78,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Spear
   damage: 15
+  pierce: 0
+  projectile: 0
   range: 20
+  knockback: 20
+  speed: 0
   requiredBeats: 3
   player: {fileID: 0}
   enemyLayerMask:

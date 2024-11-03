@@ -81,6 +81,7 @@ public class Spear : Weapon
             thrust.SetDamage(damage);
             thrust.SetSpeed(thrustSpeed);
             thrust.SetRange(thrustRange);
+            thrust.SetKnockback(knockback);
         }
         else
         {

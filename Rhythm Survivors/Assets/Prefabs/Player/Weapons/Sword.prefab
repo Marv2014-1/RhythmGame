@@ -78,7 +78,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sword
   damage: 20
+  pierce: 0
+  projectile: 0
   range: 0
+  knockback: 10
+  speed: 0
   requiredBeats: 3
   player: {fileID: 0}
   enemyLayerMask:

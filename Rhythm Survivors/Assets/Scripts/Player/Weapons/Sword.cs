@@ -28,6 +28,7 @@ public class Sword : Weapon
         {
             slash.SetDamage(damage);
             slash.SetTransform(slashSpawnPoint);
+            slash.SetKnockback(knockback);
         }
         else
         {

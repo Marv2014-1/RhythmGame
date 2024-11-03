@@ -7,8 +7,6 @@ public class Bow : Weapon
     public GameObject arrowPrefab; // Assign the Arrow prefab in the Inspector
     public Transform arrowSpawnPoint; // Assign the spawn point in the Inspector
 
-    public float arrowSpeed = 10f;
-    public float arrowRange = 20f;
     public float rotationSpeed = 5f; // Speed at which the bow rotates
 
     private Enemy closestEnemy;
@@ -80,8 +78,10 @@ public class Bow : Weapon
         if (arrow != null)
         {
             arrow.SetDamage(damage);
-            arrow.SetSpeed(arrowSpeed);
-            arrow.SetRange(arrowRange);
+            arrow.SetSpeed(speed);
+            arrow.SetRange(range);
+            arrow.SetPierce(pierce);
+            arrow.SetKnockback(knockback);
 
             Debug.Log("Bow shot an arrow.");
         }

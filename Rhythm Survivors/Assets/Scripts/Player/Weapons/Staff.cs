@@ -47,6 +47,7 @@ public class Staff : Weapon
                 spark.SetSpeed(speed);
                 spark.SetRange(range);
                 spark.SetDirection(sparkDirection);
+                spark.SetKnockback(knockback);
             }
             else
             {

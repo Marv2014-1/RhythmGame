@@ -1,14 +1,12 @@
 using UnityEngine;
 
-/// <summary>
 /// Orc enemy that follows the player and attacks when in range.
-/// </summary>
 public class Crew : Enemy
 {
 	[Header("Crew Settings")]
 	public float attackRange = 1.5f;      // Distance within which Orc can attack
 	public float crewAttackCooldown = 2f; // Time between attacks
-	public int damageAmount = 10;         // Damage dealt to the player
+	public float knockbackForce = 5f;
 
 	private PlayerHealth playerHealth;
 	private float lastAttackTime;
@@ -31,28 +29,22 @@ public class Crew : Enemy
 		lastAttackTime = -crewAttackCooldown;
 	}
 
-	/// <summary>
 	/// Handles enemy movement towards the player.
-	/// </summary>
 	protected override void FixedUpdate()
 	{
 		base.FixedUpdate(); // Move towards the player using currentMoveSpeed
 	}
 
-	/// <summary>
 	/// Called every frame to check attack conditions.
-	/// </summary>
 	protected override void Update()
 	{
 		if (canMove)
 		{
-            AttemptAttack();
-        }
+			AttemptAttack();
+		}
 	}
 
-	/// <summary>
 	/// Attempts to attack the player if conditions are met.
-	/// </summary>
 	private void AttemptAttack()
 	{
 		if (playerTransform == null || playerHealth == null)
@@ -66,26 +58,53 @@ public class Crew : Enemy
 			lastAttackTime = Time.time;
 		}
 	}
-
-	/// <summary>
 	/// Attacks the player by dealing damage.
-	/// </summary>
 	private void AttackPlayer()
 	{
 		if (playerHealth != null)
 		{
-			playerHealth.TakeDamage(damageAmount);
-			Debug.Log($"{gameObject.name} attacked the player for {damageAmount} damage.");
-			// Optionally, trigger attack animations or effects here
+			// Calculate knockback direction: from enemy to player
+			Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+
+			// Apply damage with knockback
+			playerHealth.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
 		}
 	}
 
-	/// <summary>
 	/// Overrides the Die method to include Orc-specific death behavior.
-	/// </summary>
 	protected override void Die()
 	{
 		base.Die();
 		// Add Orc-specific death behavior (e.g., drop loot, play death sound)
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		// Ensure you have tagged the player GameObject with "Player"
+		if (other.CompareTag("Player"))
+		{
+			ApplyDamageToPlayer();
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		// Ensure you have tagged the player GameObject with "Player"
+		if (collision.gameObject.CompareTag("Player"))
+		{
+			ApplyDamageToPlayer();
+		}
+	}
+
+	private void ApplyDamageToPlayer()
+	{
+		if (playerHealth != null)
+		{
+			// Calculate knockback direction: from enemy to player
+			Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+
+			// Apply damage with knockback
+			playerHealth.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+		}
 	}
 }

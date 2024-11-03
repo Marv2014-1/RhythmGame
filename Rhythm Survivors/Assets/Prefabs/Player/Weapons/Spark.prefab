@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 669930349975238605}
   - component: {fileID: 6588826744228475260}
   - component: {fileID: 3806468334635379890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8814618354872206509}
   - component: {fileID: 6096346228148285105}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 5140497042274075218}
   - component: {fileID: 5504076589134571738}
   - component: {fileID: 4800456659606986036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

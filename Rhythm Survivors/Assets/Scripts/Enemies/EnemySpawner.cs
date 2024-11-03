@@ -10,6 +10,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> enemyPrefabs; // List of enemy prefabs to spawn
+    public GameObject firstBoss;
+    public GameObject secondBoss;
+    public GameObject thirdBoss;
 
     [Header("Spawn Radius Settings")]
     [SerializeField]
@@ -32,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
     private int beatCount = 0; // Counts the number of beats occurred during the interval
     private BeatDetector beatDetector;
     private Transform playerTransform;
+    private float difficultyScale = 2.5f;
 
     void Start()
     {
@@ -41,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // Subscribe to the OnBeatOccurred event
             beatDetector.OnBeatOccurred.AddListener(OnBeatOccurred);
+            beatDetector.OnSongTransition.AddListener(OnSongTransition);
         }
         else
         {
@@ -104,6 +109,15 @@ public class EnemySpawner : MonoBehaviour
         beatCount++;
     }
 
+    private void OnSongTransition()
+    {
+        difficultyScale -= 0.2f;
+        if (difficultyScale <= 1.0f)
+        {
+            difficultyScale = 0.5f;
+        }
+    }
+
     /// Coroutine that waits for the spawn interval, then spawns enemies based on beat count.
     private IEnumerator SpawnEnemiesRoutine()
     {
@@ -113,7 +127,8 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             // Calculate the total available cost based on beat count
-            int totalAvailableCost = (beatCount / 2) + 3; // Divide by 2 to reduce the difficulty
+
+            int totalAvailableCost = (int)(beatCount / difficultyScale) + 1; // Divide by dificulty scale to reduce the difficulty
 
             // Reset beat count
             beatCount = 0;

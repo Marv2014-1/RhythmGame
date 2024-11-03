@@ -18,7 +18,7 @@ public class PlayerExperience : MonoBehaviour
     {
         level = 1;
         experience = 0;
-        xpToLevel = 20;
+        xpToLevel = 50;
         UpdateXPUIImmediate();
         playerWeapons = gameObject.GetComponent<PlayerWeapons>();
     }
@@ -34,7 +34,8 @@ public class PlayerExperience : MonoBehaviour
             experience -= xpToLevel;
             xpToLevel *= 2;
             GetExperience(0);
-        } else
+        }
+        else
         {
             targetFillAmount = (float)experience / xpToLevel;
             StartCoroutine(SmoothFill());

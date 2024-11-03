@@ -5,6 +5,7 @@ public class Thrust : MonoBehaviour
     private int damage;
     private float speed;
     private float range;
+    private float knockback;
     private Vector3 startPosition;
     private Quaternion startRotation;
 
@@ -21,6 +22,11 @@ public class Thrust : MonoBehaviour
     public void SetRange(float rangeAmount)
     {
         range = rangeAmount;
+    }
+
+    public void SetKnockback(float knockbackAmount)
+    {
+        knockback = knockbackAmount;
     }
 
     private void Start()
@@ -49,6 +55,8 @@ public class Thrust : MonoBehaviour
 
             if (enemy != null)
             {
+                Vector2 direction = (enemy.transform.position - transform.position).normalized;
+                enemy.Knockback(direction, knockback);
                 enemy.TakeDamage(damage);
                 Debug.Log($"Spear hit {enemy.gameObject.name} and dealt {damage} damage.");
             }

@@ -6,6 +6,7 @@ public class Spark : MonoBehaviour
     private int damage;
     private float speed;
     private float range;
+    private float knockback;
     private Vector3 startPosition;
     private Vector2 direction;
 
@@ -41,6 +42,11 @@ public class Spark : MonoBehaviour
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized; // Ensure direction is normalized
+    }
+
+    public void SetKnockback(float knockbackAmount)
+    {
+        knockback = knockbackAmount;
     }
 
     private void Start()
@@ -79,6 +85,8 @@ public class Spark : MonoBehaviour
 
             if (enemy != null)
             {
+                direction = (enemy.transform.position - transform.position).normalized;
+                enemy.Knockback(direction, knockback);
                 enemy.TakeDamage(damage);
                 Debug.Log($"Spark hit {enemy.gameObject.name} and dealt {damage} damage.");
             }

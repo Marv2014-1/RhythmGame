@@ -78,7 +78,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Bow
   damage: 10
+  pierce: 0
+  projectile: 0
   range: 20
+  knockback: 5
+  speed: 15
   requiredBeats: 3
   player: {fileID: 0}
   enemyLayerMask:
@@ -88,6 +92,4 @@ MonoBehaviour:
   beatDetector: {fileID: 0}
   arrowPrefab: {fileID: 4210355246839257373, guid: 8bf8a60a2c807f74693d2c62380a7827, type: 3}
   arrowSpawnPoint: {fileID: 4343178604827829964}
-  arrowSpeed: 15
-  arrowRange: 20
   rotationSpeed: 5

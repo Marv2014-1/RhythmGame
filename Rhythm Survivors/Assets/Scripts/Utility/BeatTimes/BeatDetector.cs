@@ -35,6 +35,7 @@ public class BeatDetector : MonoBehaviour
     public UnityEvent OnBeatHit;
     public UnityEvent OnBeatMissed;
     public UnityEvent OnBeatOccurred;
+    public UnityEvent OnSongTransition;
     private Coroutine clearFeedbackCoroutine;
 
     private bool songStarted = false;
@@ -77,6 +78,9 @@ public class BeatDetector : MonoBehaviour
 
         if (OnBeatOccurred == null)
             OnBeatOccurred = new UnityEvent();
+
+        if (OnSongTransition == null)
+            OnSongTransition = new UnityEvent();
 
         if (playlist.Count > 0)
         {
@@ -201,6 +205,8 @@ public class BeatDetector : MonoBehaviour
         songStartTime = Time.time - delay;
 
         songStarted = true;
+
+        OnSongTransition.Invoke();
 
         // Wait for the specified delay
         yield return new WaitForSeconds(delay - 1);
