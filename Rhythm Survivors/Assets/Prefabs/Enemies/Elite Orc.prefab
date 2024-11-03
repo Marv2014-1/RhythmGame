@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 10
   maxHealth: 100
-  xpDrop: 50
+  xpDrop: 100
   canMove: 0
   baseMoveSpeed: 4
   currentMoveSpeed: 0

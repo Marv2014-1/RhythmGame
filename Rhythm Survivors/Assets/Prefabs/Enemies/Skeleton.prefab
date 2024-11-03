@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 3
   maxHealth: 40
-  xpDrop: 15
+  xpDrop: 20
   canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
@@ -280,6 +280,7 @@ MonoBehaviour:
   attackCooldown: 1
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
+  invulnerabilityDuration: 0.2
   attackRange: 1.5
   crewAttackCooldown: 2
   knockbackForce: 5

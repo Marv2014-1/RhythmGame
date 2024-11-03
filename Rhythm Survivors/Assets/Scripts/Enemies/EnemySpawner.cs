@@ -11,8 +11,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private List<GameObject> enemyPrefabs; // List of enemy prefabs to spawn
     public GameObject firstBoss;
-    public GameObject secondBoss;
-    public GameObject thirdBoss;
 
     [Header("Spawn Radius Settings")]
     [SerializeField]
@@ -182,6 +180,16 @@ public class EnemySpawner : MonoBehaviour
                 {
                     // If the enemy prefab doesn't have an Enemy component, remove it
                     possibleEnemies.Remove(selectedEnemyPrefab);
+                }
+            }
+
+            if (waveCount >= 10)
+            {
+                int numBosses = waveCount - 9;
+                for (int i = 0; i < numBosses; i++)
+                {
+                    Vector2 spawnPosition = GenerateSpawnPosition();
+                    Instantiate(firstBoss, spawnPosition, Quaternion.identity);
                 }
             }
         }
