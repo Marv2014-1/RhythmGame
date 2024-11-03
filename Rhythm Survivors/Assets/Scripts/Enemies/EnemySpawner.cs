@@ -37,6 +37,8 @@ public class EnemySpawner : MonoBehaviour
     private Transform playerTransform;
     private float difficultyScale = 2.5f;
 
+    private int waveCount = 0;
+
     void Start()
     {
         // Find the BeatDetector in the scene
@@ -116,6 +118,8 @@ public class EnemySpawner : MonoBehaviour
         {
             difficultyScale = 0.5f;
         }
+
+        waveCount++;
     }
 
     /// Coroutine that waits for the spawn interval, then spawns enemies based on beat count.

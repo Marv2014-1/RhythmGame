@@ -44,7 +44,8 @@ public abstract class Enemy : MonoBehaviour
 
     private bool isKnockedBack = false;
     public float knockbackDuration = 0.2f;
-    private bool isInvulnerable = false; // Add this field
+    private bool isInvulnerable = false;
+    public float invulnerabilityDuration = 0.2f;
 
     // Reference to the BeatDetector
     protected BeatDetector beatDetector;
@@ -182,7 +183,7 @@ public abstract class Enemy : MonoBehaviour
     // Add invulnerability cooldown
     private IEnumerator InvulnerabilityCooldown()
     {
-        yield return new WaitForSeconds(0.2f); // Wait for 0.2 seconds
+        yield return new WaitForSeconds(invulnerabilityDuration);
         isInvulnerable = false; // Remove invulnerability
     }
 

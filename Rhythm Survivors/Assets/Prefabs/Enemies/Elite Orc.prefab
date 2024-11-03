@@ -316,6 +316,7 @@ MonoBehaviour:
   attackCooldown: 1
   deathEffect: {fileID: 0}
   knockbackDuration: 0.1
+  invulnerabilityDuration: 0.5
   attackRange: 1.5
   crewAttackCooldown: 2
   knockbackForce: 5
