@@ -16,6 +16,11 @@ public class Bow : Weapon
     protected override void Start()
     {
         base.Start();
+
+        upgrades = new List<(string, int)>()
+        {
+            ("Pierce", 1), ("Range", 5), ("Pierce", 1), ("Damage", 5)
+        };
     }
 
     void Update()
@@ -65,23 +70,10 @@ public class Bow : Weapon
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    protected override void OnBeatDetected()
-    {
-        beatCount++;
-        UpdateWeaponUI(beatCount);
-
-        if (beatCount >= requiredBeats)
-        {
-            Attack();
-            beatCount = 0; // Reset beat count after attack
-            UpdateWeaponUI(beatCount);
-        }
-    }
-
     public override void Attack()
     {
         // Instantiate an arrow at the spawn point with the same rotation as the bow
-        GameObject arrowInstance = Instantiate(arrowPrefab, arrowSpawnPoint.position, transform.rotation);
+        GameObject arrowInstance = Instantiate(arrowPrefab, arrowSpawnPoint.position, transform.rotation, player.transform);
 
         Arrow arrow = arrowInstance.GetComponent<Arrow>();
 

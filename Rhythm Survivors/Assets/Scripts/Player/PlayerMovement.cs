@@ -99,17 +99,17 @@ public class PlayerMovement : MonoBehaviour
         isTurning = true;
         float time = 0f;
         float duration = 0.15f;
-        Vector3 initialScale = transform.localScale;
+        Vector3 initialScale = animator.transform.localScale;
         Vector3 targetScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z);
 
         while (time < duration)
         {
-            transform.localScale = Vector3.Lerp(initialScale, targetScale, time / duration);
+            animator.transform.localScale = Vector3.Lerp(initialScale, targetScale, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = targetScale;
+        animator.transform.localScale = targetScale;
         facingRight = !facingRight;
 
         isTurning = false;

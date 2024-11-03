@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerExperience : MonoBehaviour
 {
-    public int level;
-    public int experience;
-    public int xpToLevel;
+    private int level, experience, xpToLevel;
+
     public Image xpBarFill; // Assign ExperienceBarFill Image in the Inspector
     public float smoothSpeed = 5f; // Speed of the fill transition
     private float targetFillAmount;
+
+    private PlayerWeapons playerWeapons;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class PlayerExperience : MonoBehaviour
         experience = 0;
         xpToLevel = 20;
         UpdateXPUIImmediate();
+        playerWeapons = gameObject.GetComponent<PlayerWeapons>();
     }
 
     // Gives the player experience from defeated enemies
@@ -42,6 +44,7 @@ public class PlayerExperience : MonoBehaviour
     // Levels up the player and informs the weapon script to prompt an upgrade
     void LevelUp()
     {
+        playerWeapons.OpenMenu();
         level += 1;
     }
 

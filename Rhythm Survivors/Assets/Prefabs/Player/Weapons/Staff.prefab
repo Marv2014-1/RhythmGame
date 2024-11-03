@@ -77,8 +77,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Staff
-  damage: 15
+  damage: 10
+  pierce: 1
+  projectile: 4
   range: 10
+  knockback: 0
+  speed: 5
   requiredBeats: 5
   player: {fileID: 0}
   enemyLayerMask:

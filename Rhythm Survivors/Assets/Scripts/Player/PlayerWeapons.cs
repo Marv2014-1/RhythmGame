@@ -5,23 +5,21 @@ using UnityEngine.UI;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    public GameObject weaponDisplay, weaponUI;
-    public GameObject bow, staff, sword;
-    public Sprite bowSprite, staffSprite, swordSprite;
+    public GameObject weaponDisplay, weaponUI, levelMenu;
+    public GameObject bow, staff, sword, spear;
+    public Sprite bowSprite, staffSprite, swordSprite, spearSprite;
 
     private List<(string, int)> items = new List<(string, int)>()
     { 
-        ("Bow", 0), ("Staff", 0), ("Sword", 0)
+        ("Bow", 0), ("Staff", 0), ("Sword", 0), ("Spear", 0)
     };
-    public int maxWeapons;
-    public int maxTrinkets;
-    private int numWeapons;
-    private int numTrinkets;
+    public int maxWeapons = 3, maxTrinkets = 3, numWeapons = 0, numTrinkets = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        return;
+        levelMenu.SetActive(false);
+        ProgressItem("Staff");
     }
 
     // Update is called once per frame
@@ -30,26 +28,7 @@ public class PlayerWeapons : MonoBehaviour
         // Temporary testing inputs
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (items[FindItem("Bow")].Item2 == 0)
-            {
-                ProgressItem("Bow");
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (items[FindItem("Staff")].Item2 == 0)
-            {
-                ProgressItem("Staff");
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (items[FindItem("Sword")].Item2 == 0)
-            {
-                ProgressItem("Sword");
-            }
+            OpenMenu();
         }
     }
 
@@ -65,33 +44,88 @@ public class PlayerWeapons : MonoBehaviour
         return -1;
     }
 
+    public void OpenMenu()
+    {
+        Time.timeScale = 0.0f;
+        AudioListener.pause = true;
+        levelMenu.GetComponent<LevelMenu>().PopulateUpgrades(items);
+        levelMenu.SetActive(true);
+    }
+
+    public void CloseMenu(string name)
+    {
+        AudioListener.pause = false;
+        ProgressItem(name);
+        levelMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+    }      
+
     private void ProgressItem(string name)
     {
         int index = FindItem(name);
 
         switch (name)
         {
+            case "Heal":
+                gameObject.GetComponent<PlayerHealth>().Heal(100);
+                break;
             case "Bow":
-                Instantiate(bow, this.transform);
-                AddUIElement(bowSprite, bow.GetComponent<Weapon>().requiredBeats);
-                numWeapons++;
+                if (items[index].Item2 == 0)
+                {
+                    bow = Instantiate(bow, this.transform);
+                    AddUIElement(bowSprite, bow.GetComponent<Weapon>().requiredBeats);
+                    numWeapons++;
+                }
+                else
+                {
+                    bow.GetComponent<Weapon>().UpgradeWeapon();
+                }
                 break;
             case "Staff":
-                Instantiate(staff, this.transform);
-                AddUIElement(staffSprite, staff.GetComponent<Weapon>().requiredBeats);
-                numWeapons++;
+                if (items[index].Item2 == 0)
+                {
+                    staff = Instantiate(staff, this.transform);
+                    AddUIElement(staffSprite, staff.GetComponent<Weapon>().requiredBeats);
+                    numWeapons++;
+                }
+                else
+                {
+                    staff.GetComponent<Weapon>().UpgradeWeapon();
+                }
                 break;
             case "Sword":
-                Instantiate(sword, this.transform);
-                AddUIElement(swordSprite, sword.GetComponent<Weapon>().requiredBeats);
-                numWeapons++;
+                if (items[index].Item2 == 0)
+                {
+                    sword = Instantiate(sword, this.transform);
+                    AddUIElement(swordSprite, sword.GetComponent<Weapon>().requiredBeats);
+                    numWeapons++;
+                } 
+                else
+                {
+                    sword.GetComponent<Weapon>().UpgradeWeapon();
+                }
+                break;
+            case "Spear":
+                if(items[index].Item2 == 0)
+                {
+                    spear = Instantiate(spear, this.transform);
+                    AddUIElement(spearSprite, spear.GetComponent<Weapon>().requiredBeats);
+                    numWeapons++;
+                } 
+                else
+                {
+                    spear.GetComponent<Weapon>().UpgradeWeapon();
+                }
                 break;
             default:
                 Debug.LogWarning(name + " not found in item list.");
                 break;
         }
 
-        items[index] = (name, items[index].Item2 + 1);
+        if (index != -1)
+        {
+            items[index] = new(items[index].Item1, items[index].Item2 + 1);
+        }
     }
 
     private void AddUIElement(Sprite weaponSprite, int beats)

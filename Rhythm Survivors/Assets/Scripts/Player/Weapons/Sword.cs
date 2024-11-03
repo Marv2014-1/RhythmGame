@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : Weapon
@@ -10,12 +10,17 @@ public class Sword : Weapon
     protected override void Start()
     {
         base.Start();
+
+        upgrades = new List<(string, int)>()
+        {
+            ("Knockback", 5), ("Knockback", 5), ("Knockback", 5), ("Damage", 5)
+        };
     }
 
     public override void Attack()
     {
         // Instantiate a slash at the spawn point
-        GameObject slashInstance = Instantiate(slashPrefab, slashSpawnPoint.position, transform.rotation, this.transform);
+        GameObject slashInstance = Instantiate(slashPrefab, player.transform);
 
         Slash slash = slashInstance.GetComponent<Slash>();
 
