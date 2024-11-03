@@ -11,7 +11,6 @@ public class BeatDetector : MonoBehaviour
 
     [Header("JSON Settings")]
     public string subfolder = "Beat_Times";
-    public string jsonFileName = "";
 
     [Header("Timing Settings")]
     public float timingWindow = 0.15f;
@@ -45,14 +44,12 @@ public class BeatDetector : MonoBehaviour
 
     private int currentSongIndex = -1;
     private int currentLoopCount = 0;
-
-    private List<List<float>> allBeatTimes = new List<List<float>>();
     private List<List<float>> allBeatTimesWDelay = new List<List<float>>();
     public float delay = 4.0f;
+    private float initialDelay = 4.0f;
     private float songStartTime = 0f;
-
-    private bool isTransitionSong = false;
-    private bool isLoopingSong = false;
+    private bool canCheck = false;
+    private bool canCheckMissedBeats = false;
 
     void Awake()
     {
@@ -91,9 +88,7 @@ public class BeatDetector : MonoBehaviour
             for (int i = 0; i < playlist.Count; i++)
             {
                 string jsonFileName = playlist[i].jsonFileName;
-                List<float> songBeats = beatTimeLoader.LoadBeatTimes(subfolder, jsonFileName, 0);
-                allBeatTimes.Add(songBeats);
-                List<float> songBeatsWDelay = beatTimeLoader.LoadBeatTimes(subfolder, jsonFileName, delay);
+                List<float> songBeatsWDelay = beatTimeLoader.LoadBeatTimes(subfolder, jsonFileName, delay - playlist[i].delayOffset);
                 allBeatTimesWDelay.Add(songBeatsWDelay);
 
                 // Preload audio clips
@@ -117,6 +112,8 @@ public class BeatDetector : MonoBehaviour
         {
             Debug.LogError("Playlist is empty!");
         }
+
+        initialDelay = delay;
     }
 
     void Update()
@@ -129,7 +126,7 @@ public class BeatDetector : MonoBehaviour
         float adjustedSongTime = songTime - delay;
         float adjustedPreviousTime = previousAudioTime - delay;
 
-        beatVisualManager.UpdateBeatVisuals(beatTimes, adjustedSongTime);
+        beatVisualManager.UpdateBeatVisuals(beatTimes);
 
         // Get the current audio time for loop detection
         float audioSongTime = audioManager.GetSongTime();
@@ -140,8 +137,7 @@ public class BeatDetector : MonoBehaviour
             currentLoopCount++;
             if (currentLoopCount <= playlist[currentSongIndex].loopCount)
             {
-                // Replay the current song
-                StartCoroutine(OnSongLooped());
+                // loop?
             }
             else
             {
@@ -159,9 +155,10 @@ public class BeatDetector : MonoBehaviour
 
     private IEnumerator TransitionToNextSong()
     {
+        canCheck = false;
+        canCheckMissedBeats = false;
+
         currentSongIndex++;
-        Debug.Log("Current Song Index: " + currentSongIndex);
-        Debug.Log("Current playlist size: " + playlist.Count);
         if (currentSongIndex >= playlist.Count)
         {
             Debug.Log("Playlist ended.");
@@ -182,11 +179,11 @@ public class BeatDetector : MonoBehaviour
         }
 
         currentLoopCount = 0;
-        isTransitionSong = true;
-        isLoopingSong = false;
 
         // Use delayed beat times when transitioning to the next song
         beatTimes = allBeatTimesWDelay[currentSongIndex];
+        delay = initialDelay;
+        delay = delay - playlist[currentSongIndex].delayOffset;
 
         // Initialize beat statuses
         beatStatus.Clear();
@@ -195,67 +192,47 @@ public class BeatDetector : MonoBehaviour
             beatStatus[i] = 0; // 0 = unhandled
         }
 
-        // Initialize beat visuals with songTime = 0f
-        beatVisualManager.InitializeBeatVisuals(beatTimes, 0f);
+        // Initialize beat visuals
+        beatVisualManager.InitializeBeatVisuals();
 
         audioManager.SetupAudio(playlist[currentSongIndex]);
         Debug.Log($"Transitioning to next song: {playlist[currentSongIndex].audioClip.name}");
 
         songStartTime = Time.time - delay;
+
         songStarted = true;
 
         // Wait for the specified delay
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay - 1);
 
-        // Start the audio
-        audioManager.PlayAudio();
-    }
+        // allow the player to miss
+        canCheck = true;
 
-    private IEnumerator OnSongLooped()
-    {
-        isTransitionSong = false;
-        isLoopingSong = true;
+        // Wait for the remaining delay
+        yield return new WaitForSeconds(1f);
 
-        // Use delayed beat times when the song loops
-        beatTimes = allBeatTimes[currentSongIndex];
+        canCheckMissedBeats = true;
 
-        // Reset beat statuses
-        beatStatus.Clear();
-        for (int i = 0; i < beatTimes.Count; i++)
-        {
-            beatStatus[i] = 0; // Reset all beat statuses to unhandled
-        }
 
-        // Reset songStartTime and previousAudioTime
-        songStartTime = Time.time;
+        // Reset previousAudioTime
         previousAudioTime = 0f;
 
-        // Re-initialize beat visuals with songTime = 0f
-        beatVisualManager.InitializeBeatVisuals(beatTimes, 0f);
-
-        // Wait for the specified delay
-        yield return new WaitForSeconds(1);
-
-        // Ensure audio starts from the beginning
-        audioManager.audioSource.time = 0f;
-
         // Start the audio
         audioManager.PlayAudio();
-
-        songStarted = true;
     }
 
-    private void DetectPlayerInput(float songTime)
+    private void DetectPlayerInput(float adjustedSongTime)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canCheck)
         {
-            CheckBeatAccuracy(songTime);
+            CheckBeatAccuracy(adjustedSongTime);
         }
     }
 
-    private void CheckBeatAccuracy(float inputTime)
+    public void CheckBeatAccuracy(float inputTime)
     {
         int index = FindClosestIndex(inputTime);
+
         bool hit = false;
         float difference = float.MaxValue;
         int beatIndex = -1;
@@ -308,9 +285,6 @@ public class BeatDetector : MonoBehaviour
 
                 OnBeatOccurred.Invoke();
             }
-
-            // Optional: Log the hit details
-            Debug.Log($"Hit Time: {inputTime} Closest Beat Time: {beatTimes[beatIndex]} Difference: {difference}");
         }
         else
         {
@@ -319,9 +293,6 @@ public class BeatDetector : MonoBehaviour
 
             OnBeatMissed.Invoke();
             OnBeatOccurred.Invoke();
-
-            // Optional: Log the miss details
-            Debug.Log($"Missed Beat at Time: {inputTime} Closest Beat Time: {(index < beatTimes.Count ? beatTimes[index].ToString() : "N/A")}");
         }
     }
 
@@ -344,7 +315,7 @@ public class BeatDetector : MonoBehaviour
     private IEnumerator ClearFeedbackText()
     {
         // Wait for 0.15 seconds
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
 
         // Clear the feedback text
         feedbackText.text = "";
@@ -353,6 +324,10 @@ public class BeatDetector : MonoBehaviour
 
     private void CheckMissedBeats(float previousTime, float currentTime)
     {
+
+        if (!canCheck || !canCheckMissedBeats)
+            return;
+
         float audioClipLength = audioManager.audioClip.length;
 
         for (int i = 0; i < beatTimes.Count; i++)
@@ -379,7 +354,6 @@ public class BeatDetector : MonoBehaviour
                 if (beatStatus[i] == 0)
                 {
                     SetFeedback("Beat Miss!", Color.red);
-                    // Debug.Log($"Beat missed at time: {beatTime}");
                     MarkBeatAsHandled(i, false);
                     OnBeatMissed.Invoke();
                     OnBeatOccurred.Invoke();
