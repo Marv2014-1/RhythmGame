@@ -12,7 +12,7 @@ public class Staff : Weapon
 
         upgrades = new List<(string, int)>()
         {
-            ("Range", 5), ("Projectile", 1), ("Damage", 5), ("Projectile", 1)
+            ("Range", 5), ("Projectile", 1), ("Damage", 5), ("Projectile", 2)
         };
     }
 

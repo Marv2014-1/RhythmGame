@@ -8,7 +8,7 @@ public class Crew : Enemy
 	public float crewAttackCooldown = 2f; // Time between attacks
 	public float knockbackForce = 5f;
 
-	private PlayerHealth playerHealth;
+	// private PlayerHealth playerHealth;
 	private float lastAttackTime;
 
 	protected override void Awake()
@@ -18,11 +18,11 @@ public class Crew : Enemy
 		// Get the PlayerHealth component
 		if (playerTransform != null)
 		{
-			playerHealth = playerTransform.GetComponent<PlayerHealth>();
-			if (playerHealth == null)
-			{
-				Debug.LogError("PlayerHealth component not found on Player.");
-			}
+			// playerHealth = playerTransform.GetComponent<PlayerHealth>();
+			// if (playerHealth == null)
+			// {
+			// 	Debug.LogError("PlayerHealth component not found on Player.");
+			// }
 		}
 
 		// Initialize attack timer to allow immediate attack if in range
@@ -38,38 +38,38 @@ public class Crew : Enemy
 	/// Called every frame to check attack conditions.
 	protected override void Update()
 	{
-		if (canMove)
-		{
-			AttemptAttack();
-		}
+		// if (canMove)
+		// {
+		// 	AttemptAttack();
+		// }
 	}
 
 	/// Attempts to attack the player if conditions are met.
-	private void AttemptAttack()
-	{
-		if (playerTransform == null || playerHealth == null)
-			return;
+	// private void AttemptAttack()
+	// {
+	// 	if (playerTransform == null || playerHealth == null)
+	// 		return;
 
-		float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+	// 	float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-		if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + crewAttackCooldown)
-		{
-			AttackPlayer();
-			lastAttackTime = Time.time;
-		}
-	}
-	/// Attacks the player by dealing damage.
-	private void AttackPlayer()
-	{
-		if (playerHealth != null)
-		{
-			// Calculate knockback direction: from enemy to player
-			Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+	// 	if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + crewAttackCooldown)
+	// 	{
+	// 		AttackPlayer();
+	// 		lastAttackTime = Time.time;
+	// 	}
+	// }
+	// /// Attacks the player by dealing damage.
+	// private void AttackPlayer()
+	// {
+	// 	if (playerHealth != null)
+	// 	{
+	// 		// Calculate knockback direction: from enemy to player
+	// 		Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
 
-			// Apply damage with knockback
-			playerHealth.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
-		}
-	}
+	// 		// Apply damage with knockback
+	// 		playerHealth.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+	// 	}
+	// }
 
 	/// Overrides the Die method to include Orc-specific death behavior.
 	protected override void Die()
@@ -80,31 +80,29 @@ public class Crew : Enemy
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		// Ensure you have tagged the player GameObject with "Player"
-		if (other.CompareTag("Player"))
+		// handle error
+		try
 		{
-			ApplyDamageToPlayer();
+			// Ensure you have tagged the player GameObject with "Player"
+			if (other.CompareTag("Player"))
+			{
+				Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+				other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+			}
+		}
+		catch (System.Exception e)
+		{
+			Debug.Log(e);
 		}
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
-		// Ensure you have tagged the player GameObject with "Player"
-		if (collision.gameObject.CompareTag("Player"))
-		{
-			ApplyDamageToPlayer();
-		}
-	}
-
-	private void ApplyDamageToPlayer()
-	{
-		if (playerHealth != null)
-		{
-			// Calculate knockback direction: from enemy to player
-			Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
-
-			// Apply damage with knockback
-			playerHealth.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
-		}
-	}
+	// private void OnCollisionEnter2D(Collision2D collision)
+	// {
+	// 	// Ensure you have tagged the player GameObject with "Player"
+	// 	if (collision.gameObject.CompareTag("Player"))
+	// 	{
+	// 		Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+	// 		collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+	// 	}
+	// }
 }
