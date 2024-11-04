@@ -85,7 +85,7 @@ public abstract class Enemy : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
         bool isMoving = distanceToPlayer > 0.1f; // Consider moving if distance is significant
 
-        // Update "IsMoving" based on whether the enemy is moving
+        // Update "IsMoving" based on whether the enemy is moving 
         if (animator != null)
         {
             animator.SetBool("IsMoving", isMoving);

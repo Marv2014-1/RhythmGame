@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armored Skeleton_Dead
+  m_Name: Elite Orc_Hurt
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 119552310, guid: 09d213aea999a4849af427584f390ba7, type: 3}
+      value: {fileID: 459335547, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
+    - time: 0.1
+      value: {fileID: -146225790, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
+    - time: 0.2
+      value: {fileID: 1739432826, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
+    - time: 0.3
+      value: {fileID: 1338629261, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,13 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 119552310, guid: 09d213aea999a4849af427584f390ba7, type: 3}
+    - {fileID: 459335547, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
+    - {fileID: -146225790, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
+    - {fileID: 1739432826, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
+    - {fileID: 1338629261, guid: 89b262616c02e3d4899a1265796a5245, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.1
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
