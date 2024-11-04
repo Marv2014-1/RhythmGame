@@ -24,7 +24,7 @@ public abstract class Enemy : MonoBehaviour
     protected Transform playerTransform;
 
     [Header("Attack")]
-    public float attackDamage = 10f;
+    public int attackDamage = 10;
     public float attackCooldown = 1f;
     private float attackTimer;
 
@@ -41,6 +41,11 @@ public abstract class Enemy : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
     protected Animator animator;
+
+    private bool isKnockedBack = false;
+    public float knockbackDuration = 0.2f;
+    private bool isInvulnerable = false;
+    public float invulnerabilityDuration = 0.2f;
 
     // Reference to the BeatDetector
     protected BeatDetector beatDetector;
@@ -64,6 +69,12 @@ public abstract class Enemy : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
+
+        // Set rigidbody properties
+        rb.mass = 1f;
+        rb.drag = 1f;
+        rb.angularDrag = 0.5f;
+
     }
 
     protected virtual void Update()
@@ -115,11 +126,15 @@ public abstract class Enemy : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     protected void MoveTowardsPlayer()
     {
-        if (playerTransform == null) return;
+        if (playerTransform == null || isKnockedBack) return;
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
@@ -129,7 +144,6 @@ public abstract class Enemy : MonoBehaviour
         Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
 
-        // Optional: Flip sprite based on horizontal movement
         if (spriteRenderer != null)
         {
             if (direction.x >= 0)
@@ -143,10 +157,15 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    // Reduce health when hit
     public virtual void TakeDamage(int damageAmount)
     {
+        if (isInvulnerable) return; // If invulnerable, ignore damage
+
+        isInvulnerable = true; // Set invulnerability
+        StartCoroutine(InvulnerabilityCooldown()); // Start cooldown
+
         currentHealth -= damageAmount;
-        Debug.Log($"{gameObject.name} took {damageAmount} damage. Current Health: {currentHealth}");
 
         animator.SetBool("IsHurt", true);
 
@@ -156,6 +175,36 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public bool IsInvulnerable
+    {
+        get { return isInvulnerable; }
+    }
+
+    // Add invulnerability cooldown
+    private IEnumerator InvulnerabilityCooldown()
+    {
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        isInvulnerable = false; // Remove invulnerability
+    }
+
+    // Knockback the enemy
+    public virtual void Knockback(Vector2 direction, float force)
+    {
+        if (!isKnockedBack)
+        {
+            isKnockedBack = true;
+            rb.AddForce(direction * force, ForceMode2D.Impulse);
+            StartCoroutine(KnockbackCooldown());
+        }
+    }
+
+    private IEnumerator KnockbackCooldown()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false;
+    }
+
+    // Kill the enemy
     protected virtual void Die()
     {
         Debug.Log($"{gameObject.name} has died.");
@@ -165,7 +214,7 @@ public abstract class Enemy : MonoBehaviour
         {
             // Find Score Manager and update player's score
             ScoreManager score = FindObjectOfType<ScoreManager>();
-            score.UpdateScore(cost*10);
+            score.UpdateScore(cost * 10);
         }
 
         animator.SetBool("IsDead", true);

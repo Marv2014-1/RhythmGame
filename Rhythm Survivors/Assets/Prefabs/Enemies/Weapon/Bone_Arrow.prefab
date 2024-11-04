@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8037585219820327588}
   - component: {fileID: 2743388463716057491}
   - component: {fileID: 8820132146583149998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_Arrow
-  m_TagString: Untagged
+  m_TagString: Projectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 191
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0006666835, y: -0.0044198516}

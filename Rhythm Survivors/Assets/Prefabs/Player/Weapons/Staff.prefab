@@ -77,8 +77,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Staff
-  damage: 15
+  damage: 10
+  pierce: 1
+  projectile: 4
   range: 10
+  knockback: 1
+  speed: 5
   requiredBeats: 5
   player: {fileID: 0}
   enemyLayerMask:
@@ -88,6 +92,3 @@ MonoBehaviour:
   beatDetector: {fileID: 0}
   sparkPrefab: {fileID: 8879890909060314736, guid: 271278f47308b394eb78a5a1b94d7328, type: 3}
   sparkSpawnPoint: {fileID: 9082883056150873119}
-  numberOfSparks: 8
-  sparkSpeed: 5
-  sparkRange: 15

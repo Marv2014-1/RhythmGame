@@ -5,11 +5,17 @@ using UnityEngine;
 public class Slash : MonoBehaviour
 {
     private int damage;
+    private float knockback;
     private Transform anchor;
 
     public void SetDamage(int damageAmount)
     {
         damage = damageAmount;
+    }
+
+    public void SetKnockback(float knockbackAmount)
+    {
+        knockback = knockbackAmount;
     }
 
     public void SetTransform(Transform anchorPoint)
@@ -31,6 +37,8 @@ public class Slash : MonoBehaviour
 
             if (enemy != null)
             {
+                Vector2 direction = (enemy.transform.position - transform.position).normalized;
+                enemy.Knockback(direction, knockback);
                 enemy.TakeDamage(damage);
                 Debug.Log($"Sword hit {enemy.gameObject.name} and dealt {damage} damage.");
             }

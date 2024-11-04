@@ -9,13 +9,16 @@ public class EnemyArrow : MonoBehaviour
     private Vector2 startPosition;
     private float maxTravelDistance;
 
-    public void Initialize(Vector2 direction, float speed, int damage, float attackRange)
+    private float knockback;
+
+    public void Initialize(Vector2 direction, float speed, int damage, float attackRange, float knockback)
     {
         ArrowVelocity = speed;
         ArrowDamage = damage;
         rb.velocity = direction * ArrowVelocity;
         startPosition = transform.position;
         maxTravelDistance = attackRange * 2f;
+        this.knockback = knockback;
     }
 
     private void Update()
@@ -33,18 +36,15 @@ public class EnemyArrow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Assume the player has a method to take damage
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(ArrowDamage);
+            // Assume the player has a method to take damage and apply knockback
+            Vector2 direction = (collision.transform.position - transform.position).normalized;
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(ArrowDamage, direction, knockback);
             Destroy(gameObject); // Destroy the arrow upon hitting the player
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             // Ignore other enemies
             return;
-        } else
-        {
-            // Destroy the arrow upon colliding with any object
-            Destroy(gameObject);
         }
     }
 }

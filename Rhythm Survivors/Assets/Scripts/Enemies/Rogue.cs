@@ -15,7 +15,27 @@ public class Rogue : Enemy
 	[SerializeField] private float attackRange = 10f; // Range within which the enemy attacks
 	[SerializeField] private float fireRate = 2f;     // Cooldown between shots
 
+	private int damage = 10;
+	public float knockbackForce = 5f;
+
 	private float nextFireTime = 0f;
+
+	private PlayerHealth playerHealth;
+
+	protected override void Awake()
+	{
+		base.Awake();
+
+		// Get the PlayerHealth component
+		if (playerTransform != null)
+		{
+			playerHealth = playerTransform.GetComponent<PlayerHealth>();
+			if (playerHealth == null)
+			{
+				Debug.LogError("PlayerHealth component not found on Player.");
+			}
+		}
+	}
 
 	protected override void Update()
 	{
@@ -29,13 +49,6 @@ public class Rogue : Enemy
 		// Check if player is within attack range
 		if (distanceToPlayer <= attackRange)
 		{
-			// Flip sprite to face the player (left or right)
-			Vector2 direction = (playerTransform.position - transform.position).normalized;
-			if (spriteRenderer != null)
-			{
-				spriteRenderer.flipX = direction.x < 0;
-			}
-
 			// Handle firing based on cooldown
 			if (Time.time >= nextFireTime)
 			{
@@ -46,20 +59,52 @@ public class Rogue : Enemy
 	}
 
 	private void FireBow()
-{
-    // Determine the firing direction directly towards the player
-    Vector2 arrowDirection = (playerTransform.position - ShootPoint.position).normalized;
+	{
+		// Determine the firing direction directly towards the player
+		Vector2 arrowDirection = (playerTransform.position - ShootPoint.position).normalized;
 
-    // Calculate the angle for the arrow to face
-    float angle = Mathf.Atan2(arrowDirection.y, arrowDirection.x) * Mathf.Rad2Deg;
+		// Calculate the angle for the arrow to face
+		float angle = Mathf.Atan2(arrowDirection.y, arrowDirection.x) * Mathf.Rad2Deg;
 
-    // Create a rotation based on the angle
-    Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+		// Create a rotation based on the angle
+		Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
 
-    // Instantiate and initialize the arrow with the calculated rotation
-    var arrow = Instantiate(ArrowPrefab, ShootPoint.position, rotation).GetComponent<EnemyArrow>();
-    int damage = 10; // Adjust as needed
-    arrow.Initialize(arrowDirection, BowPower, damage, attackRange);
-}
+		// Instantiate and initialize the arrow with the calculated rotation
+		var arrow = Instantiate(ArrowPrefab, ShootPoint.position, rotation).GetComponent<EnemyArrow>();
+		arrow.Initialize(arrowDirection, BowPower, damage, attackRange, knockbackForce);
+	}
+
+	// player takes damage on collision with enemy
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		// Ensure you have tagged the player GameObject with "Player"
+		if (other.CompareTag("Player"))
+		{
+			ApplyDamageToPlayer();
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		// Ensure you have tagged the player GameObject with "Player"
+		if (collision.gameObject.CompareTag("Player"))
+		{
+			ApplyDamageToPlayer();
+		}
+	}
+
+	// Apply damage to the player and knock them back
+	private void ApplyDamageToPlayer()
+	{
+		if (playerHealth != null)
+		{
+			// Calculate knockback direction: from enemy to player
+			Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+
+			// Apply damage with knockback
+			playerHealth.TakeDamage(damage, knockbackDirection, knockbackForce);
+		}
+	}
+
 
 }

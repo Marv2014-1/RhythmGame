@@ -5,8 +5,9 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     public string weaponName;
-    public int damage;
-    public float range;
+    protected int level;
+    public int damage, pierce, projectile;
+    public float range, knockback, speed;
     public int requiredBeats; // Number of beats required to activate attack
     public GameObject player; // Reference to the player object
     public LayerMask enemyLayerMask; // Layer mask to identify enemies
@@ -14,8 +15,12 @@ public abstract class Weapon : MonoBehaviour
     public WeaponBeatIndicatorManager weaponBeatIndicatorManager; // Reference to the UI indicator manager
     public BeatDetector beatDetector; // Reference to the BeatDetector
 
+    protected List<(string, int)> upgrades;
+
     protected virtual void Start()
     {
+        level = 1;
+
         // Assign the player object
         player = GameObject.Find("Player");
 
@@ -68,6 +73,41 @@ public abstract class Weapon : MonoBehaviour
             weaponBeatIndicatorManager.UpdateBeatCount(beatCount);
         }
         Debug.Log($"Weapon UI updated with beat count: {beatCount}");
+    }
+
+    public virtual void UpgradeWeapon()
+    {
+        string attribute = upgrades[level - 1].Item1;
+        int value = upgrades[level - 1].Item2;
+        switch (attribute)
+        {
+            case "Damage":
+                damage += value;
+                break;
+            case "Range":
+                range += (float)value;
+                break;
+            case "Knockback":
+                knockback += (float)value;
+                break;
+            case "Speed":
+                speed += (float)value;
+                break;
+            case "Pierce":
+                pierce += value;
+                break;
+            case "Projectile":
+                projectile += value;
+                break;
+            case "Beat":
+                requiredBeats += value;
+                break;
+            default:
+                Debug.LogWarning("Upgrade attribute not found.");
+                break;
+        }
+
+        level += 1;
     }
 }
 
