@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f755653360adc6148b4cc66c25d9cf82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 3
+  cost: 4
   maxHealth: 30
   xpDrop: 20
   canMove: 0
