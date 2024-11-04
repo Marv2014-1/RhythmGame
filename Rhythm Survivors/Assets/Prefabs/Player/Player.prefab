@@ -295,13 +295,13 @@ MonoBehaviour:
   bow: {fileID: 6310086432241009636, guid: 1e0ac9e480305a344954ab3a39f7acbf, type: 3}
   staff: {fileID: 4743939787892635563, guid: 093dcc849ab60e0429df6576d745aaa4, type: 3}
   sword: {fileID: 4755284668526086232, guid: ea53fd5b7f79f8e468201d42f0f9635b, type: 3}
-  spear: {fileID: 0}
+  spear: {fileID: 4755284668526086232, guid: 64ed2cc54086cb1408381bc27356d1d1, type: 3}
   bowSprite: {fileID: 21300000, guid: ca2b0b41a0f65ca48ad3e7862b263afe, type: 3}
   staffSprite: {fileID: 21300000, guid: 571404f9b570a1b4e94477b81264e5ee, type: 3}
   swordSprite: {fileID: 21300000, guid: 977096abea779b84e800320918ad7a17, type: 3}
-  spearSprite: {fileID: 0}
-  maxWeapons: 0
-  maxTrinkets: 0
+  spearSprite: {fileID: 21300000, guid: fe88af382c9ce5742918c6be6151a117, type: 3}
+  maxWeapons: 3
+  maxTrinkets: 3
   numWeapons: 0
   numTrinkets: 0
 --- !u!114 &4012498056234599756
