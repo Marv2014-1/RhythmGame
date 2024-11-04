@@ -75,6 +75,11 @@ public abstract class Weapon : MonoBehaviour
         Debug.Log($"Weapon UI updated with beat count: {beatCount}");
     }
 
+    public virtual string ShowUpgrade()
+    {
+        return upgrades[level - 1].Item1 + "\n + " + upgrades[level - 1].Item2.ToString();
+    }
+
     public virtual void UpgradeWeapon()
     {
         string attribute = upgrades[level - 1].Item1;

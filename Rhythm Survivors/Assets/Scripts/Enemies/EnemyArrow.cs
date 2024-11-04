@@ -32,14 +32,21 @@ public class EnemyArrow : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Assume the player has a method to take damage and apply knockback
-            Vector2 direction = (collision.transform.position - transform.position).normalized;
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(ArrowDamage, direction, knockback);
-            Destroy(gameObject); // Destroy the arrow upon hitting the player
+            try
+            {
+                // Assume the player has a method to take damage and apply knockback
+                Vector2 direction = (collision.transform.position - transform.position).normalized;
+                collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(ArrowDamage, direction, knockback);
+                Destroy(gameObject); // Destroy the arrow upon hitting the player
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("PlayerHealth component not found on Player.");
+            }
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {

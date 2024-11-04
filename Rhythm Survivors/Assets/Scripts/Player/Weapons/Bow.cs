@@ -5,7 +5,6 @@ public class Bow : Weapon
 {
     [Header("Arrow Settings")]
     public GameObject arrowPrefab; // Assign the Arrow prefab in the Inspector
-    public Transform arrowSpawnPoint; // Assign the spawn point in the Inspector
 
     public float rotationSpeed = 5f; // Speed at which the bow rotates
 
@@ -70,8 +69,8 @@ public class Bow : Weapon
 
     public override void Attack()
     {
-        // Instantiate an arrow at the spawn point with the same rotation as the bow
-        GameObject arrowInstance = Instantiate(arrowPrefab, arrowSpawnPoint.position, transform.rotation, player.transform);
+        // Instantiate an arrow with the same rotation as the bow
+        GameObject arrowInstance = Instantiate(arrowPrefab, this.transform);
 
         Arrow arrow = arrowInstance.GetComponent<Arrow>();
 
@@ -89,6 +88,8 @@ public class Bow : Weapon
         {
             Debug.LogError("Arrow prefab does not have an Arrow component.");
         }
+
+        arrowInstance.transform.SetParent(null, true);
     }
 
     private void OnDrawGizmosSelected()

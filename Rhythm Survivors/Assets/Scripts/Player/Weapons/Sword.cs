@@ -5,7 +5,8 @@ public class Sword : Weapon
 {
     [Header("Sword Settings")]
     public GameObject slashPrefab; // Assign the Slash prefab in the Inspector
-    public Transform slashSpawnPoint; // Assign the spawn point in the Inspector
+    public Transform slashSpawnPointR; // Assign the spawn point in the Inspector
+    public Transform slashSpawnPointL; // Assign the flipped spawn point in the Inspector
 
     protected override void Start()
     {
@@ -13,7 +14,7 @@ public class Sword : Weapon
 
         upgrades = new List<(string, int)>()
         {
-            ("Knockback", 5), ("Knockback", 5), ("Knockback", 5), ("Damage", 5)
+            ("Knockback", 5), ("Damage", 5), ("Knockback", 5), ("Damage", 5)
         };
     }
 
@@ -27,8 +28,15 @@ public class Sword : Weapon
         if (slash != null)
         {
             slash.SetDamage(damage);
-            slash.SetTransform(slashSpawnPoint);
             slash.SetKnockback(knockback);
+
+            if (player.transform.GetChild(0).transform.localScale.x > 0)
+            {
+                slash.SetTransform(slashSpawnPointR);
+            } else
+            {
+                slash.SetTransform(slashSpawnPointL);
+            }
         }
         else
         {

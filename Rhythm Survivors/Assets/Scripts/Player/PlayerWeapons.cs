@@ -13,7 +13,7 @@ public class PlayerWeapons : MonoBehaviour
     { 
         ("Bow", 0), ("Staff", 0), ("Sword", 0), ("Spear", 0)
     };
-    public int maxWeapons = 3, maxTrinkets = 3, numWeapons = 0, numTrinkets = 0;
+    private int numWeapons = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +58,33 @@ public class PlayerWeapons : MonoBehaviour
         ProgressItem(name);
         levelMenu.SetActive(false);
         Time.timeScale = 1.0f;
-    }      
+    }
+
+    public string CheckUpgrade(string name)
+    {
+        string statUpgrade = "N/A";
+
+        switch (name)
+        {
+            case "Bow":
+                statUpgrade = bow.GetComponent<Weapon>().ShowUpgrade();
+                break;
+            case "Staff":
+                statUpgrade = staff.GetComponent<Weapon>().ShowUpgrade();
+                break;
+            case "Sword":
+                statUpgrade = sword.GetComponent<Weapon>().ShowUpgrade();
+                break;
+            case "Spear":
+                statUpgrade = spear.GetComponent<Weapon>().ShowUpgrade();
+                break;
+            default:
+                Debug.LogWarning(name + " not found in item list.");
+                break;
+        }
+
+        return statUpgrade;
+    }
 
     private void ProgressItem(string name)
     {

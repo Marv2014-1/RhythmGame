@@ -5,21 +5,14 @@ public class Staff : Weapon
 {
     [Header("Staff Settings")]
     public GameObject sparkPrefab;          // Assign your Spark prefab in the Inspector
-    public Transform sparkSpawnPoint;       // The center point from where sparks are emitted
 
     protected override void Start()
     {
         base.Start();
 
-        // Ensure sparkSpawnPoint is assigned
-        if (sparkSpawnPoint == null)
-        {
-            Debug.LogError("SparkSpawnPoint is not assigned in the Staff class.");
-        }
-
         upgrades = new List<(string, int)>()
         {
-            ("Range", 5), ("Projectile", 1), ("Damage", 5), ("Projectile", 1)
+            ("Range", 5), ("Projectile", 1), ("Damage", 5), ("Projectile", 2)
         };
     }
 
@@ -38,7 +31,7 @@ public class Staff : Weapon
             Vector2 sparkDirection = sparkMoveVector.normalized;
 
             // Instantiate the spark
-            GameObject sparkInstance = Instantiate(sparkPrefab, sparkSpawnPoint.position, Quaternion.identity, player.transform);
+            GameObject sparkInstance = Instantiate(sparkPrefab, this.transform);
             Spark spark = sparkInstance.GetComponent<Spark>();
 
             if (spark != null)
@@ -54,6 +47,7 @@ public class Staff : Weapon
                 Debug.LogError("Spark prefab does not have a Spark component.");
             }
 
+            sparkInstance.transform.SetParent(null, true);
             angle += angleStep;
         }
     }

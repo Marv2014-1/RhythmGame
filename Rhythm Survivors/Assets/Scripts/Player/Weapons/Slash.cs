@@ -23,6 +23,11 @@ public class Slash : MonoBehaviour
         anchor = anchorPoint;
     }
 
+    private void Start()
+    {
+       transform.localScale = anchor.localScale;
+    }
+
     private void Update()
     {
         transform.position = anchor.position;
