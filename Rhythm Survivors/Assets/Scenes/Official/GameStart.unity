@@ -696,6 +696,10 @@ PrefabInstance:
       propertyPath: weaponDisplay
       value: 
       objectReference: {fileID: 1796799749}
+    - target: {fileID: 2526400934523484219, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3202301495404100059, guid: cb078de5f6737494c8e3f797fd026d3f, type: 3}
       propertyPath: m_IsActive
       value: 0
