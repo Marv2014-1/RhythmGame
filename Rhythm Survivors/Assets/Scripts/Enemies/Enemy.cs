@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
     public int maxHealth = 100;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
+    protected bool movable = true;
 
     protected int currentHealth;
 
@@ -139,43 +140,46 @@ public abstract class Enemy : MonoBehaviour
 
     protected void MoveTowardsPlayer()
     {
-        if (playerTransform == null) return;
-
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-
-        animator.SetBool("IsMoving", true);
-
-        // Move in both x and y directions
-        Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
-        // Optional: Flip sprite based on horizontal movement
-        if (spriteRenderer != null)
+        if (movable == true)
         {
-            if (direction.x > 0)
+            if (playerTransform == null) return;
+
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+
+            animator.SetBool("IsMoving", true);
+
+            // Move in both x and y directions
+            Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + movement);
+            // Optional: Flip sprite based on horizontal movement
+            if (spriteRenderer != null)
             {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Face right
-            }
-            else if (direction.x < 0)
-            {
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Face left
+                if (direction.x > 0)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Face right
+                }
+                else if (direction.x < 0)
+                {
+                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Face left
+                }
+
             }
 
-        }
-
-        // if (spriteRenderer != null)
-        // {
-        //     if (direction.x >= 0)
-        //     {
-        //         transform.localScale = new Vector3(10, 10, 1);
-        //     }
-        //     else
-        //     {
-        //         transform.localScale = new Vector3(-10, 10, 1);
-        //     }
-        // }
-        if (animator != null)
-        {
-            animator.SetBool("IsMoving", true); // Trigger movement animation
+            // if (spriteRenderer != null)
+            // {
+            //     if (direction.x >= 0)
+            //     {
+            //         transform.localScale = new Vector3(10, 10, 1);
+            //     }
+            //     else
+            //     {
+            //         transform.localScale = new Vector3(-10, 10, 1);
+            //     }
+            // }
+            if (animator != null)
+            {
+                animator.SetBool("IsMoving", true); // Trigger movement animation
+            }
         }
     }
 
