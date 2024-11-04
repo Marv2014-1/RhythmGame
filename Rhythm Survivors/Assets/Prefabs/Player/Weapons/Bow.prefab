@@ -90,6 +90,5 @@ MonoBehaviour:
     m_Bits: 1024
   weaponBeatIndicatorManager: {fileID: 0}
   beatDetector: {fileID: 0}
-  arrowPrefab: {fileID: 4210355246839257373, guid: 8bf8a60a2c807f74693d2c62380a7827, type: 3}
-  arrowSpawnPoint: {fileID: 4343178604827829964}
+  arrowPrefab: {fileID: 8879890909060314736, guid: ce52b8c8945fd5743bdc814d06939c27, type: 3}
   rotationSpeed: 5
