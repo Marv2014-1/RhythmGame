@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Greatsword Skeleton_Dead
+  m_Name: Orc rider_Die
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1546281475, guid: cfec2e9706df44b4983e47f43fa344f2, type: 3}
+      value: {fileID: -888070462, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
+    - time: 0.1
+      value: {fileID: 968373798, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
+    - time: 0.2
+      value: {fileID: 1371388851, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
+    - time: 0.3
+      value: {fileID: 1752638852, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,13 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1546281475, guid: cfec2e9706df44b4983e47f43fa344f2, type: 3}
+    - {fileID: -888070462, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
+    - {fileID: 968373798, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
+    - {fileID: 1371388851, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
+    - {fileID: 1752638852, guid: 38098550002a6764caa8e454fa87bf9a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.1
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
