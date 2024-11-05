@@ -45,7 +45,7 @@ public class EnemyArrow : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogError("PlayerHealth component not found on Player.");
+                Debug.Log("PlayerHealth component not found on Player." + e.Message);
             }
         }
         else if (collision.gameObject.CompareTag("Enemy"))
