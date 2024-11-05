@@ -186,16 +186,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f755653360adc6148b4cc66c25d9cf82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 5
+  cost: 4
   maxHealth: 30
   xpDrop: 20
   canMove: 0
-  baseMoveSpeed: 2
-  currentMoveSpeed: 2
+  baseMoveSpeed: 3
+  currentMoveSpeed: 0
   attackDamage: 10
   attackCooldown: 2
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
+  invulnerabilityDuration: 0.2
   ArrowPrefab: {fileID: 8545732733218134329, guid: 9fcbf04c72855414cac2e26436ab8d3d, type: 3}
   ShootPoint: {fileID: 8206899130154120976}
   BowPower: 10

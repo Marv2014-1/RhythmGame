@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Bow
-  damage: 10
+  damage: 15
   pierce: 0
   projectile: 0
   range: 20
