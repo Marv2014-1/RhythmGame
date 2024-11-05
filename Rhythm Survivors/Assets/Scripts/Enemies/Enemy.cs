@@ -17,8 +17,6 @@ public abstract class Enemy : MonoBehaviour
     public bool canMove;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
-    protected bool movable = true;
-
     protected int currentHealth;
 
     [Header("Movement Settings")]
@@ -154,6 +152,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected void MoveTowardsPlayer()
     {
+        if (!canMove)
+        {
+            return;
+        }
         if (playerTransform == null || isKnockedBack) return;
 
         Vector2 direction = (playerTransform.position - transform.position).normalized;

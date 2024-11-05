@@ -23,6 +23,16 @@ public class EnemyArrow : MonoBehaviour
 
     private void Update()
     {
+         // transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.forward);
+        transform.Translate(rb.velocity * Time.deltaTime);
+    // rotation towards the direction of the arrow
+    // if (rb.velocity != Vector2.zero) // Check to avoid errors if velocity is zero
+    // {
+    //     float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+    //     transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    // }
+       
+
 
         // Check the distance traveled
         float distanceTraveled = Vector2.Distance(startPosition, transform.position);
@@ -45,7 +55,8 @@ public class EnemyArrow : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogError("PlayerHealth component not found on Player.");
+                // Debug.LogError("PlayerHealth component not found on Player.");
+                // Debug.LogError(e.ToString());
             }
         }
         else if (collision.gameObject.CompareTag("Enemy"))
