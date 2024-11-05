@@ -187,15 +187,17 @@ MonoBehaviour:
   detectionRadius: 5
   cost: 1
   maxHealth: 100
+  xpDrop: 10
+  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
   attackDamage: 10
   attackCooldown: 1
   deathEffect: {fileID: 0}
+  knockbackDuration: 0.2
+  invulnerabilityDuration: 0.2
   attackRange: 3
-  attackDamage: 10
-  attackCooldown: 2
-  skeletonHitbox: {fileID: 0}
+  Hitbox: {fileID: 0}
 --- !u!1 &8428386729775311495
 GameObject:
   m_ObjectHideFlags: 0

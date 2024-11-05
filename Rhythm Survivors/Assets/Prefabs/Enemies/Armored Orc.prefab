@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7445106908422933681}
   - component: {fileID: 2933667330341753115}
-  - component: {fileID: 4556988653885460699}
   - component: {fileID: 8299613422478039448}
   m_Layer: 10
   m_Name: Hitbox
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3918752984857920051}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.91698354, w: 0.3989251}
-  m_LocalPosition: {x: 0.061159518, y: -0.15517269, z: 0}
+  m_LocalPosition: {x: 0.066, y: -0.157, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69,33 +68,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.09982809, y: -0.15089622}
   m_Size: {x: 0.053910304, y: 0.17314462}
   m_Direction: 0
---- !u!50 &4556988653885460699
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3918752984857920051}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &8299613422478039448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
+  knockbackForce: 5
 --- !u!1 &4418307091790181422
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,12 +269,14 @@ MonoBehaviour:
   detectionRadius: 5
   cost: 1
   maxHealth: 100
+  xpDrop: 10
+  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
   attackDamage: 10
   attackCooldown: 1
   deathEffect: {fileID: 0}
+  knockbackDuration: 0.2
+  invulnerabilityDuration: 0.2
   attackRange: 3
-  attackDamage: 10
-  attackCooldown: 2
-  skeletonHitbox: {fileID: 0}
+  Hitbox: {fileID: 0}

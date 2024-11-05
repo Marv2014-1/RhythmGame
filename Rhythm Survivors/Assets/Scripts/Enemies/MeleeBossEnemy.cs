@@ -92,7 +92,7 @@
 
 using UnityEngine;
 
-public class MeleeEnemy : Enemy
+public class MeleeBossEnemy : Enemy
 {
     [Header("Crew Attack Settings")]
     public float attackRange = 3f;
@@ -102,66 +102,44 @@ public class MeleeEnemy : Enemy
 
     [Header("Attack Hitbox")]
     public GameObject Hitbox;
+    private float nextAttackTime;
+    private float AttackRate = 2f;
 
-    // protected override void Awake()
-    // {
-    //     base.Awake();
-
-    //     // Debug to confirm skeletonHitbox setup
-    //     if (Hitbox != null)
-    //     {
-    //         Hitbox.SetActive(false); // Ensure hitbox is initially inactive
-    //         Debug.Log("skeletonHitbox initialized and set to inactive.");
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("skeletonHitbox is not assigned in MeleeEnemy.");
-    //     }
-
-    //     // Debug to confirm animator setup
-    //     if (animator == null)
-    //     {
-    //         animator = GetComponent<Animator>();
-    //         if (animator != null)
-    //         {
-    //             Debug.Log("Animator component found on MeleeEnemy.");
-    //         }
-    //         else
-    //         {
-    //             Debug.LogError("Animator component is missing on MeleeEnemy.");
-    //         }
-    //     }
-
-    //     // Debug to confirm playerTransform setup
-    //     if (playerTransform == null)
-    //     {
-    //         Debug.LogWarning("Player Transform not assigned.");
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Player Transform found and assigned.");
-    //     }
-    // }
+    
 
     protected override void Update()
     {
-        base.Update();
+        // base.Update();
 
         // Debug playerTransform check in Update
-        if (playerTransform == null)
-        {
-            Debug.LogWarning("playerTransform is null in Update.");
-            return;
-        }
+        // if (playerTransform == null)
+        // {
+        //     Debug.LogWarning("playerTransform is null in Update.");
+        //     return;
+        // }
 
+        // float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        // Debug.Log($"Distance to player: {distanceToPlayer}");
+
+        // if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+        // {
+        //     AttemptAttack();
+        //     lastAttackTime = Time.time;
+        //     Debug.Log("AttemptAttack called.");
+        // }
+        base.Update();
+
+        if (playerTransform == null) return;
+
+        // Calculate distance to the player
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        Debug.Log($"Distance to player: {distanceToPlayer}");
 
-        if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+        // Check if player is within attack range and if cooldown has passed
+        if (distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
         {
+            canMove = false;
             AttemptAttack();
-            lastAttackTime = Time.time;
-            Debug.Log("AttemptAttack called.");
+            nextAttackTime = Time.time + AttackRate; // Reset cooldown
         }
     }
 

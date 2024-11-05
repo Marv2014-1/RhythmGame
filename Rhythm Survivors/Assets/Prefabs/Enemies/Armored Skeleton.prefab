@@ -148,8 +148,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0.028070355, y: 0.014932084}
+  m_Size: {x: 0.098058894, y: 0.17230001}
   m_Direction: 0
 --- !u!95 &2117774832131998147
 Animator:
@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012675471037510942}
   - component: {fileID: 2641148069726852978}
+  - component: {fileID: 8052857560360473076}
   m_Layer: 10
   m_Name: Hitbox
   m_TagString: Enemy
@@ -223,13 +224,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8387508365424500413}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.69868636, w: 0.7154281}
-  m_LocalPosition: {x: 0.102, y: -0.24, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.00033421605, w: 1}
+  m_LocalPosition: {x: 0.094346814, y: -0.3027607, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5514873032989917562}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -88.643}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.038}
 --- !u!70 &2641148069726852978
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -262,6 +263,20 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0015970888, y: 0.3217814}
-  m_Size: {x: 0.049622785, y: 0.37852985}
+  m_Offset: {x: 0.009587121, y: 0.33241963}
+  m_Size: {x: 0.065602854, y: 0.22405957}
   m_Direction: 0
+--- !u!114 &8052857560360473076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387508365424500413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d90d774cfca244e9ef1f099585be0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
+  knockbackForce: 5
