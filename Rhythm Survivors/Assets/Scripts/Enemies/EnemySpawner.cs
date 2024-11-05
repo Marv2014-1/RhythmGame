@@ -114,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
         difficultyScale -= 0.2f;
         if (difficultyScale <= 1.0f)
         {
-            difficultyScale = 0.5f;
+            difficultyScale = 1.0f;
         }
 
         waveCount++;
@@ -129,7 +129,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             // Calculate the total available cost based on beat count
-            int extra = 3;
+            int extra = 1;
 
             if (waveCount >= 5)
             {
