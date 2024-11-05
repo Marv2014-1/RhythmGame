@@ -24,8 +24,11 @@ public class EnemyArrow : MonoBehaviour
     private void Update()
     {
          // transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.forward);
-        transform.Translate(rb.velocity * Time.deltaTime);
-    // rotation towards the direction of the arrow
+        // transform.Translate(rb.velocity * Time.deltaTime);
+    // rotation towards the direction of the arrow follow the velocity
+    
+    // transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.forward); // This line works perfectly for 2D arrows but not for 3D arrows. For 3D arrows, you might need to use a different approach.
+
     // if (rb.velocity != Vector2.zero) // Check to avoid errors if velocity is zero
     // {
     //     float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
