@@ -148,8 +148,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0.021091938, y: 0.020295693}
+  m_Size: {x: 0.11958637, y: 0.17182727}
   m_Direction: 0
 --- !u!95 &8888952505080259646
 Animator:
@@ -187,15 +187,17 @@ MonoBehaviour:
   detectionRadius: 5
   cost: 1
   maxHealth: 100
+  xpDrop: 10
+  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
   attackDamage: 10
   attackCooldown: 1
   deathEffect: {fileID: 0}
+  knockbackDuration: 0.2
+  invulnerabilityDuration: 0.2
   attackRange: 3
-  attackDamage: 10
-  attackCooldown: 2
-  skeletonHitbox: {fileID: 0}
+  Hitbox: {fileID: 0}
 --- !u!1 &3590957208201557982
 GameObject:
   m_ObjectHideFlags: 0

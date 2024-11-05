@@ -101,16 +101,16 @@ public class MeleeEnemy : Enemy
     private float lastAttackTime;
 
     [Header("Attack Hitbox")]
-    public GameObject skeletonHitbox;
+    public GameObject Hitbox;
 
     protected override void Awake()
     {
         base.Awake();
 
         // Debug to confirm skeletonHitbox setup
-        if (skeletonHitbox != null)
+        if (Hitbox != null)
         {
-            skeletonHitbox.SetActive(false); // Ensure hitbox is initially inactive
+            Hitbox.SetActive(false); // Ensure hitbox is initially inactive
             Debug.Log("skeletonHitbox initialized and set to inactive.");
         }
         else
@@ -173,7 +173,7 @@ public class MeleeEnemy : Enemy
             Debug.LogWarning("Animator is null in AttemptAttack.");
             return;
         }
-        if (skeletonHitbox == null)
+        if (Hitbox == null)
         {
             Debug.LogWarning("skeletonHitbox is null in AttemptAttack.");
             return;
@@ -194,16 +194,16 @@ public class MeleeEnemy : Enemy
         Debug.Log($"Animator trigger {attackType} set.");
 
         // Activate hitbox
-        skeletonHitbox.SetActive(true);
+        Hitbox.SetActive(true);
         Debug.Log("skeletonHitbox activated.");
         Invoke(nameof(DisableHitbox), 0.5f); // Adjust timing based on animation length
     }
 
     private void DisableHitbox()
     {
-        if (skeletonHitbox != null)
+        if (Hitbox != null)
         {
-            skeletonHitbox.SetActive(false);
+            Hitbox.SetActive(false);
             Debug.Log("skeletonHitbox deactivated.");
         }
         else
