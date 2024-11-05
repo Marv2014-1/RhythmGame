@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> enemyPrefabs; // List of enemy prefabs to spawn
+    public GameObject firstBoss;
 
     [Header("Spawn Radius Settings")]
     [SerializeField]
@@ -32,6 +33,9 @@ public class EnemySpawner : MonoBehaviour
     private int beatCount = 0; // Counts the number of beats occurred during the interval
     private BeatDetector beatDetector;
     private Transform playerTransform;
+    private float difficultyScale = 2.5f;
+
+    private int waveCount = 0;
 
     void Start()
     {
@@ -41,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // Subscribe to the OnBeatOccurred event
             beatDetector.OnBeatOccurred.AddListener(OnBeatOccurred);
+            beatDetector.OnSongTransition.AddListener(OnSongTransition);
         }
         else
         {
@@ -104,6 +109,17 @@ public class EnemySpawner : MonoBehaviour
         beatCount++;
     }
 
+    private void OnSongTransition()
+    {
+        difficultyScale -= 0.2f;
+        if (difficultyScale <= 1.0f)
+        {
+            difficultyScale = 0.5f;
+        }
+
+        waveCount++;
+    }
+
     /// Coroutine that waits for the spawn interval, then spawns enemies based on beat count.
     private IEnumerator SpawnEnemiesRoutine()
     {
@@ -113,7 +129,20 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
             // Calculate the total available cost based on beat count
-            int totalAvailableCost = (beatCount / 2) + 3; // Divide by 2 to reduce the difficulty
+            int extra = 3;
+
+            if (waveCount >= 5)
+            {
+                extra = 5;
+            } else if (waveCount >= 10)
+            {
+                extra = 7;
+            } else if (waveCount >= 15)
+            {
+                extra = 20;
+            }
+
+            int totalAvailableCost = (int)(beatCount / difficultyScale) + extra; // Divide by difficulty scale to reduce the difficulty
 
             // Reset beat count
             beatCount = 0;
@@ -163,6 +192,16 @@ public class EnemySpawner : MonoBehaviour
                 {
                     // If the enemy prefab doesn't have an Enemy component, remove it
                     possibleEnemies.Remove(selectedEnemyPrefab);
+                }
+            }
+
+            if (waveCount >= 10)
+            {
+                int numBosses = waveCount - 9;
+                for (int i = 0; i < numBosses; i++)
+                {
+                    Vector2 spawnPosition = GenerateSpawnPosition();
+                    Instantiate(firstBoss, spawnPosition, Quaternion.identity);
                 }
             }
         }

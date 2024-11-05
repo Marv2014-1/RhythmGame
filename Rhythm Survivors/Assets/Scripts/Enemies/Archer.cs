@@ -6,6 +6,7 @@ public class Archer : Enemy
 	[Header("Arrow Settings")]
 	[SerializeField] private GameObject ArrowPrefab;
 	[SerializeField] private Transform ShootPoint;
+	public float knockbackForce = 5f;
 
 	[Header("Bow Settings")]
 	[Range(0, 10)]
@@ -78,6 +79,6 @@ public class Archer : Enemy
 		// Instantiate and initialize the arrow with the calculated rotation
 		var arrow = Instantiate(ArrowPrefab, ShootPoint.position, rotation).GetComponent<EnemyArrow>();
 		int damage = 10; // Adjust as needed
-		arrow.Initialize(arrowDirection, BowPower, damage, attackRange);
+		arrow.Initialize(arrowDirection, BowPower, damage, attackRange, knockbackForce);
 	}
 }

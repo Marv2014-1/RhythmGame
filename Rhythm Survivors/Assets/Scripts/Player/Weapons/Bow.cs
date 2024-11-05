@@ -5,10 +5,7 @@ public class Bow : Weapon
 {
     [Header("Arrow Settings")]
     public GameObject arrowPrefab; // Assign the Arrow prefab in the Inspector
-    public Transform arrowSpawnPoint; // Assign the spawn point in the Inspector
 
-    public float arrowSpeed = 10f;
-    public float arrowRange = 20f;
     public float rotationSpeed = 5f; // Speed at which the bow rotates
 
     private Enemy closestEnemy;
@@ -16,6 +13,11 @@ public class Bow : Weapon
     protected override void Start()
     {
         base.Start();
+
+        upgrades = new List<(string, int)>()
+        {
+            ("Pierce", 1), ("Range", 5), ("Pierce", 1), ("Damage", 5)
+        };
     }
 
     void Update()
@@ -65,31 +67,20 @@ public class Bow : Weapon
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    protected override void OnBeatDetected()
-    {
-        beatCount++;
-        UpdateWeaponUI(beatCount);
-
-        if (beatCount >= requiredBeats)
-        {
-            Attack();
-            beatCount = 0; // Reset beat count after attack
-            UpdateWeaponUI(beatCount);
-        }
-    }
-
     public override void Attack()
     {
-        // Instantiate an arrow at the spawn point with the same rotation as the bow
-        GameObject arrowInstance = Instantiate(arrowPrefab, arrowSpawnPoint.position, transform.rotation);
+        // Instantiate an arrow with the same rotation as the bow
+        GameObject arrowInstance = Instantiate(arrowPrefab, this.transform);
 
         Arrow arrow = arrowInstance.GetComponent<Arrow>();
 
         if (arrow != null)
         {
             arrow.SetDamage(damage);
-            arrow.SetSpeed(arrowSpeed);
-            arrow.SetRange(arrowRange);
+            arrow.SetSpeed(speed);
+            arrow.SetRange(range);
+            arrow.SetPierce(pierce);
+            arrow.SetKnockback(knockback);
 
             Debug.Log("Bow shot an arrow.");
         }
@@ -97,6 +88,8 @@ public class Bow : Weapon
         {
             Debug.LogError("Arrow prefab does not have an Arrow component.");
         }
+
+        arrowInstance.transform.SetParent(null, true);
     }
 
     private void OnDrawGizmosSelected()

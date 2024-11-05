@@ -96,8 +96,7 @@ public class MeleeEnemy : Enemy
 {
     [Header("Crew Attack Settings")]
     public float attackRange = 3f;
-    public int attackDamage = 10;
-    public float attackCooldown = 2f;
+
 
     private float lastAttackTime;
 

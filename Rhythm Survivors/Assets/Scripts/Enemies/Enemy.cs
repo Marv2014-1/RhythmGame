@@ -13,6 +13,8 @@ public abstract class Enemy : MonoBehaviour
     public float detectionRadius = 5f; // Adjust as needed for each enemy type
     public int cost = 1; // strength of the enemy as seen in the spawner
     public int maxHealth = 100;
+    public int xpDrop = 10;
+    public bool canMove;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
     protected bool movable = true;
@@ -24,13 +26,14 @@ public abstract class Enemy : MonoBehaviour
     protected Transform playerTransform;
 
     [Header("Attack")]
-    public float attackDamage = 10f;
+    public int attackDamage = 10;
     public float attackCooldown = 1f;
     private readonly float attackTimer;
 
     [Header("Death Settings")]
     [SerializeField]
     protected GameObject deathEffect; // Particle effect or animation on death
+    protected PlayerExperience playerXP;
 
     [Header("Speed Adjustment Settings")]
     protected float speedBoostMultiplier = 2f;     // Speed increase on beat miss
@@ -41,6 +44,11 @@ public abstract class Enemy : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected Animator animator;
 
+    private bool isKnockedBack = false;
+    public float knockbackDuration = 0.2f;
+    private bool isInvulnerable = false;
+    public float invulnerabilityDuration = 0.2f;
+
     // Reference to the BeatDetector
     protected BeatDetector beatDetector;
 
@@ -48,14 +56,11 @@ public abstract class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentMoveSpeed = baseMoveSpeed; // Initialize current speed
+        canMove = true;
 
         rb = GetComponent<Rigidbody2D>();
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Freeze Z rotation
-        var playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            playerTransform = playerObject.transform;
-        }
+        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        playerXP = FindObjectOfType<PlayerExperience>();
 
         beatDetector = FindObjectOfType<BeatDetector>();
         if (beatDetector != null)
@@ -74,6 +79,12 @@ public abstract class Enemy : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
+
+        // Set rigidbody properties
+        rb.mass = 1f;
+        rb.drag = 1f;
+        rb.angularDrag = 0.5f;
+
     }
 
     protected virtual void Update()
@@ -131,62 +142,50 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (playerTransform == null) return;
-
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-        Vector2 movement = currentMoveSpeed * Time.fixedDeltaTime * direction;
-        rb.MovePosition(rb.position + movement);
+        if (canMove)
+        {
+            MoveTowardsPlayer();
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     protected void MoveTowardsPlayer()
     {
-        if (movable == true)
+        if (playerTransform == null || isKnockedBack) return;
+
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
+
+        animator.SetBool("IsMoving", true);
+
+        // Move in both x and y directions
+        Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + movement);
+
+        if (spriteRenderer != null)
         {
-            if (playerTransform == null) return;
-
-            Vector2 direction = (playerTransform.position - transform.position).normalized;
-
-            animator.SetBool("IsMoving", true);
-
-            // Move in both x and y directions
-            Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(rb.position + movement);
-            // Optional: Flip sprite based on horizontal movement
-            if (spriteRenderer != null)
+            if (direction.x >= 0)
             {
-                if (direction.x > 0)
-                {
-                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Face right
-                }
-                else if (direction.x < 0)
-                {
-                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Face left
-                }
-
+                transform.localScale = new Vector3(10, 10, 1);
             }
-
-            // if (spriteRenderer != null)
-            // {
-            //     if (direction.x >= 0)
-            //     {
-            //         transform.localScale = new Vector3(10, 10, 1);
-            //     }
-            //     else
-            //     {
-            //         transform.localScale = new Vector3(-10, 10, 1);
-            //     }
-            // }
-            if (animator != null)
+            else
             {
-                animator.SetBool("IsMoving", true); // Trigger movement animation
+                transform.localScale = new Vector3(-10, 10, 1);
             }
         }
     }
 
+    // Reduce health when hit
     public virtual void TakeDamage(int damageAmount)
     {
+        if (isInvulnerable) return; // If invulnerable, ignore damage
+
+        isInvulnerable = true; // Set invulnerability
+        StartCoroutine(InvulnerabilityCooldown()); // Start cooldown
+
         currentHealth -= damageAmount;
-        Debug.Log($"{gameObject.name} took {damageAmount} damage. Current Health: {currentHealth}");
 
         animator.SetBool("IsHurt", true);
 
@@ -196,9 +195,41 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public bool IsInvulnerable
+    {
+        get { return isInvulnerable; }
+    }
+
+    // Add invulnerability cooldown
+    private IEnumerator InvulnerabilityCooldown()
+    {
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        isInvulnerable = false; // Remove invulnerability
+    }
+
+    // Knockback the enemy
+    public virtual void Knockback(Vector2 direction, float force)
+    {
+        if (!isKnockedBack)
+        {
+            isKnockedBack = true;
+            rb.AddForce(direction * force, ForceMode2D.Impulse);
+            StartCoroutine(KnockbackCooldown());
+        }
+    }
+
+    private IEnumerator KnockbackCooldown()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false;
+    }
+
+    // Kill the enemy
     protected virtual void Die()
     {
         Debug.Log($"{gameObject.name} has died.");
+        canMove = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         if (FindObjectOfType<ScoreManager>() != null)
         {
             // Find Score Manager and update player's score
@@ -207,6 +238,8 @@ public abstract class Enemy : MonoBehaviour
         }
 
         animator.SetBool("IsDead", true);
+
+        playerXP.GetExperience(xpDrop);
 
         if (deathEffect != null)
         {

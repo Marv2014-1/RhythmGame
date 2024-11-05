@@ -5,6 +5,8 @@ public class Arrow : MonoBehaviour
 	private int damage;
 	private float speed;
 	private float range;
+	private int pierce;
+	private float knockback;
 	private Vector3 startPosition;
 
 	public void SetDamage(int damageAmount)
@@ -20,6 +22,16 @@ public class Arrow : MonoBehaviour
 	public void SetRange(float rangeAmount)
 	{
 		range = rangeAmount;
+	}
+
+	public void SetPierce(int pierceAmount)
+	{
+		pierce = pierceAmount;
+	}
+
+	public void SetKnockback(float knockbackAmount)
+	{
+		knockback = knockbackAmount;
 	}
 
 	private void Start()
@@ -48,12 +60,31 @@ public class Arrow : MonoBehaviour
 
 			if (enemy != null)
 			{
-				enemy.TakeDamage(damage);
-				Debug.Log($"Arrow hit {enemy.gameObject.name} and dealt {damage} damage.");
-			}
+				// Check if the enemy is invulnerable
+				if (!enemy.IsInvulnerable)
+				{
+					// Knockback the enemy in the opposite direction of the arrow
+					Vector2 direction = (enemy.transform.position - transform.position).normalized;
+					enemy.Knockback(direction, knockback);
+					enemy.TakeDamage(damage);
+					Debug.Log($"Arrow hit {enemy.gameObject.name} and dealt {damage} damage.");
 
-			// Destroy the arrow
-			Destroy(gameObject);
+					// Decrease pierce count
+					if (pierce > 0)
+					{
+						pierce--;
+					}
+					else
+					{
+						Destroy(gameObject);
+					}
+				}
+				else
+				{
+					// Enemy is invulnerable, do not decrease pierce or destroy the arrow
+					Debug.Log($"Arrow hit {enemy.gameObject.name}, but enemy is invulnerable.");
+				}
+			}
 		}
 	}
 }

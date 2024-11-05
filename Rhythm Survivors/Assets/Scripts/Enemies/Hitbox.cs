@@ -6,29 +6,38 @@ public class Hitbox : MonoBehaviour
 {
     public int damageAmount = 10;
     private Animator animator;
+    public float knockbackForce = 5f;
+    protected Transform playerTransform;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        
+        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        MeleeAttack meleeAttack = GetComponentInParent<MeleeAttack>();
+        if (meleeAttack != null)
         {
-            // Retrieve the damage amount from the parent MeleeAttack component
-            MeleeAttack meleeAttack = GetComponentInParent<MeleeAttack>();
-            if (meleeAttack != null)
+            damageAmount = meleeAttack.GetAttackDamage();
+        }
+
+        try
+        {
+            // Ensure you have tagged the player GameObject with "Player"
+            if (collision.CompareTag("Player"))
             {
-                damageAmount = meleeAttack.GetAttackDamage();
+                Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+                collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageAmount, knockbackDirection, knockbackForce);
             }
-            // Assume the player has a component `PlayerHealth` to handle damage
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damageAmount);
-                Debug.Log("Player took damage from skeleton hitbox.");
-            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
         }
     }
 }

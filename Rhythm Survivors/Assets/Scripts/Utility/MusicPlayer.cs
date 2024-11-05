@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class MusicPlayer : MonoBehaviour
 {
     public AudioClip menuSong, storySong;
-    public GameObject musicSource, sfxSource;
     public static MusicPlayer instance;
     public static AudioSource music;
-    public static AudioSource sfx;
+    public AudioMixer audioMixer;
+    public float musicVolume = 1f, sfxVolume = 1f;
 
     void Awake()
     {
@@ -28,19 +28,17 @@ public class MusicPlayer : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        music = musicSource.GetComponent<AudioSource>();
-        sfx = sfxSource.GetComponent<AudioSource>();
+        music = this.GetComponent<AudioSource>();
+        audioMixer = transform.GetComponent<AudioSource>().outputAudioMixerGroup.audioMixer;
     }
 
     // Calls everytime a scene changes and changes the music track
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneLoaded Called");
         string sceneName = scene.name;
 
         if (sceneName == "MainMenu")
         {
-            Debug.Log("MainMenu Found");
             music.clip = menuSong;
         }
         else if (sceneName == "Story")
@@ -55,20 +53,22 @@ public class MusicPlayer : MonoBehaviour
         music.Play();
     }
 
-    public static void MasterVolume(float volume)
+    public void MasterVolume(float volume)
     {
         //musicVolume = volume;
         // masterGroup.volume = volume;
     }
 
-    public static void MusicVolume(float volume)
+    public void MusicVolume(float volume)
     {
-        music.volume = volume;
+        musicVolume = volume;
+        audioMixer.SetFloat("musicVol", Mathf.Log10(volume) * 20);
     }
 
-    public static void SFXVolume(float volume)
+    public void SFXVolume(float volume)
     {
-        sfx.volume = volume;
+        sfxVolume = volume;
+        audioMixer.SetFloat("sfxVol", Mathf.Log10(volume) * 20); 
     }
 
     // called when the game is terminated

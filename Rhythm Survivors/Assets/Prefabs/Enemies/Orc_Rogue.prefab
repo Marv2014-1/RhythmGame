@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5700384084139661224}
   - component: {fileID: 5310864389946468507}
   - component: {fileID: 6063391053882302770}
+  - component: {fileID: 8423730560820195750}
   m_Layer: 10
   m_Name: Orc_Rogue
   m_TagString: Enemy
@@ -62,8 +63,8 @@ Transform:
   m_GameObject: {fileID: 2141168504861516278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.023942, y: -4.8438797, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2288259282888971082}
@@ -218,16 +219,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 2
   maxHealth: 15
+  xpDrop: 10
+  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 2
   attackDamage: 10
   attackCooldown: 2
   deathEffect: {fileID: -2253911629886400664, guid: 9f4a571e113c84040a3850bce04a29af, type: 3}
+  knockbackDuration: 0.2
   ArrowPrefab: {fileID: 8545732733218134329, guid: 9fcbf04c72855414cac2e26436ab8d3d, type: 3}
-  Bow: {fileID: 934061847070800538}
+  ShootPoint: {fileID: 0}
   BowPower: 10
   attackRange: 10
   fireRate: 2
+  knockbackForce: 5
+--- !u!61 &8423730560820195750
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141168504861516278}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.004486516, y: -0.1597844}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.17735776, y: 0.32808703}
+  m_EdgeRadius: 0
 --- !u!1 &2633866850590098448
 GameObject:
   m_ObjectHideFlags: 0
