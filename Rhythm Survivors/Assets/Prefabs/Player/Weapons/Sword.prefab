@@ -115,6 +115,7 @@ MonoBehaviour:
   range: 0
   knockback: 10
   speed: 0
+  size: 10
   requiredBeats: 3
   player: {fileID: 0}
   enemyLayerMask:

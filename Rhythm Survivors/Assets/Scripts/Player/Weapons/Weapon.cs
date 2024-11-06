@@ -7,7 +7,7 @@ public abstract class Weapon : MonoBehaviour
     public string weaponName;
     protected int level;
     public int damage, pierce, projectile;
-    public float range, knockback, speed;
+    public float range, knockback, speed, size;
     public int requiredBeats; // Number of beats required to activate attack
     public GameObject player; // Reference to the player object
     public LayerMask enemyLayerMask; // Layer mask to identify enemies
@@ -32,6 +32,7 @@ public abstract class Weapon : MonoBehaviour
         if (beatDetector != null)
         {
             beatDetector.OnBeatHit.AddListener(OnBeatDetected);
+            beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
         }
         else
         {
@@ -60,6 +61,15 @@ public abstract class Weapon : MonoBehaviour
             beatCount = 0; // Reset beat count after attack
             UpdateWeaponUI(beatCount);
         }
+    }
+
+    protected virtual void OnBeatMissed()
+    {
+        if (beatCount > 0)
+        {
+            beatCount--;
+        }
+        UpdateWeaponUI(beatCount);
     }
 
     // This method will be implemented by each specific weapon type
@@ -97,6 +107,9 @@ public abstract class Weapon : MonoBehaviour
                 break;
             case "Speed":
                 speed += (float)value;
+                break;
+            case "Size":
+                size += (float)value;
                 break;
             case "Pierce":
                 pierce += value;
