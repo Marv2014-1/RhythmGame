@@ -155,15 +155,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Sprite: {fileID: 21300000, guid: 9fec9cea0d0c72e4b9f0762c4b16d381, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6666667}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6485644861733381810
@@ -402,7 +402,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   knockbackDuration: 0.1
   invulnerabilityDuration: 0.5
-  attackRange: 4
+  attackRange: 2.5
   hitbox: {fileID: 0}
 --- !u!95 &3369973210537583654
 Animator:

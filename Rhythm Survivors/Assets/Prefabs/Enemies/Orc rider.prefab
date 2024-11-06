@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1376443543293895080}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4457468, y: 0.14539228, z: 0}
+  m_LocalPosition: {x: 0.012, y: 0.005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,17 +72,17 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: 54e0510961416d04cb7229e6d91b9d34, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6666667}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 2
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2204811033923960657
 GameObject:
@@ -365,7 +365,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
-  attackRange: 5
+  attackRange: 3
   hitbox: {fileID: 0}
 --- !u!114 &5764795766191698207
 MonoBehaviour:
