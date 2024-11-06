@@ -997,15 +997,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2548173374421803268, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5514873032989917562, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.8
+      value: -9.24
       objectReference: {fileID: 0}
     - target: {fileID: 5514873032989917562, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.31
+      value: 2.31
       objectReference: {fileID: 0}
     - target: {fileID: 5514873032989917562, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1040,8 +1040,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454702114066001998, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
+      propertyPath: attackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454702114066001998, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: attackDamage
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454702114066001998, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
+      propertyPath: baseMoveSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1240,21 +1248,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1656670265802529759, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
+      propertyPath: blockChance
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656670265802529759, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
+      propertyPath: blockStrength
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4418307091790181422, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_Name
       value: Armored Orc
       objectReference: {fileID: 0}
     - target: {fileID: 4418307091790181422, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7625973748145501968, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.21
+      value: -16.42
       objectReference: {fileID: 0}
     - target: {fileID: 7625973748145501968, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.12
+      value: 6.05
       objectReference: {fileID: 0}
     - target: {fileID: 7625973748145501968, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1287,6 +1303,10 @@ PrefabInstance:
     - target: {fileID: 7625973748145501968, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627514124756354214, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
+      propertyPath: attackRange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8627514124756354214, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: attackDamage
