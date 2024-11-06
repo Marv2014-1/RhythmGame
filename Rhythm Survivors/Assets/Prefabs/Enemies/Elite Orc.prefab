@@ -62,7 +62,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.029922737, y: 0.03569756}
@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d90d774cfca244e9ef1f099585be0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  knockbackForce: 5
+  ArrowDamage: 0
+  knockbackForce: 10
 --- !u!1 &4916269413340135270
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5135309448974831903}
   - component: {fileID: 972700902501219501}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 7804078976829976143}
   - component: {fileID: 8439459048163481738}
   - component: {fileID: 3369973210537583654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Elite Orc
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -390,9 +390,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 10
-  maxHealth: 100
-  xpDrop: 100
+  cost: 7
+  maxHealth: 300
+  xpDrop: 30
   canMove: 0
   baseMoveSpeed: 4
   currentMoveSpeed: 0
@@ -402,7 +402,6 @@ MonoBehaviour:
   knockbackDuration: 0.1
   invulnerabilityDuration: 0.5
   attackRange: 1.5
-  Hitbox: {fileID: 0}
 --- !u!95 &3369973210537583654
 Animator:
   serializedVersion: 5

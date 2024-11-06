@@ -145,36 +145,47 @@ public class MeleeBossEnemy : Enemy
 
     private void AttemptAttack()
     {
-        // Debug components before executing attack logic
-        if (animator == null)
-        {
-            Debug.LogWarning("Animator is null in AttemptAttack.");
-            return;
-        }
-        if (Hitbox == null)
-        {
-            Debug.LogWarning("skeletonHitbox is null in AttemptAttack.");
-            return;
-        }
+        
 
-        bool isAbove = playerTransform.position.y > transform.position.y;
-        string attackType = isAbove ? "IsAttack1" : "IsAttack2";
 
-        // Debug to confirm which attack type is being set
-        Debug.Log($"Setting attack trigger: {attackType}");
 
-        // Reset both triggers to avoid conflicts
-        animator.ResetTrigger("IsAttack1");
-        animator.ResetTrigger("IsAttack2");
 
-        // Set the trigger for the chosen attack
-        animator.SetTrigger(attackType);
-        Debug.Log($"Animator trigger {attackType} set.");
 
-        // Activate hitbox
-        Hitbox.SetActive(true);
-        Debug.Log("skeletonHitbox activated.");
-        Invoke(nameof(DisableHitbox), 0.5f); // Adjust timing based on animation length
+
+
+
+
+
+        // // Debug components before executing attack logic
+        // if (animator == null)
+        // {
+        //     Debug.LogWarning("Animator is null in AttemptAttack.");
+        //     return;
+        // }
+        // if (Hitbox == null)
+        // {
+        //     Debug.LogWarning("skeletonHitbox is null in AttemptAttack.");
+        //     return;
+        // }
+
+        // bool isAbove = playerTransform.position.y > transform.position.y;
+        // string attackType = isAbove ? "IsAttack1" : "IsAttack2";
+
+        // // Debug to confirm which attack type is being set
+        // Debug.Log($"Setting attack trigger: {attackType}");
+
+        // // Reset both triggers to avoid conflicts
+        // animator.ResetTrigger("IsAttack1");
+        // animator.ResetTrigger("IsAttack2");
+
+        // // Set the trigger for the chosen attack
+        // animator.SetTrigger(attackType);
+        // Debug.Log($"Animator trigger {attackType} set.");
+
+        // // Activate hitbox
+        // Hitbox.SetActive(true);
+        // Debug.Log("skeletonHitbox activated.");
+        // Invoke(nameof(DisableHitbox), 0.5f); // Adjust timing based on animation length
     }
 
     private void DisableHitbox()

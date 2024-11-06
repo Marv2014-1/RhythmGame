@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1530968298719569786}
   - component: {fileID: 8315141904263988876}
   - component: {fileID: 5327818792284136197}
+  - component: {fileID: 3617364553819280163}
   m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d90d774cfca244e9ef1f099585be0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
+  ArrowDamage: 0
   knockbackForce: 5
 --- !u!70 &5327818792284136197
 CapsuleCollider2D:
@@ -160,12 +161,26 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.21247855, y: -0.18448143}
   m_Size: {x: 0.07504292, y: 0.07504292}
   m_Direction: 0
+--- !u!114 &3617364553819280163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7980180433386214868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d90d774cfca244e9ef1f099585be0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowDamage: 0
+  knockbackForce: 5
 --- !u!1 &8840884471665460991
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +381,6 @@ MonoBehaviour:
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
   attackRange: 1.5
-  Hitbox: {fileID: 0}
 --- !u!61 &8175167213558090231
 BoxCollider2D:
   m_ObjectHideFlags: 0

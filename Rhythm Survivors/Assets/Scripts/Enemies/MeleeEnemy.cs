@@ -73,142 +73,142 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
-    [Header("Crew Attack Settings")]
-    public float attackRange = 3f;
+    [Header("Attack Settings")]
+    [SerializeField] private float attackRange = 3f;       // Range within which the enemy attacks
+    private float nextAttackTime = 0f;
 
+    // public GameObject Hitbox;
 
-    private float lastAttackTime;
-
-    [Header("Attack Hitbox")]
-    public GameObject Hitbox;
+    // private MeleeAttack meleeAttack;
 
     // protected override void Awake()
     // {
     //     base.Awake();
-
-    //     // Debug to confirm skeletonHitbox setup
-    //     if (Hitbox != null)
-    //     {
-    //         Hitbox.SetActive(false); // Ensure hitbox is initially inactive
-    //         Debug.Log("skeletonHitbox initialized and set to inactive.");
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("skeletonHitbox is not assigned in MeleeEnemy.");
-    //     }
-
-    //     // Debug to confirm animator setup
-    //     if (animator == null)
-    //     {
-    //         animator = GetComponent<Animator>();
-    //         if (animator != null)
-    //         {
-    //             Debug.Log("Animator component found on MeleeEnemy.");
-    //         }
-    //         else
-    //         {
-    //             Debug.LogError("Animator component is missing on MeleeEnemy.");
-    //         }
-    //     }
-
-    //     // Debug to confirm playerTransform setup
-    //     if (playerTransform == null)
-    //     {
-    //         Debug.LogWarning("Player Transform not assigned.");
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Player Transform found and assigned.");
-    //     }
+    //     meleeAttack = GetComponent<MeleeAttack>();
     // }
+    //   private void Start()
+    // {
+    //     Hitbox.SetActive(false); // Ensure the hitbox is initially inactive
+    // }
+    [SerializeField] private Hitbox hitbox;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // Ensure the animator is initialized
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                Debug.LogError("Animator not found on MeleeEnemy or its children.");
+            }
+        }
+
+        // Automatically assign the hitbox if it's not set in the Inspector
+        if (hitbox == null)
+        {
+            hitbox = GetComponentInChildren<Hitbox>();
+            if (hitbox == null)
+            {
+                Debug.LogError("Hitbox not found as a child of MeleeEnemy. Please assign it in the Inspector or ensure it exists as a child GameObject.");
+            }
+        }
+    }
     protected override void Update()
     {
         base.Update();
 
-        // Debug playerTransform check in Update
-        if (playerTransform == null)
-        {
-            Debug.LogWarning("playerTransform is null in Update.");
-            return;
-        }
+        if (playerTransform == null) return;
 
+        // Calculate distance to the player
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        Debug.Log($"Distance to player: {distanceToPlayer}");
 
-        if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+        // If the player is within attack range and cooldown has passed
+        if (distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
         {
-            AttemptAttack();
-            lastAttackTime = Time.time;
-            Debug.Log("AttemptAttack called.");
-        }
-    }
-
-    private void AttemptAttack()
-    {
-        // Debug components before executing attack logic
-        if (animator == null)
-        {
-            Debug.LogWarning("Animator is null in AttemptAttack.");
-            return;
-        }
-        if (Hitbox == null)
-        {
-            Debug.LogWarning("skeletonHitbox is null in AttemptAttack.");
-            return;
-        }
-
-        bool isAbove = playerTransform.position.y > transform.position.y;
-        string attackType = isAbove ? "IsAttack1" : "IsAttack2";
-
-        // Debug to confirm which attack type is being set
-        Debug.Log($"Setting attack trigger: {attackType}");
-
-        // Reset both triggers to avoid conflicts
-        animator.ResetTrigger("IsAttack1");
-        animator.ResetTrigger("IsAttack2");
-
-        // Set the trigger for the chosen attack
-        animator.SetTrigger(attackType);
-        Debug.Log($"Animator trigger {attackType} set.");
-
-        // Activate hitbox
-        Hitbox.SetActive(true);
-        Debug.Log("skeletonHitbox activated.");
-        Invoke(nameof(DisableHitbox), 0.5f); // Adjust timing based on animation length
-    }
-
-    private void DisableHitbox()
-    {
-        if (Hitbox != null)
-        {
-            Hitbox.SetActive(false);
-            Debug.Log("skeletonHitbox deactivated.");
+            PerformAttack();
+            nextAttackTime = Time.time + attackCooldown; // Reset attack cooldown
         }
         else
         {
-            Debug.LogWarning("skeletonHitbox is null in DisableHitbox.");
+            MoveTowardsPlayer(); // Continue moving towards player if out of range
         }
+    }
+
+    private void PerformAttack()
+    {
+        if (animator == null)
+        {
+            Debug.LogWarning("animator is null");
+            return;
+        }
+        if (hitbox == null)
+        {
+            Debug.LogWarning("hitbox is null");
+            return;
+        }
+        canMove = false; // Stop moving when attacking
+                         // Randomly choose one of the three attack directions
+        int attackType = UnityEngine.Random.Range(0, 3);
+        string triggerName = attackType switch
+        {
+            0 => "TriggerAttackTop",
+            1 => "TriggerAttackSide",
+            _ => "TriggerAttackBottom",
+        };
+
+        Attack(triggerName, 0.001f, 0.5f);
+
+
+        // case 0:
+        //     Attack("TriggerAttackTop", attackDamage, 0.1f, 0.5f);
+        //     break;
+        // case 1:
+        //     Attack("TriggerAttackSide", attackDamage, 0.1f, 0.5f);
+        //     break;
+        // case 2:
+        //     Attack("TriggerAttackBottom", attackDamage, 0.1f, 0.5f);
+        //     break;
+
+    }
+    public void Attack(string triggerName, float activateTime, float deactivateTime)
+    {
+        // currentAttackDamage = damage;       // Set the current attack damage
+        animator.SetTrigger(triggerName);    // Trigger the specific attack animation
+        hitbox.ActivateHitbox();
+        // Invoke("ActivateHitbox", activateTime); // Activate hitbox after `activateTime` seconds
+        // Invoke("DeactivateHitbox", 0.2f); // Deactivate hitbox after `deactivateTime` seconds
+        Invoke(nameof(ActivateHitbox), activateTime); // Activate hitbox after `activateTime` seconds
+        Invoke(nameof(DeactivateHitbox), deactivateTime); // Deactivate hitbox after `deactivateTime` seconds
+        // Invoke(nameof(EndAttack), activateTime);
+    }
+
+
+    // Called at the end of the attack animation to reset movement
+    public void FinishAttack()
+    {
+        canMove = true; // Allow movement again
+        // animator.SetBool("IsMoving", true); // Reset the attacking parameter
+    }
+
+    private void ActivateHitbox()
+    {
+        hitbox?.ActivateHitbox();  // Activate the hitbox
+    }
+
+    private void DeactivateHitbox()
+    {
+        hitbox?.DeactivateHitbox();  // Deactivate the hitbox
+    }
+
+    public int GetAttackDamage()
+    {
+        return attackDamage;
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyArrow : MonoBehaviour
 {
-    [HideInInspector] public float ArrowVelocity;
+    [HideInInspector] public float speed;
     [HideInInspector] public int ArrowDamage;
     [SerializeField] Rigidbody2D rb;
 
@@ -11,11 +11,15 @@ public class EnemyArrow : MonoBehaviour
 
     private float knockback;
 
+    private void Start()
+	{
+		startPosition = transform.position;
+	}
     public void Initialize(Vector2 direction, float speed, int damage, float attackRange, float knockback)
     {
-        ArrowVelocity = speed;
+        this.speed = speed;
         ArrowDamage = damage;
-        rb.velocity = direction * ArrowVelocity;
+        rb.velocity = direction * speed;
         startPosition = transform.position;
         maxTravelDistance = attackRange * 2f;
         this.knockback = knockback;
@@ -23,21 +27,10 @@ public class EnemyArrow : MonoBehaviour
 
     private void Update()
     {
-         // transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.forward);
-        // transform.Translate(rb.velocity * Time.deltaTime);
-    // rotation towards the direction of the arrow follow the velocity
-    
-    // transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.forward); // This line works perfectly for 2D arrows but not for 3D arrows. For 3D arrows, you might need to use a different approach.
-
-    // if (rb.velocity != Vector2.zero) // Check to avoid errors if velocity is zero
-    // {
-    //     float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-    //     transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-    // }
-       
-
-
+         
         // Check the distance traveled
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
+
         float distanceTraveled = Vector2.Distance(startPosition, transform.position);
         if (distanceTraveled >= maxTravelDistance)
         {

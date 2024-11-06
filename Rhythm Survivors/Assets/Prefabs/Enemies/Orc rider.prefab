@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2405551039865254126}
   - component: {fileID: 2453660468662339733}
-  m_Layer: 0
+  - component: {fileID: 7536567759124149924}
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,12 +62,26 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.04450027, y: -0.1296415}
   m_Size: {x: 0.124179706, y: 0.23581024}
   m_Direction: 0
+--- !u!114 &7536567759124149924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204811033923960657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d90d774cfca244e9ef1f099585be0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowDamage: 0
+  knockbackForce: 15
 --- !u!1 &2332586447867861224
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,9 +96,9 @@ GameObject:
   - component: {fileID: 6145650698823854649}
   - component: {fileID: 1364237356102587149}
   - component: {fileID: 3451143854452219371}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Orc rider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,11 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 1
-  maxHealth: 100
-  xpDrop: 10
+  cost: 10
+  maxHealth: 400
+  xpDrop: 40
   canMove: 0
-  baseMoveSpeed: 2
+  baseMoveSpeed: 4
   currentMoveSpeed: 0
   attackDamage: 10
   attackCooldown: 1
@@ -264,4 +279,3 @@ MonoBehaviour:
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
   attackRange: 3
-  Hitbox: {fileID: 0}

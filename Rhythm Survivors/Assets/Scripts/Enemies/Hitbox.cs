@@ -4,26 +4,51 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    public int damageAmount = 10;
-    private Animator animator;
+    [HideInInspector] public int ArrowDamage;
+    private Collider2D hitboxCollider;
+    // [SerializeField] Rigidbody2D Hb;
+    // private float knockback;
+
+    private int damageAmount;
+    // private Animator animator;
+
     public float knockbackForce = 5f;
     protected Transform playerTransform;
 
 
+    // private void Start()
+    // {
+    //     animator = GetComponent<Animator>();
+
+    //     playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+    // }
+    private void Awake()
+    {
+        hitboxCollider = GetComponent<Collider2D>();
+        hitboxCollider.enabled = false;  // Ensure the hitbox is initially disabled
+    }
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
 
+    private void Update()
+    {
+
+    }
+    public void SetKnockback(float knockbackAmount)
+    {
+        knockbackForce = knockbackAmount;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        MeleeAttack meleeAttack = GetComponentInParent<MeleeAttack>();
-        if (meleeAttack != null)
+        MeleeEnemy enemy = GetComponentInParent<MeleeEnemy>();
+        if (enemy != null)
         {
-            damageAmount = meleeAttack.GetAttackDamage();
+            damageAmount = enemy.GetAttackDamage();
+            // damageAmount = meleeAttack.GetAttackDamage();
         }
 
         try
@@ -40,5 +65,15 @@ public class Hitbox : MonoBehaviour
             Debug.Log(e);
         }
     }
+    public void ActivateHitbox()
+    {
+        hitboxCollider.enabled = true;
+    }
+    public void DeactivateHitbox()
+    {
+        hitboxCollider.enabled = false;
+    }
+
+
 }
 

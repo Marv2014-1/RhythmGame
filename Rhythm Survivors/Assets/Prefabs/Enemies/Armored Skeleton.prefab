@@ -185,9 +185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 1
-  maxHealth: 100
-  xpDrop: 10
+  cost: 3
+  maxHealth: 150
+  xpDrop: 12
   canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
@@ -197,7 +197,6 @@ MonoBehaviour:
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
   attackRange: 3
-  Hitbox: {fileID: 0}
 --- !u!1 &8387508365424500413
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +259,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.009587121, y: 0.33241963}
@@ -278,5 +277,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d90d774cfca244e9ef1f099585be0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  knockbackForce: 5
+  ArrowDamage: 0
+  knockbackForce: 10
