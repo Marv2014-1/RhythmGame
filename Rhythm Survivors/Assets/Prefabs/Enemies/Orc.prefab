@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1231061266862846777}
   - component: {fileID: 1312192871236779407}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 72bcafd2e9cba904fb93e60e306e7e12, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6666667}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
-  attackRange: 3
+  attackRange: 2.2
   hitbox: {fileID: 0}
 --- !u!61 &8175167213558090231
 BoxCollider2D:
