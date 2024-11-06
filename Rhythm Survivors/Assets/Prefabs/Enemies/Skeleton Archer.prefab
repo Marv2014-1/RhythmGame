@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 5
+  cost: 4
   maxHealth: 20
   xpDrop: 20
   baseMoveSpeed: 3

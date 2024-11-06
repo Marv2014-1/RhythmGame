@@ -135,7 +135,7 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            int extra = 0;
+            int extra = 1;
 
             if (waveCount >= 3)
             {
