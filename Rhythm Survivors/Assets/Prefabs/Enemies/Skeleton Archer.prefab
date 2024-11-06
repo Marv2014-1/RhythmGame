@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5310864389946468507}
   - component: {fileID: 6063391053882302770}
   - component: {fileID: 1853362504387630424}
+  - component: {fileID: 8315170618849749295}
   m_Layer: 10
   m_Name: Skeleton Archer
   m_TagString: Enemy
@@ -249,6 +250,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13820887, y: 0.1870031}
   m_EdgeRadius: 0
+--- !u!114 &8315170618849749295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141168504861516278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e75be375e74eb4786d7c0bff970999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidanceRadius: 1
+  avoidanceForce: 2
 --- !u!1 &7120455905143141379
 GameObject:
   m_ObjectHideFlags: 0

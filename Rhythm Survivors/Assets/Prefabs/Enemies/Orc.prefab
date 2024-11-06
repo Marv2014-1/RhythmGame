@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 2756872150039610617}
   - component: {fileID: 8175167213558090231}
   - component: {fileID: 7794756618742803109}
+  - component: {fileID: 91888513276462448}
   m_Layer: 8
   m_Name: Orc
   m_TagString: Enemy
@@ -462,3 +463,17 @@ CircleCollider2D:
   m_Offset: {x: 0.007970608, y: 0.0036794485}
   serializedVersion: 2
   m_Radius: 0.07499904
+--- !u!114 &91888513276462448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840884471665460991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e75be375e74eb4786d7c0bff970999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidanceRadius: 1
+  avoidanceForce: 2

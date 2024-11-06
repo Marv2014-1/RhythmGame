@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 7804078976829976143}
   - component: {fileID: 8439459048163481738}
   - component: {fileID: 3369973210537583654}
-  - component: {fileID: 43321719127935206}
+  - component: {fileID: 2790909986351050550}
   m_Layer: 8
   m_Name: Elite Orc
   m_TagString: Enemy
@@ -425,19 +425,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!208 &43321719127935206
-NavMeshObstacle:
+--- !u!114 &2790909986351050550
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6485644861733381810}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e75be375e74eb4786d7c0bff970999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidanceRadius: 1
+  avoidanceForce: 2
