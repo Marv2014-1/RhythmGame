@@ -7,7 +7,7 @@ public abstract class Weapon : MonoBehaviour
     public string weaponName;
     protected int level;
     public int damage, pierce, projectile;
-    public float range, knockback, speed;
+    public float range, knockback, speed, size;
     public int requiredBeats; // Number of beats required to activate attack
     public GameObject player; // Reference to the player object
     public LayerMask enemyLayerMask; // Layer mask to identify enemies
@@ -107,6 +107,9 @@ public abstract class Weapon : MonoBehaviour
                 break;
             case "Speed":
                 speed += (float)value;
+                break;
+            case "Size":
+                size += (float)value;
                 break;
             case "Pierce":
                 pierce += value;

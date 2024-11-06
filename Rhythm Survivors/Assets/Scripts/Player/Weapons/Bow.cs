@@ -16,7 +16,7 @@ public class Bow : Weapon
 
         upgrades = new List<(string, int)>()
         {
-            ("Pierce", 1), ("Range", 5), ("Pierce", 1), ("Damage", 15)
+            ("Pierce", 1), ("Range", 5), ("Pierce", 1), ("Damage", 10), ("Range", 5), ("Damage", 5), ("Pierce", 2)
         };
     }
 

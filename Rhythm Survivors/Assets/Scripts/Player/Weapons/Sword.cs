@@ -14,7 +14,7 @@ public class Sword : Weapon
 
         upgrades = new List<(string, int)>()
         {
-            ("Knockback", 5), ("Damage", 10), ("Knockback", 5), ("Damage", 10)
+            ("Knockback", 5), ("Damage", 5), ("Size", 2), ("Damage", 5), ("Size", 2), ("Damage", 5), ("Damage", 10)
         };
     }
 
@@ -29,6 +29,7 @@ public class Sword : Weapon
         {
             slash.SetDamage(damage);
             slash.SetKnockback(knockback);
+            slash.SetSize(size);
 
             if (player.transform.GetChild(0).transform.localScale.x > 0)
             {
