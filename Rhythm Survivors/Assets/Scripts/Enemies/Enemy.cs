@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
     protected int currentHealth;
+    private Shield shield;
 
     [Header("Movement Settings")]
     protected Rigidbody2D rb;
@@ -31,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Attack")]
     public int attackDamage = 10;
     public float attackCooldown = 1f;
-    private readonly float attackTimer;
+    private float attackTimer;
 
     [Header("Death Settings")]
     [SerializeField]
@@ -56,7 +57,9 @@ public abstract class Enemy : MonoBehaviour
     protected BeatDetector beatDetector;
 
     protected virtual void Awake()
+
     {
+        shield = GetComponent<Shield>();
         currentHealth = maxHealth;
         currentMoveSpeed = baseMoveSpeed; // Initialize current speed
         canMove = true;
@@ -107,16 +110,16 @@ public abstract class Enemy : MonoBehaviour
     {
         // agent.areaMask = (1 << NavMesh.GetAreaFromName("Default")) | (1 << NavMesh.GetAreaFromName("Enemy"));
 
-        if (playerTransform == null) return;
+        // if (playerTransform == null) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        bool isMoving = distanceToPlayer > 0.1f; // Consider moving if distance is significant
+        // float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        // bool isMoving = distanceToPlayer > 0.1f; // Consider moving if distance is significant
 
-        // Update "IsMoving" based on whether the enemy is moving 
-        if (animator != null)
-        {
-            animator.SetBool("IsMoving", isMoving);
-        }
+        // // Update "IsMoving" based on whether the enemy is moving 
+        // if (animator != null)
+        // {
+        //     animator.SetBool("IsMoving", isMoving);
+        // }
 
 
     }
@@ -214,7 +217,22 @@ public abstract class Enemy : MonoBehaviour
     // Reduce health when hit
     public virtual void TakeDamage(int damageAmount)
     {
-        if (isInvulnerable) return; // If invulnerable, ignore damage
+        if (isInvulnerable)
+        {
+
+            return;
+        } // If invulnerable, ignore damage
+        if (shield!= null && shield.IsBlocking())
+        {
+            animator.SetTrigger("TriggerShield");
+            damageAmount = shield.CalculateDamageAfterBlock(damageAmount); // Reduce damage by shield
+        }
+        // If damage is reduced to 0 by the shield, no further processing is needed
+        if (damageAmount <= 0)
+        {
+            Debug.Log("Damage fully blocked by shield.");
+            return;
+        }
 
         isInvulnerable = true; // Set invulnerability
         StartCoroutine(InvulnerabilityCooldown()); // Start cooldown
@@ -227,6 +245,7 @@ public abstract class Enemy : MonoBehaviour
         {
             Die();
         }
+
     }
 
     public bool IsInvulnerable

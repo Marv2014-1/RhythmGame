@@ -8,27 +8,27 @@ public class EnemyAvoidance : MonoBehaviour
 
     private void FixedUpdate()
     {
-    //     // Define a LayerMask that includes both "Enemy" and "Default" layers by name
-    //     LayerMask avoidanceLayers = LayerMask.GetMask("Enemy", "Default");
+        // Define a LayerMask that includes both "Enemy" and "Default" layers by name
+        LayerMask avoidanceLayers = LayerMask.GetMask("Enemy", "Default");
 
-    //     // Check for colliders in the avoidance radius on specified layers
-    //     Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, avoidanceRadius, avoidanceLayers);
+        // Check for colliders in the avoidance radius on specified layers
+        Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, avoidanceRadius, avoidanceLayers);
 
-    //     foreach (Collider obj in nearbyObjects)
-    //     {
-    //         // Avoid self-collision and check distance
-    //         if (obj.gameObject != this.gameObject)
-    //         {
-    //             Vector3 directionAway = transform.position - obj.transform.position;
-    //             float distance = directionAway.magnitude;
+        foreach (Collider obj in nearbyObjects)
+        {
+            // Avoid self-collision and check distance
+            if (obj.gameObject != this.gameObject)
+            {
+                Vector3 directionAway = transform.position - obj.transform.position;
+                float distance = directionAway.magnitude;
 
-    //             // Only apply avoidance force if within the minimum distance
-    //             if (distance < minimumDistance)
-    //             {
-    //                 Vector3 avoidanceDirection = directionAway.normalized * (avoidanceForce * Time.deltaTime);
-    //                 transform.position += avoidanceDirection;
-    //             }
-    //         }
-        // }
+                // Only apply avoidance force if within the minimum distance
+                if (distance < minimumDistance)
+                {
+                    Vector3 avoidanceDirection = directionAway.normalized * (avoidanceForce * Time.deltaTime);
+                    transform.position += avoidanceDirection;
+                }
+            }
+        }
     }
 }

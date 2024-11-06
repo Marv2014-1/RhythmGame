@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 4
+  cost: 5
   maxHealth: 30
   xpDrop: 20
   baseMoveSpeed: 3
@@ -264,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidanceRadius: 1
   avoidanceForce: 2
+  minimumDistance: 0.5
 --- !u!1 &7120455905143141379
 GameObject:
   m_ObjectHideFlags: 0

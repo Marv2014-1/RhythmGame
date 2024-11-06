@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1231061266862846777}
   - component: {fileID: 1312192871236779407}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 1
+  cost: 5
   maxHealth: 15
   xpDrop: 10
   baseMoveSpeed: 2.5
@@ -477,3 +477,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidanceRadius: 1
   avoidanceForce: 2
+  minimumDistance: 0.5
