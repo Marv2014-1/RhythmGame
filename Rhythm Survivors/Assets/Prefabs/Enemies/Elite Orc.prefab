@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5849752836429213413}
   - component: {fileID: 5266194084355404831}
   - component: {fileID: 7365170255119203449}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5135309448974831903}
   - component: {fileID: 972700902501219501}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 8439459048163481738}
   - component: {fileID: 3369973210537583654}
   - component: {fileID: 2790909986351050550}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Elite Orc
   m_TagString: Enemy
   m_Icon: {fileID: 0}

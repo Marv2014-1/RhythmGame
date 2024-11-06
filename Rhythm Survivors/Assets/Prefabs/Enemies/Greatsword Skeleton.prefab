@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1167249637816405026}
   - component: {fileID: 2862527187403670242}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 3603073907694305771}
   - component: {fileID: 6402198645414532735}
   - component: {fileID: 3741449461013808048}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Greatsword Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 8569681197808766666}
   - component: {fileID: 8694949854958169299}
   - component: {fileID: 611828642824004578}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2117774832131998147}
   - component: {fileID: 7454702114066001998}
   - component: {fileID: 3398405717170448000}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Armored Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4165415438158859391}
   - component: {fileID: 5509204036060588794}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 2012675471037510942}
   - component: {fileID: 2641148069726852978}
   - component: {fileID: 8052857560360473076}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Enemy
   m_Icon: {fileID: 0}
