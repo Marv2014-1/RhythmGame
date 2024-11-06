@@ -1328,6 +1328,14 @@ PrefabInstance:
       propertyPath: enemyPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 8325102962908147761, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 4418307091790181422, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
+    - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: enemyPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 2548173374421803268, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
     - target: {fileID: 7349946975714620294, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_Name
       value: World

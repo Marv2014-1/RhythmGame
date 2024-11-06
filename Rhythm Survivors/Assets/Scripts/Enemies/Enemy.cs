@@ -22,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Movement Settings")]
     protected Rigidbody2D rb;
+    protected CapsuleCollider2D capsuleCollider;
     protected Transform playerTransform;
 
     // private NavMeshAgent agent;
@@ -63,6 +64,13 @@ public abstract class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         currentMoveSpeed = baseMoveSpeed; // Initialize current speed
         canMove = true;
+
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        // destroy if the collider is disabled
+        if (capsuleCollider == null || !capsuleCollider.enabled)
+        {
+            Destroy(this);
+        }
 
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -120,6 +128,11 @@ public abstract class Enemy : MonoBehaviour
         // {
         //     animator.SetBool("IsMoving", isMoving);
         // }
+
+        if (capsuleCollider == null || !capsuleCollider.enabled)
+        {
+            Destroy(this);
+        }
 
 
     }
