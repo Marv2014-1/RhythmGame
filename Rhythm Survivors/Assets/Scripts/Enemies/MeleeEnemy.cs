@@ -21,6 +21,7 @@ public class MeleeEnemy : Enemy
             if (animator == null)
             {
                 Debug.LogError("Animator not found on MeleeEnemy or its children.");
+                Die();
             }
         }
 
@@ -31,6 +32,7 @@ public class MeleeEnemy : Enemy
             if (hitbox == null)
             {
                 Debug.LogError("Hitbox not found as a child of MeleeEnemy. Please assign it in the Inspector or ensure it exists as a child GameObject.");
+                Die();
             }
         }
     }

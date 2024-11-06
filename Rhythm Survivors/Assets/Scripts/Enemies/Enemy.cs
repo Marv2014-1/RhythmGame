@@ -27,6 +27,7 @@ public abstract class Enemy : MonoBehaviour
 
     // private NavMeshAgent agent;
     public bool canMove;
+    bool isDieing = false;
 
 
 
@@ -64,13 +65,6 @@ public abstract class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         currentMoveSpeed = baseMoveSpeed; // Initialize current speed
         canMove = true;
-
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
-        // destroy if the collider is disabled
-        if (capsuleCollider == null || !capsuleCollider.enabled)
-        {
-            Destroy(this);
-        }
 
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -110,7 +104,12 @@ public abstract class Enemy : MonoBehaviour
 
         // // Set NavMeshAgent properties to make sure it avoids other enemies and obstacles
         // agent.areaMask = (1 << NavMesh.GetAreaFromName("Default")) | (1 << NavMesh.GetAreaFromName("Enemy"));
-
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        // destroy if the collider is disabled
+        if ((capsuleCollider == null || !capsuleCollider.enabled) && Time.timeScale > 0 && !isDieing)
+        {
+            Die();
+        }
     }
 
     protected virtual void Update()
@@ -129,9 +128,9 @@ public abstract class Enemy : MonoBehaviour
         //     animator.SetBool("IsMoving", isMoving);
         // }
 
-        if (capsuleCollider == null || !capsuleCollider.enabled)
+        if ((capsuleCollider == null || !capsuleCollider.enabled) && Time.timeScale > 0 && !isDieing)
         {
-            Destroy(this);
+            Die();
         }
 
 
@@ -294,6 +293,12 @@ public abstract class Enemy : MonoBehaviour
     // Kill the enemy
     protected virtual void Die()
     {
+        if (isDieing)
+        {
+            return;
+        }
+
+        isDieing = true;
         Debug.Log($"{gameObject.name} has died.");
         canMove = false;
         GetComponent<CapsuleCollider2D>().enabled = false;

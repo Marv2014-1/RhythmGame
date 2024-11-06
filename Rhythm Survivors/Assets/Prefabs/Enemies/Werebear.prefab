@@ -283,7 +283,7 @@ MonoBehaviour:
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
   attackRange: 2.5
-  hitbox: {fileID: 0}
+  hitbox: {fileID: 7268790646320344919}
 --- !u!114 &1782013966277806696
 MonoBehaviour:
   m_ObjectHideFlags: 0
