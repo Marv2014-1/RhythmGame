@@ -7,6 +7,7 @@ public class Slash : MonoBehaviour
     private int damage;
     private float knockback;
     private Transform anchor;
+    private float size;
 
     public void SetDamage(int damageAmount)
     {
@@ -23,9 +24,14 @@ public class Slash : MonoBehaviour
         anchor = anchorPoint;
     }
 
+    public void SetSize(float sizeAmount)
+    {
+        size = sizeAmount;
+    }
+
     private void Start()
     {
-       transform.localScale = anchor.localScale;
+        transform.localScale = new Vector3 (anchor.localScale.x * size / 10, anchor.localScale.y * size / 10, anchor.localScale.z);
     }
 
     private void Update()

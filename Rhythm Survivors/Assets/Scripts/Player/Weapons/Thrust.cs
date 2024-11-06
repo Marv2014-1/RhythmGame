@@ -6,6 +6,7 @@ public class Thrust : MonoBehaviour
     private float speed;
     private float range;
     private float knockback;
+    private float size;
     private Vector3 startPosition;
     private Quaternion startRotation;
 
@@ -29,10 +30,16 @@ public class Thrust : MonoBehaviour
         knockback = knockbackAmount;
     }
 
+    public void SetSize(float sizeAmount)
+    {
+        size = sizeAmount;
+    }
+
     private void Start()
     {
         startPosition = transform.position;
         startRotation = transform.rotation;
+        transform.localScale = new Vector3(size / 10, size / 10, 1);
     }
 
     private void Update()
