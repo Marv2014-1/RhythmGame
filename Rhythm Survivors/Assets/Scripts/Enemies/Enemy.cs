@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 /// <summary>
 /// Abstract base class for all enemies.
@@ -14,7 +15,6 @@ public abstract class Enemy : MonoBehaviour
     public int cost = 1; // strength of the enemy as seen in the spawner
     public int maxHealth = 100;
     public int xpDrop = 10;
-    public bool canMove;
     public float baseMoveSpeed = 2f; // Normal move speed
     public float currentMoveSpeed;
     protected int currentHealth;
@@ -22,6 +22,11 @@ public abstract class Enemy : MonoBehaviour
     [Header("Movement Settings")]
     protected Rigidbody2D rb;
     protected Transform playerTransform;
+
+    // private NavMeshAgent agent;
+    public bool canMove;
+
+
 
     [Header("Attack")]
     public int attackDamage = 10;
@@ -83,11 +88,24 @@ public abstract class Enemy : MonoBehaviour
         rb.drag = 1f;
         rb.angularDrag = 0.5f;
 
+        // agent = GetComponent<NavMeshAgent>();
+        // if (agent == null)
+        // {
+        //     agent = gameObject.AddComponent<NavMeshAgent>();
+        // }
+        // // Set up avoidance to avoid both Default and Enemy layers
+        // agent.avoidancePriority = Random.Range(10, 50);  // Random priority to reduce collision clustering
+        // agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+
+        // // Set NavMeshAgent properties to make sure it avoids other enemies and obstacles
+        // agent.areaMask = (1 << NavMesh.GetAreaFromName("Default")) | (1 << NavMesh.GetAreaFromName("Enemy"));
+
     }
 
     protected virtual void Update()
 
     {
+        // agent.areaMask = (1 << NavMesh.GetAreaFromName("Default")) | (1 << NavMesh.GetAreaFromName("Enemy"));
 
         if (playerTransform == null) return;
 
@@ -158,6 +176,8 @@ public abstract class Enemy : MonoBehaviour
         }
         if (playerTransform == null || isKnockedBack) return;
 
+
+
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
         animator.SetBool("IsMoving", true);
@@ -166,8 +186,20 @@ public abstract class Enemy : MonoBehaviour
         Vector2 movement = direction * currentMoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
 
+        // if (agent.isOnNavMesh)
+        // {
+        //     agent.SetDestination(playerTransform.position);
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("Agent is not on a NavMesh. Ensure NavMesh is baked and agent is placed on it.");
+        // }
+
         if (spriteRenderer != null)
         {
+            // Vector3 scale = transform.localScale;
+            // scale.x = (agent.desiredVelocity.x >= 0) ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
+            // transform.localScale = scale;
             if (direction.x >= 0)
             {
                 transform.localScale = new Vector3(10, 10, 1);

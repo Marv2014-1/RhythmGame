@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8505844440320546198}
   - component: {fileID: 2117774832131998147}
   - component: {fileID: 7454702114066001998}
-  m_Layer: 10
+  - component: {fileID: 595641939106349478}
+  m_Layer: 8
   m_Name: Armored Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,15 +189,32 @@ MonoBehaviour:
   cost: 3
   maxHealth: 150
   xpDrop: 12
-  canMove: 0
-  baseMoveSpeed: 2
+  baseMoveSpeed: 4
   currentMoveSpeed: 0
-  attackDamage: 10
+  canMove: 0
+  attackDamage: 15
   attackCooldown: 1
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
-  attackRange: 3
+  attackRange: 4
+  hitbox: {fileID: 0}
+--- !u!208 &595641939106349478
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548173374421803268}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.06, y: 0.1, z: 0.06}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8387508365424500413
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +226,7 @@ GameObject:
   - component: {fileID: 2012675471037510942}
   - component: {fileID: 2641148069726852978}
   - component: {fileID: 8052857560360473076}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Hitbox
   m_TagString: Enemy
   m_Icon: {fileID: 0}

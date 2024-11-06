@@ -181,10 +181,11 @@ public class MeleeEnemy : Enemy
     {
         // currentAttackDamage = damage;       // Set the current attack damage
         animator.SetTrigger(triggerName);    // Trigger the specific attack animation
+        Invoke(nameof(ActivateHitbox), activateTime); // Activate hitbox after `activateTime` seconds
         hitbox.ActivateHitbox();
         // Invoke("ActivateHitbox", activateTime); // Activate hitbox after `activateTime` seconds
         // Invoke("DeactivateHitbox", 0.2f); // Deactivate hitbox after `deactivateTime` seconds
-        Invoke(nameof(ActivateHitbox), activateTime); // Activate hitbox after `activateTime` seconds
+
         Invoke(nameof(DeactivateHitbox), deactivateTime); // Deactivate hitbox after `deactivateTime` seconds
         // Invoke(nameof(EndAttack), activateTime);
     }

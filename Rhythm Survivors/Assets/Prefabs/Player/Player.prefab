@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1785534063115561760}
   - component: {fileID: 7411263274541787537}
-  - component: {fileID: 4792032883061283714}
   - component: {fileID: 6758006324669907685}
+  - component: {fileID: 7625763556118860439}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Player
@@ -86,27 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4792032883061283714
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200780706664052860}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: baf7ae1a0fe73504d815bc5d4a69c96b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &6758006324669907685
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -142,6 +121,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0.005, y: 0.015}
   m_Size: {x: 0.12, y: 0.18}
   m_Direction: 0
+--- !u!95 &7625763556118860439
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200780706664052860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: baf7ae1a0fe73504d815bc5d4a69c96b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7005587798895976517
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 5239286639336431215}
   - component: {fileID: 2445078984113255038}
   - component: {fileID: 4012498056234599756}
+  - component: {fileID: 8413468907563342813}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -215,7 +216,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7005587798895976517}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -273,7 +274,7 @@ MonoBehaviour:
   healthBarFill: {fileID: 0}
   healthText: {fileID: 0}
   smoothSpeed: 5
-  animator: {fileID: 4792032883061283714}
+  animator: {fileID: 7625763556118860439}
   invincibilityDuration: 1
   knockbackForce: 5
   knockbackDuration: 0.2
@@ -300,10 +301,6 @@ MonoBehaviour:
   staffSprite: {fileID: 21300000, guid: 571404f9b570a1b4e94477b81264e5ee, type: 3}
   swordSprite: {fileID: 21300000, guid: 977096abea779b84e800320918ad7a17, type: 3}
   spearSprite: {fileID: 21300000, guid: fe88af382c9ce5742918c6be6151a117, type: 3}
-  maxWeapons: 3
-  maxTrinkets: 3
-  numWeapons: 0
-  numTrinkets: 0
 --- !u!114 &4012498056234599756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +315,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpBarFill: {fileID: 0}
   smoothSpeed: 5
+--- !u!208 &8413468907563342813
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7005587798895976517}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.05, y: 0.05, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8221385665862161993
 GameObject:
   m_ObjectHideFlags: 0

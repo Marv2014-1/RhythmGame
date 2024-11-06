@@ -190,9 +190,9 @@ MonoBehaviour:
   cost: 4
   maxHealth: 30
   xpDrop: 20
-  canMove: 0
   baseMoveSpeed: 3
   currentMoveSpeed: 0
+  canMove: 0
   attackDamage: 10
   attackCooldown: 2
   deathEffect: {fileID: 0}

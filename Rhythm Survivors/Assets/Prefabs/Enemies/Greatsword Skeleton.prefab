@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8669544438688492566}
   - component: {fileID: 3603073907694305771}
   - component: {fileID: 6402198645414532735}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Greatsword Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,15 +188,16 @@ MonoBehaviour:
   cost: 5
   maxHealth: 150
   xpDrop: 15
-  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
+  canMove: 0
   attackDamage: 10
   attackCooldown: 1
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
-  attackRange: 3
+  attackRange: 4
+  hitbox: {fileID: 0}
 --- !u!1 &8428386729775311495
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +209,7 @@ GameObject:
   - component: {fileID: 8569681197808766666}
   - component: {fileID: 8694949854958169299}
   - component: {fileID: 611828642824004578}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

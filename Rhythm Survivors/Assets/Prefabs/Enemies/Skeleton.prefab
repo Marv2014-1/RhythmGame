@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5382154320335315588}
   - component: {fileID: 4836886156698138878}
   - component: {fileID: 8332132063606003414}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,12 +270,13 @@ MonoBehaviour:
   cost: 1
   maxHealth: 15
   xpDrop: 10
-  canMove: 0
   baseMoveSpeed: 2
   currentMoveSpeed: 0
+  canMove: 0
   attackDamage: 10
-  attackCooldown: 1
+  attackCooldown: 0.5
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
   invulnerabilityDuration: 0.2
-  attackRange: 1.5
+  attackRange: 3
+  hitbox: {fileID: 0}
