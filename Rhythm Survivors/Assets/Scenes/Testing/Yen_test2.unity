@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Werebear
       objectReference: {fileID: 0}
+    - target: {fileID: 3499413235484529707, guid: 7855abcac2a44b64498e7a8053a377f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -238,6 +242,10 @@ PrefabInstance:
     - target: {fileID: 8325102962908147761, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
       propertyPath: m_Name
       value: Greatsword Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325102962908147761, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -586,13 +594,13 @@ PrefabInstance:
       propertyPath: attackDamage
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4739265235907787811, guid: b87570bc6cc87e645851c84da0adb0bd, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8840884471665460991, guid: b87570bc6cc87e645851c84da0adb0bd, type: 3}
       propertyPath: m_Name
       value: Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840884471665460991, guid: b87570bc6cc87e645851c84da0adb0bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -638,6 +646,10 @@ PrefabInstance:
     - target: {fileID: 2332586447867861224, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
       propertyPath: m_Name
       value: Orc rider
+      objectReference: {fileID: 0}
+    - target: {fileID: 2332586447867861224, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3451143854452219371, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
       propertyPath: attackDamage
@@ -797,18 +809,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 972700902501219501, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 972700902501219501, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916269413340135270, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5769896718366593835, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.834764
@@ -853,9 +853,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elite Orc
       objectReference: {fileID: 0}
-    - target: {fileID: 8439459048163481738, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
-      propertyPath: attackDamage
-      value: 20
+    - target: {fileID: 6485644861733381810, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -911,6 +911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 2141168504861516278, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5330709995793686323, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.232613
@@ -951,14 +955,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6063391053882302770, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
-      propertyPath: cost
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6063391053882302770, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
-      propertyPath: attackDamage
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8288275027842095373, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -998,6 +994,10 @@ PrefabInstance:
     - target: {fileID: 2548173374421803268, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_Name
       value: Armored Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548173374421803268, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5514873032989917562, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1244,6 +1244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armored Orc
       objectReference: {fileID: 0}
+    - target: {fileID: 4418307091790181422, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7625973748145501968, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.21
@@ -1341,13 +1345,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7445828797797009495, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
-      propertyPath: attackDamage
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8840884471665460991, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840884471665460991, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1442,6 +1446,10 @@ PrefabInstance:
       propertyPath: beatVisualContainer
       value: 
       objectReference: {fileID: 1995698977}
+    - target: {fileID: 5476241318499682355, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5625012193333698124, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_text
       value: Game Start!
