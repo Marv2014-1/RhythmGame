@@ -189,12 +189,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius: 5
   cost: 5
-  maxHealth: 30
+  maxHealth: 20
   xpDrop: 20
   baseMoveSpeed: 3
   currentMoveSpeed: 0
   canMove: 0
-  attackDamage: 10
+  attackDamage: 5
   attackCooldown: 2
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2

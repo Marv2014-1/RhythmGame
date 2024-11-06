@@ -354,13 +354,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 5
-  cost: 1
-  maxHealth: 15
-  xpDrop: 10
+  cost: 3
+  maxHealth: 25
+  xpDrop: 18
   baseMoveSpeed: 2
   currentMoveSpeed: 0
   canMove: 0
-  attackDamage: 5
+  attackDamage: 3
   attackCooldown: 0.5
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2

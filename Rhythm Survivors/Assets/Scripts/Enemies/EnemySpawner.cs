@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private List<GameObject> enemyPrefabs;
     public GameObject firstBoss;
+    public GameObject secondBoss;
+    public GameObject thirdBoss;
 
     [Header("Spawn Radius Settings")]
     [SerializeField]
@@ -109,6 +111,19 @@ public class EnemySpawner : MonoBehaviour
         }
 
         waveCount++;
+
+        if (waveCount == 3)
+        {
+            enemyPrefabs.Add(firstBoss);
+        }
+        else if (waveCount == 5)
+        {
+            enemyPrefabs.Add(secondBoss);
+        }
+        else if (waveCount == 9)
+        {
+            enemyPrefabs.Add(thirdBoss);
+        }
     }
 
     private IEnumerator SpawnEnemiesRoutine()
