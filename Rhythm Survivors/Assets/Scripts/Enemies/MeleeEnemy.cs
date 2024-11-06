@@ -1,99 +1,13 @@
-// using UnityEngine;
-
-// public class MeleeEnemy : Enemy
-// {
-//     [Header("Crew Attack Settings")]
-//     public float attackRange = 3f;
-//     public int attackDamage = 10;
-//     public float attackCooldown = 2f;
-
-//     private float lastAttackTime;
-
-//     [Header("Attack Hitbox")]
-//     public GameObject skeletonHitbox;
-
-//     protected override void Awake()
-//     {
-//         base.Awake();
-//         if (skeletonHitbox != null)
-//         {
-//             skeletonHitbox.SetActive(false); // Ensure hitbox is initially inactive
-//         }
-//     }
-
-//     protected override void Update()
-//     {
-//         base.Update();
-
-//         if (playerTransform == null) return;
-
-//         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-//         if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
-//         {
-//             AttemptAttack();
-//             lastAttackTime = Time.time;
-//         }
-//     }
-
-//     private void AttemptAttack()
-//     {
-//         if (animator == null || skeletonHitbox == null) return;
-
-//         bool isAbove = playerTransform.position.y > transform.position.y;
-//         string attackType = isAbove ? "IsAttack1" : "IsAttack2";
-
-//         // Debug to confirm which attack type is being set
-//         Debug.Log($"Setting attack trigger: {attackType}");
-
-//         // Reset both triggers to avoid conflicts
-//         animator.ResetTrigger("IsAttack1");
-//         animator.ResetTrigger("IsAttack2");
-
-//         // Set the trigger for the chosen attack
-//         animator.SetTrigger(attackType);
-
-//         // Check if the trigger is successfully set
-//         Debug.Log($"Animator trigger {attackType} set.");
-
-//         // Activate hitbox
-//         skeletonHitbox.SetActive(true);
-//         Invoke(nameof(DisableHitbox), 0.5f); // Adjust timing based on animation length
-//     }
-
-//     private void DisableHitbox()
-//     {
-//         if (skeletonHitbox != null)
-//         {
-//             skeletonHitbox.SetActive(false);
-//         }
-//     }
-// }
-
-
-
-
-
+using System;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
     [Header("Attack Settings")]
-    [SerializeField] private float attackRange = 3f;       // Range within which the enemy attacks
+    [SerializeField] private float attackRange = 3f;       
     private float nextAttackTime = 0f;
 
-    // public GameObject Hitbox;
 
-    // private MeleeAttack meleeAttack;
-
-    // protected override void Awake()
-    // {
-    //     base.Awake();
-    //     meleeAttack = GetComponent<MeleeAttack>();
-    // }
-    //   private void Start()
-    // {
-    //     Hitbox.SetActive(false); // Ensure the hitbox is initially inactive
-    // }
     [SerializeField] private Hitbox hitbox;
 
     protected override void Awake()
@@ -154,34 +68,52 @@ public class MeleeEnemy : Enemy
             return;
         }
         canMove = false; // Stop moving when attacking
-                         // Randomly choose one of the three attack directions
-        int attackType = UnityEngine.Random.Range(0, 3);
-        string triggerName = attackType switch
+                         
+        Attack(CheckP(), 0.001f, 0.5f);
+    }
+
+    private String CheckP()
+    {
+        String position = "";
+        // Calculate the direction vector from the enemy to the player
+        Vector2 directionToPlayer = playerTransform.position - transform.position;
+
+        // Determine if the player is above, below, to the left, or to the right
+        if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
         {
-            0 => "TriggerAttackTop",
-            1 => "TriggerAttackSide",
-            _ => "TriggerAttackBottom",
-        };
-
-        Attack(triggerName, 0.001f, 0.5f);
-
-
-        // case 0:
-        //     Attack("TriggerAttackTop", attackDamage, 0.1f, 0.5f);
-        //     break;
-        // case 1:
-        //     Attack("TriggerAttackSide", attackDamage, 0.1f, 0.5f);
-        //     break;
-        // case 2:
-        //     Attack("TriggerAttackBottom", attackDamage, 0.1f, 0.5f);
-        //     break;
-
+            // The player is more to the left or right
+            if (directionToPlayer.x > 0)
+            {
+                position = "TriggerAttackSide";
+                // Trigger right-side attack or movement logic
+            }
+            else
+            {
+                position = "TriggerAttackSide";
+                // Trigger left-side attack or movement logic
+            }
+        }
+        else
+        {
+            // The player is more above or below
+            if (directionToPlayer.y > 0)
+            {
+                position = "TriggerAttackTop";
+                // Trigger upward attack or movement logic
+            }
+            else
+            {
+                position = "TriggerAttackBottom";
+                // Trigger downward attack or movement logic
+            }
+        }
+        return position;
     }
     public void Attack(string triggerName, float activateTime, float deactivateTime)
     {
-        // currentAttackDamage = damage;       // Set the current attack damage
-        animator.SetTrigger(triggerName);    // Trigger the specific attack animation
-        Invoke(nameof(ActivateHitbox), activateTime); // Activate hitbox after `activateTime` seconds
+
+        animator.SetTrigger(triggerName);    
+        Invoke(nameof(ActivateHitbox), activateTime); 
         hitbox.ActivateHitbox();
         // Invoke("ActivateHitbox", activateTime); // Activate hitbox after `activateTime` seconds
         // Invoke("DeactivateHitbox", 0.2f); // Deactivate hitbox after `deactivateTime` seconds
@@ -194,8 +126,8 @@ public class MeleeEnemy : Enemy
     // Called at the end of the attack animation to reset movement
     public void FinishAttack()
     {
-        canMove = true; // Allow movement again
-        // animator.SetBool("IsMoving", true); // Reset the attacking parameter
+        canMove = true; // Resume moving after attacking
+        
     }
 
     private void ActivateHitbox()

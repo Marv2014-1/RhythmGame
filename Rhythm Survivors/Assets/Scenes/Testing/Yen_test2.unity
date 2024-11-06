@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3370419575229483846, guid: 7855abcac2a44b64498e7a8053a377f0, type: 3}
+      propertyPath: attackDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3499413235484529707, guid: 7855abcac2a44b64498e7a8053a377f0, type: 3}
       propertyPath: m_Name
       value: Werebear
@@ -226,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 3301405522355756510, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402198645414532735, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
+      propertyPath: attackDamage
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8325102962908147761, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
       propertyPath: m_Name
@@ -574,6 +582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2756872150039610617, guid: b87570bc6cc87e645851c84da0adb0bd, type: 3}
+      propertyPath: attackDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4739265235907787811, guid: b87570bc6cc87e645851c84da0adb0bd, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -626,6 +638,10 @@ PrefabInstance:
     - target: {fileID: 2332586447867861224, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
       propertyPath: m_Name
       value: Orc rider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451143854452219371, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
+      propertyPath: attackDamage
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8027181485862799948, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,6 +853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elite Orc
       objectReference: {fileID: 0}
+    - target: {fileID: 8439459048163481738, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -935,6 +955,10 @@ PrefabInstance:
       propertyPath: cost
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6063391053882302770, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
+      propertyPath: attackDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8288275027842095373, guid: 1f4c5092cebcaac4ba94e8c0d6d64c2e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1014,6 +1038,10 @@ PrefabInstance:
     - target: {fileID: 5514873032989917562, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454702114066001998, guid: b4fea9cde1bb06e45adca2fcc632356d, type: 3}
+      propertyPath: attackDamage
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1256,6 +1284,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8627514124756354214, guid: 6f90fd48e25a90d4a8506447090ea807, type: 3}
+      propertyPath: attackDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1308,6 +1340,10 @@ PrefabInstance:
     - target: {fileID: 2576023548269190757, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445828797797009495, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
+      propertyPath: attackDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8840884471665460991, guid: 4a2c0058e9b5a4847920e2136178915a, type: 3}
       propertyPath: m_Name
