@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6402198645414532735, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
       propertyPath: attackRange
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8325102962908147761, guid: c4bd493e5103df0419de4b7d626081c8, type: 3}
       propertyPath: m_Name
@@ -600,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439459048163481738, guid: f96fb49d4f9ad0f4ab504c0c91c55c16, type: 3}
       propertyPath: attackRange
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2330,7 +2330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3451143854452219371, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
       propertyPath: attackRange
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3451143854452219371, guid: 1686282921a916f44ae497cdb3850a2e, type: 3}
       propertyPath: baseMoveSpeed
