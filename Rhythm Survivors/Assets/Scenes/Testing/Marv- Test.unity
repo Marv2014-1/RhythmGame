@@ -1043,6 +1043,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2658662975567398004, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3456380967718898311, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -1105,6 +1109,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4445192577787400219, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: OnSongTransition.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880218549403355142, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5625012193333698124, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
@@ -1198,6 +1206,10 @@ PrefabInstance:
     - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
       value: 1.0131912
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150883493716564685, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

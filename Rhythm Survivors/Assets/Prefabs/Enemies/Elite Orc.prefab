@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 10
-  maxHealth: 100
-  xpDrop: 100
+  maxHealth: 80
+  xpDrop: 80
   canMove: 0
   baseMoveSpeed: 4
   currentMoveSpeed: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   invulnerabilityDuration: 0.5
   attackRange: 1.5
   crewAttackCooldown: 2
-  knockbackForce: 5
+  knockbackForce: 10
 --- !u!95 &3369973210537583654
 Animator:
   serializedVersion: 5

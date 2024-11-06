@@ -1136,6 +1136,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2387732667830373683, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2483461561456076998, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0013556108
@@ -1176,6 +1180,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2658662975567398004, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3456380967718898311, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -1185,9 +1193,17 @@ PrefabInstance:
       value: MusicPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 4445192577787400219, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445192577787400219, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: feedbackText
       value: 
       objectReference: {fileID: 1653765071}
+    - target: {fileID: 4445192577787400219, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: visualDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4445192577787400219, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: beatVisualPrefab
       value: 
@@ -1244,6 +1260,10 @@ PrefabInstance:
       propertyPath: playlist.Array.data[20]
       value: 
       objectReference: {fileID: 3293349787080338670}
+    - target: {fileID: 4880218549403355142, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5625012193333698124, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: m_text
       value: Game Start!
@@ -1278,7 +1298,7 @@ PrefabInstance:
       objectReference: {fileID: 1764991736}
     - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6928640827316142971, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: enemyPrefabs.Array.data[0]
@@ -1363,6 +1383,10 @@ PrefabInstance:
     - target: {fileID: 8817260308092859212, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
       propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
       value: 1.0131912
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150883493716564685, guid: b733a25e3f7c55b43958241fd27a0eb2, type: 3}
+      propertyPath: delayOffset
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

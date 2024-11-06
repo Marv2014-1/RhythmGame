@@ -34,8 +34,8 @@ public abstract class Enemy : MonoBehaviour
     protected PlayerExperience playerXP;
 
     [Header("Speed Adjustment Settings")]
-    protected float speedBoostMultiplier = 2f;     // Speed increase on beat miss
-    protected float speedBoostDuration = 0.2f;        // Duration of speed boost in seconds
+    protected float speedBoostMultiplier = 1f;     // Speed increase on beat miss
+    protected float speedBoostDuration = 1f;        // Duration of speed boost in seconds
     protected float speedSlowdownMultiplier = 1f;  // Speed decrease on beat hit
     protected float speedSlowdownDuration = 0.2f;     // Duration of slowdown in seconds
 
@@ -63,7 +63,7 @@ public abstract class Enemy : MonoBehaviour
         beatDetector = FindObjectOfType<BeatDetector>();
         if (beatDetector != null)
         {
-            beatDetector.OnBeatHit.AddListener(OnBeatHit);
+            // beatDetector.OnBeatHit.AddListener(OnBeatHit);
             beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
         }
 
@@ -91,15 +91,15 @@ public abstract class Enemy : MonoBehaviour
     {
         if (beatDetector != null)
         {
-            beatDetector.OnBeatHit.RemoveListener(OnBeatHit);
+            // beatDetector.OnBeatHit.RemoveListener(OnBeatHit);
             beatDetector.OnBeatMissed.RemoveListener(OnBeatMissed);
         }
     }
 
-    protected virtual void OnBeatHit()
-    {
-        StartCoroutine(SlowDown());
-    }
+    // protected virtual void OnBeatHit()
+    // {
+    //     StartCoroutine(SlowDown());
+    // }
 
     protected virtual void OnBeatMissed()
     {

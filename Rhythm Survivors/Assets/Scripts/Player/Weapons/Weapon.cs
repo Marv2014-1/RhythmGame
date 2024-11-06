@@ -32,6 +32,7 @@ public abstract class Weapon : MonoBehaviour
         if (beatDetector != null)
         {
             beatDetector.OnBeatHit.AddListener(OnBeatDetected);
+            beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
         }
         else
         {
@@ -60,6 +61,15 @@ public abstract class Weapon : MonoBehaviour
             beatCount = 0; // Reset beat count after attack
             UpdateWeaponUI(beatCount);
         }
+    }
+
+    protected virtual void OnBeatMissed()
+    {
+        if (beatCount > 0)
+        {
+            beatCount--;
+        }
+        UpdateWeaponUI(beatCount);
     }
 
     // This method will be implemented by each specific weapon type

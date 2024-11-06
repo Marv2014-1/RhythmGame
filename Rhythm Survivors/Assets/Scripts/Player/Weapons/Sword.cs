@@ -14,7 +14,7 @@ public class Sword : Weapon
 
         upgrades = new List<(string, int)>()
         {
-            ("Knockback", 5), ("Damage", 5), ("Knockback", 5), ("Damage", 5)
+            ("Knockback", 5), ("Damage", 10), ("Knockback", 5), ("Damage", 10)
         };
     }
 
