@@ -9,9 +9,9 @@ public class EnemyShield : MonoBehaviour
     public int shieldStrength = 100; // Durability of the shield
     public float blockDamageReduction = 1.0f; // Full block when 1.0, partial when <1.0
 
-    private bool isBlocking = false;
-    private float nextBlockTime = 0f;
-    private Animator animator;
+    // private bool isBlocking = false;
+    // private float nextBlockTime = 0f;
+    // private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
