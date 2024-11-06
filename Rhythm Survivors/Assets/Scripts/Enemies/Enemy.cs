@@ -233,7 +233,7 @@ public abstract class Enemy : MonoBehaviour
             Debug.Log("Damage fully blocked by shield.");
             return;
         }
-
+        canMove = false;
         isInvulnerable = true; // Set invulnerability
         StartCoroutine(InvulnerabilityCooldown()); // Start cooldown
 
@@ -258,6 +258,7 @@ public abstract class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(invulnerabilityDuration);
         isInvulnerable = false; // Remove invulnerability
+        canMove = true;
     }
 
     // Knockback the enemy

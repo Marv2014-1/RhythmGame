@@ -114,15 +114,18 @@ public class EnemySpawner : MonoBehaviour
 
         if (waveCount == 3)
         {
-            enemyPrefabs.Add(firstBoss);
+            Vector2 spawnPosition = GenerateSpawnPosition();
+            Instantiate(firstBoss, spawnPosition, Quaternion.identity);
         }
         else if (waveCount == 5)
         {
-            enemyPrefabs.Add(secondBoss);
+            Vector2 spawnPosition = GenerateSpawnPosition();
+            Instantiate(secondBoss, spawnPosition, Quaternion.identity);
         }
         else if (waveCount == 9)
         {
-            enemyPrefabs.Add(thirdBoss);
+            Vector2 spawnPosition = GenerateSpawnPosition();
+            Instantiate(thirdBoss, spawnPosition, Quaternion.identity);
         }
     }
 
@@ -192,15 +195,15 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
 
-            if (waveCount >= 10)
-            {
-                int numBosses = waveCount - 9;
-                for (int i = 0; i < numBosses; i++)
-                {
-                    Vector2 spawnPosition = GenerateSpawnPosition();
-                    Instantiate(firstBoss, spawnPosition, Quaternion.identity);
-                }
-            }
+            // if (waveCount >= 10)
+            // {
+            //     int numBosses = waveCount - 9;
+            //     for (int i = 0; i < numBosses; i++)
+            //     {
+            //         Vector2 spawnPosition = GenerateSpawnPosition();
+            //         Instantiate(firstBoss, spawnPosition, Quaternion.identity);
+            //     }
+            // }
         }
     }
 
