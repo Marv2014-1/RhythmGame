@@ -193,7 +193,7 @@ MonoBehaviour:
   baseMoveSpeed: 4
   currentMoveSpeed: 0
   canMove: 0
-  attackDamage: 15
+  attackDamage: 12
   attackCooldown: 1
   deathEffect: {fileID: 0}
   knockbackDuration: 0.2
