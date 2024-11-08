@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerExperience : MonoBehaviour
 {
     private int level, experience, xpToLevel;
-    float levelMultiplier = 1.6f;
+    float levelMultiplier = 2f;
 
     public Image xpBarFill; // Assign ExperienceBarFill Image in the Inspector
     public float smoothSpeed = 5f; // Speed of the fill transition
@@ -34,7 +34,7 @@ public class PlayerExperience : MonoBehaviour
             LevelUp();
             experience -= xpToLevel;
             xpToLevel = (int)(xpToLevel * levelMultiplier);
-            levelMultiplier -= 0.05f;
+            levelMultiplier -= 0.1f;
             if (levelMultiplier < 1.1f)
             {
                 levelMultiplier = 1.1f;

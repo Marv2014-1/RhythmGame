@@ -18,7 +18,7 @@ public class Spear : Weapon
 
         upgrades = new List<(string, int)>()
         {
-            ("Knockback", 5), ("Damage", 5), ("Knockback", 5), ("Pierce", 1)
+            ("Knockback", 5), ("Damage", 5), ("Size", 3), ("Damage", 5), ("Size", 3), ("Damage", 5), ("Knockback", 15)
         };
     }
 
@@ -82,6 +82,7 @@ public class Spear : Weapon
             thrust.SetSpeed(thrustSpeed);
             thrust.SetRange(thrustRange);
             thrust.SetKnockback(knockback);
+            thrust.SetSize(size);
         }
         else
         {

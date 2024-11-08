@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyArrow : MonoBehaviour
 {
-    [HideInInspector] public float ArrowVelocity;
+    [HideInInspector] public float speed;
     [HideInInspector] public int ArrowDamage;
     [SerializeField] Rigidbody2D rb;
 
@@ -11,11 +11,15 @@ public class EnemyArrow : MonoBehaviour
 
     private float knockback;
 
+    private void Start()
+	{
+		startPosition = transform.position;
+	}
     public void Initialize(Vector2 direction, float speed, int damage, float attackRange, float knockback)
     {
-        ArrowVelocity = speed;
+        this.speed = speed;
         ArrowDamage = damage;
-        rb.velocity = direction * ArrowVelocity;
+        rb.velocity = direction * speed;
         startPosition = transform.position;
         maxTravelDistance = attackRange * 2f;
         this.knockback = knockback;
@@ -23,8 +27,10 @@ public class EnemyArrow : MonoBehaviour
 
     private void Update()
     {
-
+         
         // Check the distance traveled
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
+
         float distanceTraveled = Vector2.Distance(startPosition, transform.position);
         if (distanceTraveled >= maxTravelDistance)
         {

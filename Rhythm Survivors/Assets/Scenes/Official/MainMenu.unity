@@ -817,9 +817,57 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Yen Duong\nMarfn Mlakha\nBrandon Bailey\nKayla Gleneski-Germain\n\nArt
-    Assets: Pixel Crawler by Anokolisa\n\t\thttps://anokolisa.itch.io/\nSound Effects:
-    Free Fantasy 200 SFX Pack by TomMusic\n\t\thttps://tommusic.itch.io/"
+  m_text: 'Developers:
+
+    Yen Duong
+
+    Marfn Mlakha
+
+    Brandon Bailey
+
+    Kayla
+    Gleneski-Germain
+
+
+    Music Beat Parser:
+
+    McFee, B., Raffel, C., Liang,
+    D., Ellis, D. P. W., McVicar, M., Battenberg, E., & Nieto, O. (2015). librosa:
+    Audio and music signal analysis in Python. In Proceedings of the 14th Python
+    in Science Conference (pp. 18-25).
+
+
+    Art Assets:
+
+    Zerie. Tiny RPG Character
+    Asset Pack v1.03. itch.io, 2024. https://zerie.itch.io/tiny-rpg-character-asset-pack.
+
+
+    Sound
+    Effects:
+
+    TomMusic. Free Fantasy 200 SFX Pack. Retrieved from https://tommusic.itch.io/.
+
+
+    Songs:
+
+
+    josefpres.
+    Dark loops 221 piano with melody short loop 60 bpm.wav. Freesound, https://freesound.org/s/634705/.
+    License: Creative Commons 0.
+
+    josefpres. Dark loops 014 piano + effect 80
+    bpm.wav. Freesound, https://freesound.org/s/588471/. License: Creative Commons
+    0.
+
+    josefpres. Piano loops 150 octave long loop 120 bpm. Freesound, https://freesound.org/s/730055/.
+    License: Creative Commons 0.
+
+    FlavioConcini. Piano 170 bpm. Freesound, https://freesound.org/s/752829/.
+    License: Creative Commons 0.
+
+    KiluaBoy. Sleep Talking ogg. Freesound, https://freesound.org/s/431820/.
+    License: Creative Commons 0.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -846,10 +894,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1

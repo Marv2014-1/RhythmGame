@@ -34,7 +34,7 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
         if (beatDetector != null)
         {
             beatDetector.OnBeatHit.AddListener(OnBeatHit);
-            // beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
+            beatDetector.OnBeatMissed.AddListener(OnBeatMissed);
         }
         else
         {
@@ -131,15 +131,15 @@ public class WeaponBeatIndicatorManager : MonoBehaviour
     }
 
     // Event handler for OnBeatMissed
-    // void OnBeatMissed()
-    // {
-    //     // Reset the current beat count or handle as needed
-    //     if (currentBeatCount > 0)
-    //     {
-    //         currentBeatCount -= 1;
-    //     }
-    //     UpdateBeatCount(currentBeatCount);
-    // }
+    void OnBeatMissed()
+    {
+        // Reset the current beat count or handle as needed
+        if (currentBeatCount > 0)
+        {
+            currentBeatCount -= 1;
+        }
+        UpdateBeatCount(currentBeatCount);
+    }
 
     // Updates the circles based on the current beat count
     public void UpdateBeatCount(int beatCount)

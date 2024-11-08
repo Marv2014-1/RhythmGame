@@ -31,7 +31,7 @@ public class LevelMenu : MonoBehaviour
             }
 
             // Remove items at max level from list
-            if (upgrades[i].Item2 >= 5)
+            if (upgrades[i].Item2 >= 8)
             {
                 upgrades.RemoveAt(i);
                 i--;
