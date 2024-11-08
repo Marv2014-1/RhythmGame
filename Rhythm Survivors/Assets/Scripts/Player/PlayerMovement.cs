@@ -14,10 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isTurning = false;
     private bool facingRight = true;
-    private bool bowFacingRight = true; // Tracks the bow's facing direction
     private float previousXDirection = 0f;
-
-    private Transform bow;  // Reference to the Bow object
 
     void Start()
     {
@@ -29,30 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Get the Animator component from the child object named "Animation"
         animator = transform.Find("Animation").GetComponent<Animator>();
-
-        // Find the Bow in the BowContainer
-        Transform bowContainer = transform.Find("BowContainer");
-        if (bowContainer != null)
-        {
-            bow = bowContainer.Find("Bow");
-        }
-        else
-        {
-            Debug.LogError("BowContainer not found!");
-        }
-
-        if (bow == null)
-        {
-            Debug.LogError("Bow not found in BowContainer!");
-        }
-
-        // Ensure the bow starts facing the correct direction
-        if (bow != null)
-        {
-            Vector3 bowScale = bow.localScale;
-            bowScale.x = bowFacingRight ? Mathf.Abs(bowScale.x) : -Mathf.Abs(bowScale.x);
-            bow.localScale = bowScale;
-        }
     }
 
     // Update is called once per frame which is good for user input
@@ -126,34 +99,19 @@ public class PlayerMovement : MonoBehaviour
         isTurning = true;
         float time = 0f;
         float duration = 0.15f;
-        Vector3 initialScale = transform.localScale;
+        Vector3 initialScale = animator.transform.localScale;
         Vector3 targetScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z);
-
-        // Flip the bow independently
-        FlipBow();
 
         while (time < duration)
         {
-            transform.localScale = Vector3.Lerp(initialScale, targetScale, time / duration);
+            animator.transform.localScale = Vector3.Lerp(initialScale, targetScale, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = targetScale;
+        animator.transform.localScale = targetScale;
         facingRight = !facingRight;
 
         isTurning = false;
-    }
-
-    // Method to flip the bow's direction
-    void FlipBow()
-    {
-        if (bow != null)
-        {
-            Vector3 bowScale = bow.localScale;
-            bowScale.x = bowFacingRight ? -Mathf.Abs(bowScale.x) : Mathf.Abs(bowScale.x);
-            bow.localScale = bowScale;
-            bowFacingRight = !bowFacingRight; // Toggle the bow's facing direction
-        }
     }
 }

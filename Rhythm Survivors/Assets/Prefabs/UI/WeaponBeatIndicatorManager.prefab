@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5418311114548170345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,8 +116,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circlePrefab: {fileID: 0}
   requiredBeats: 3
-  spacing: 30
-  arcRadius: 1
-  totalArcAngle: 180
-  startAngle: 90
+  musicPlayer: {fileID: 0}
   beatDetector: {fileID: 0}

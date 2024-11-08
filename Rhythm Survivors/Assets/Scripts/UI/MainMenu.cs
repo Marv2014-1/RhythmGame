@@ -15,11 +15,13 @@ public class MainMenu : MonoBehaviour
     public TMP_Text musicText;
     public TMP_Text sfxText;
     public ScoreManager score;
+    public MusicPlayer musicPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         score = FindObjectOfType<ScoreManager>();
+        musicPlayer = FindObjectOfType<MusicPlayer>();
     }
 
     // Loads the game scene
@@ -35,12 +37,13 @@ public class MainMenu : MonoBehaviour
         optionUI.SetActive(true);
         score.Hide();
 
-        musicSlider.value = MusicPlayer.music.volume;
+
+        musicSlider.value = musicPlayer.musicVolume;
         float vol = musicSlider.value;
         vol = Mathf.Round(vol * 100);
         musicText.text = vol.ToString();
 
-        sfxSlider.value = MusicPlayer.sfx.volume;
+        sfxSlider.value = musicPlayer.sfxVolume;
         vol = sfxSlider.value;
         vol = Mathf.Round(vol * 100);
         sfxText.text = vol.ToString();
@@ -80,7 +83,7 @@ public class MainMenu : MonoBehaviour
     // Allows the player to adjust the music volume via an onscreen slider
     public void MusicSlider()
     {
-        MusicPlayer.MusicVolume(musicSlider.value);
+        musicPlayer.MusicVolume(musicSlider.value);
         float vol = musicSlider.value;
         vol = Mathf.Round(vol * 100);
         musicText.text = vol.ToString();
@@ -89,8 +92,21 @@ public class MainMenu : MonoBehaviour
     // Allows the player to adjust the sound effect volume via an onscreen slider
     public void SFXSlider()
     {
-        MusicPlayer.SFXVolume(sfxSlider.value);
+        musicPlayer.SFXVolume(sfxSlider.value);
         float vol = sfxSlider.value;
+        vol = Mathf.Round(vol * 100);
+        sfxText.text = vol.ToString();
+    }
+
+    public void ReloadSliders()
+    {
+        musicSlider.value = musicPlayer.musicVolume;
+        float vol = musicSlider.value;
+        vol = Mathf.Round(vol * 100);
+        musicText.text = vol.ToString();
+
+        sfxSlider.value = musicPlayer.sfxVolume;
+        vol = sfxSlider.value;
         vol = Mathf.Round(vol * 100);
         sfxText.text = vol.ToString();
     }

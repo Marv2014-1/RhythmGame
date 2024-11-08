@@ -10,75 +10,43 @@ public class BeatVisualManager : MonoBehaviour
 	private AudioManager audioManager;
 	private List<BeatVisual> activeBeatVisuals = new List<BeatVisual>();
 
+	private float visualStartTime = 0f; // Time when visuals started updating
+	private bool visualsStarted = false;
+
 	void Awake()
 	{
 		audioManager = FindObjectOfType<BeatDetector>().GetComponent<AudioManager>();
 	}
 
 	/// <summary>
-	/// Initializes beat visuals for beats that are within the visual duration from the current song time.
+	/// Initializes beat visuals for beats that are within the visual duration from the current time.
 	/// </summary>
 	/// <param name="beatTimes">List of all beat times.</param>
-	/// <param name="songTime">Current song time.</param>
-	public void InitializeBeatVisuals(List<float> beatTimes, float songTime)
+	public void InitializeBeatVisuals()
 	{
 		// Clear existing visuals
-		foreach (BeatVisual beatVisual in activeBeatVisuals)
-		{
-			Destroy(beatVisual.rectTransform.gameObject);
-		}
-		activeBeatVisuals.Clear();
+		ClearAllBeatVisuals();
 
-		foreach (float beatTime in beatTimes)
-		{
-			float timeUntilBeat = beatTime - songTime;
-
-			// Adjust for negative songTime (countdown before song starts)
-			if (songTime < 0f)
-			{
-				timeUntilBeat = beatTime;
-			}
-
-			if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
-			{
-				// Create visuals for both left and right sides
-				CreateBeatVisual(beatTime, true);  // From Left
-				CreateBeatVisual(beatTime, false); // From Right
-			}
-		}
+		// Reset visual start time
+		visualStartTime = Time.time;
+		visualsStarted = true;
 	}
 
 	/// <summary>
 	/// Updates the positions of active beat visuals and manages their lifecycle.
 	/// </summary>
 	/// <param name="beatTimes">List of all beat times.</param>
-	/// <param name="songTime">Current song time.</param>
-	public void UpdateBeatVisuals(List<float> beatTimes, float songTime)
+	public void UpdateBeatVisuals(List<float> beatTimes)
 	{
-		float audioClipLength = audioManager.audioClip.length;
+		if (!visualsStarted) return;
+
+		float visualTime = Time.time - visualStartTime; // Time since visuals started
+
 		var visualsToRemove = new List<BeatVisual>();
 
 		foreach (BeatVisual beatVisual in activeBeatVisuals)
 		{
-			float timeUntilBeat = beatVisual.beatTime - songTime;
-
-			// Adjust for negative songTime
-			if (songTime < 0f)
-			{
-				timeUntilBeat = beatVisual.beatTime;
-			}
-			else
-			{
-				// Handle looping
-				if (timeUntilBeat < -audioClipLength / 2)
-				{
-					timeUntilBeat += audioClipLength;
-				}
-				else if (timeUntilBeat > audioClipLength / 2)
-				{
-					timeUntilBeat -= audioClipLength;
-				}
-			}
+			float timeUntilBeat = beatVisual.beatTime - visualTime;
 
 			if (timeUntilBeat <= 0f)
 			{
@@ -88,12 +56,12 @@ public class BeatVisualManager : MonoBehaviour
 			}
 			else if (timeUntilBeat <= visualDuration)
 			{
-				// Corrected progress calculation
+				// Calculate progress
 				float progress = timeUntilBeat / visualDuration;
 
 				float halfWidth = beatVisualContainer.rect.width / 2;
 				float startX = beatVisual.fromLeft ? -halfWidth : halfWidth;
-				float xPosition = progress * startX;
+				float xPosition = Mathf.Lerp(0f, startX, progress);
 
 				beatVisual.rectTransform.anchoredPosition = new Vector2(xPosition, beatVisual.rectTransform.anchoredPosition.y);
 			}
@@ -114,31 +82,13 @@ public class BeatVisualManager : MonoBehaviour
 		// Add new visuals for upcoming beats
 		foreach (float beatTime in beatTimes)
 		{
-			float timeUntilBeat = beatTime - songTime;
-
-			// Adjust for negative songTime
-			if (songTime < 0f)
-			{
-				timeUntilBeat = beatTime;
-			}
-			else
-			{
-				// Handle looping
-				if (timeUntilBeat < -audioClipLength / 2)
-				{
-					timeUntilBeat += audioClipLength;
-				}
-				else if (timeUntilBeat > audioClipLength / 2)
-				{
-					timeUntilBeat -= audioClipLength;
-				}
-			}
+			float timeUntilBeat = beatTime - visualTime;
 
 			if (timeUntilBeat >= 0f && timeUntilBeat <= visualDuration)
 			{
 				// Check if visuals from both sides exist
-				bool leftVisualExists = activeBeatVisuals.Exists(bv => bv.beatTime == beatTime && bv.fromLeft == true);
-				bool rightVisualExists = activeBeatVisuals.Exists(bv => bv.beatTime == beatTime && bv.fromLeft == false);
+				bool leftVisualExists = activeBeatVisuals.Exists(bv => Mathf.Approximately(bv.beatTime, beatTime) && bv.fromLeft == true);
+				bool rightVisualExists = activeBeatVisuals.Exists(bv => Mathf.Approximately(bv.beatTime, beatTime) && bv.fromLeft == false);
 
 				if (!leftVisualExists)
 				{
@@ -152,7 +102,6 @@ public class BeatVisualManager : MonoBehaviour
 		}
 	}
 
-
 	/// <summary>
 	/// Creates a beat visual from the specified direction.
 	/// </summary>
@@ -160,7 +109,6 @@ public class BeatVisualManager : MonoBehaviour
 	/// <param name="fromLeft">Direction from which the visual originates.</param>
 	private void CreateBeatVisual(float beatTime, bool fromLeft)
 	{
-		Debug.Log($"Creating beat visual for time {beatTime} from {(fromLeft ? "Left" : "Right")}");
 		Vector2 desiredSize = new Vector2(30f, 100f);
 
 		GameObject beatVisualObject = Instantiate(beatVisualPrefab, beatVisualContainer);
@@ -176,7 +124,6 @@ public class BeatVisualManager : MonoBehaviour
 		activeBeatVisuals.Add(beatVisual);
 	}
 
-
 	/// <summary>
 	/// Configures the RectTransform for the beat visual.
 	/// </summary>
@@ -191,7 +138,6 @@ public class BeatVisualManager : MonoBehaviour
 		rectTransform.anchorMax = new Vector2(0.5f, 0f);
 		rectTransform.anchoredPosition = new Vector2(0f, 25f);
 	}
-
 
 	/// <summary>
 	/// Represents a beat visual with its associated properties.
@@ -222,5 +168,6 @@ public class BeatVisualManager : MonoBehaviour
 			Destroy(beatVisual.rectTransform.gameObject);
 		}
 		activeBeatVisuals.Clear();
+		visualsStarted = false;
 	}
 }

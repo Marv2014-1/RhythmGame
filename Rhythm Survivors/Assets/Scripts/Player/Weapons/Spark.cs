@@ -6,6 +6,7 @@ public class Spark : MonoBehaviour
     private int damage;
     private float speed;
     private float range;
+    private float knockback;
     private Vector3 startPosition;
     private Vector2 direction;
 
@@ -43,6 +44,11 @@ public class Spark : MonoBehaviour
         direction = dir.normalized; // Ensure direction is normalized
     }
 
+    public void SetKnockback(float knockbackAmount)
+    {
+        knockback = knockbackAmount;
+    }
+
     private void Start()
     {
         startPosition = transform.position;
@@ -65,7 +71,8 @@ public class Spark : MonoBehaviour
         // Destroy the spark after it has traveled the specified range
         if (Vector3.Distance(startPosition, transform.position) >= range)
         {
-            BeginDestruction();
+            trailParticles.Clear();
+            Destroy(gameObject);
         }
     }
 
@@ -78,64 +85,15 @@ public class Spark : MonoBehaviour
 
             if (enemy != null)
             {
+                direction = (enemy.transform.position - transform.position).normalized;
+                enemy.Knockback(direction, knockback);
                 enemy.TakeDamage(damage);
                 Debug.Log($"Spark hit {enemy.gameObject.name} and dealt {damage} damage.");
             }
 
             // Destroy the spark upon hitting an enemy
-            BeginDestruction();
+            trailParticles.Clear();
+            Destroy(gameObject);
         }
-    }
-
-    /// <summary>
-    /// Initiates the destruction process by stopping emission, disabling components,
-    /// and starting a coroutine to destroy the GameObject after a delay.
-    /// </summary>
-    private void BeginDestruction()
-    {
-        // Prevent this method from being called multiple times
-        if (trailParticles == null || !trailParticles.isPlaying && (spriteRenderer == null || !spriteRenderer.enabled))
-            return;
-
-        // Stop emitting new particles
-        if (trailParticles != null)
-        {
-            // Stop emission but allow existing particles to finish
-            trailParticles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-        }
-
-        // Disable the collider and sprite renderer
-        if (boxCollider != null)
-        {
-            boxCollider.enabled = false;
-        }
-
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.enabled = false;
-        }
-
-        // Start the coroutine to destroy the GameObject after a delay
-        StartCoroutine(DestroyAfterDelay());
-    }
-
-    /// <summary>
-    /// Coroutine that waits for a specified duration before destroying the GameObject.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator DestroyAfterDelay()
-    {
-
-        // Ensure the particle system has finished playing
-        if (trailParticles != null)
-        {
-            while (trailParticles.IsAlive(true))
-            {
-                yield return null;
-            }
-        }
-
-        // Destroy the GameObject
-        Destroy(gameObject);
     }
 }

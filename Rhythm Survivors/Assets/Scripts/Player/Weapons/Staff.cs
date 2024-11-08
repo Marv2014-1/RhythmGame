@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,28 +5,23 @@ public class Staff : Weapon
 {
     [Header("Staff Settings")]
     public GameObject sparkPrefab;          // Assign your Spark prefab in the Inspector
-    public Transform sparkSpawnPoint;       // The center point from where sparks are emitted
-    public int numberOfSparks = 8;          // Adjustable number of sparks
-    public float sparkSpeed = 5f;           // Speed at which sparks travel
-    public float sparkRange = 10f;          // Distance after which sparks despawn
 
     protected override void Start()
     {
         base.Start();
 
-        // Ensure sparkSpawnPoint is assigned
-        if (sparkSpawnPoint == null)
+        upgrades = new List<(string, int)>()
         {
-            Debug.LogError("SparkSpawnPoint is not assigned in the Staff class.");
-        }
+            ("Damage", 5), ("Projectile", 2), ("Range", 5), ("Projectile", 2), ("Damage", 5), ("Projectile", 2), ("Damage", 10)
+        };
     }
-
+    
     public override void Attack()
     {
-        float angleStep = 360f / numberOfSparks;
+        float angleStep = 360f / projectile;
         float angle = 0f;
 
-        for (int i = 0; i < numberOfSparks; i++)
+        for (int i = 0; i < projectile; i++)
         {
             // Calculate the direction for each spark
             float sparkDirX = Mathf.Cos((angle * Mathf.PI) / 180f);
@@ -37,24 +31,24 @@ public class Staff : Weapon
             Vector2 sparkDirection = sparkMoveVector.normalized;
 
             // Instantiate the spark
-            GameObject sparkInstance = Instantiate(sparkPrefab, sparkSpawnPoint.position, Quaternion.identity);
+            GameObject sparkInstance = Instantiate(sparkPrefab, this.transform);
             Spark spark = sparkInstance.GetComponent<Spark>();
 
             if (spark != null)
             {
                 spark.SetDamage(damage);
-                spark.SetSpeed(sparkSpeed);
-                spark.SetRange(sparkRange);
+                spark.SetSpeed(speed);
+                spark.SetRange(range);
                 spark.SetDirection(sparkDirection);
+                spark.SetKnockback(knockback);
             }
             else
             {
                 Debug.LogError("Spark prefab does not have a Spark component.");
             }
 
+            sparkInstance.transform.SetParent(null, true);
             angle += angleStep;
         }
-
-        Debug.Log("Staff emitted sparks in a radial pattern.");
     }
 }
